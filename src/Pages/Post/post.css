@@ -1,0 +1,33 @@
+/* .input-field {
+  width: inherit;
+  height: 55px;
+  position: relative;
+}
+
+.input-button {
+  transform: scale(1.6);
+
+  border: none;
+  color: coral;
+}
+.input-button:focus,
+.input-button:active {
+  outline: none !important;
+  box-shadow: none;
+  color: black;
+}
+.input-button:hover {
+  color: black;
+}
+.comment-section {
+  margin-right: auto;
+  width: 90%;
+  height: 10%;
+}
+.show-comment-section {
+  margin-top: 20px;
+  height: 80%;
+}
+.collepes-section {
+  height: 100%;
+} */
