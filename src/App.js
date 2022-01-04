@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Admin from "./Pages/Admin/admin";
 import Buddy from "./Pages/buddy/buddy";
 import Challenge from "./Pages/Challenge/challenge";
+import Home from "./Pages/home";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route exact path="/admin" element={<Admin />} />
         <Route path="/challenge" element={<Challenge />} />
+        <Route exact path="/home" element={<Home />} />
         <Route path="/buddy" element={<Buddy />} />
       </Routes>
     </Router>
