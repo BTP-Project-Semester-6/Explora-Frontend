@@ -1,0 +1,48 @@
+.right-box {
+  margin: auto;
+  padding: 3px;
+  width: 95%;
+  height: 100vh;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.glass {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+}
+.heading-task {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #fe7e6d;
+}
+.heading-sug {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #fe7e6d;
+}
+.task-scroll {
+  height: 38%;
+  overflow: scroll;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.sug-scroll {
+  height: 45%;
+  overflow: scroll;
+}
+.task-scroll::-webkit-scrollbar {
+  display: none;
+}
+.sug-scroll::-webkit-scrollbar {
+  display: none;
+}
