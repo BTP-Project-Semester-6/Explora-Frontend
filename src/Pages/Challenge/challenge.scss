@@ -128,3 +128,10 @@
 .buddy-scroll .order::-webkit-scrollbar {
   display: none;
 }
+.challengeLocationUl li::before {
+  color: red;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -2em;
+}
