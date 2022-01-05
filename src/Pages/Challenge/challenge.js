@@ -19,10 +19,10 @@ export default function Challenge() {
       alert("Please enter city!");
     } else {
       dispatch(getCityChallenge(city));
-      const challengeList = useSelector(
-        (state) => state.getChallengeByCityReducer
-      );
-      setChallenges(challengeList.challenges);
+      // const challengeList = useSelector(
+      //   (state) => state.getChallengeByCityReducer
+      // );
+      // setChallenges(challengeList.challenges);
     }
   };
 
