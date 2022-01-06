@@ -1,24 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./login.scss";
 import LOGIN from "../../img/log.svg";
 import SIGNUP from "../../img/register.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../../actions/login";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+
+toast.configure();
+
+function sleep(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 const Login = () => {
   const [state, setstate] = useState("login");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const data = useSelector((state) => state.loginReducer);
+
+  function loginHandler(e) {
+    e.preventDefault();
+    const username = e.target[0].value;
+    const password = e.target[1].value;
+    if (username != "" && password != "") {
+      dispatch(loginAction({ username: username, password: password })).then(
+        (res) => {
+          if (data.state != null) {
+            localStorage.setItem("token", data.state);
+            toast.success("LOGGED IN SUCCESSFUL");
+            sleep(3000).then(() => {
+              navigate("/home");
+              window.location.reload(false);
+            });
+          } else toast.error("LOGIN FAILED");
+        }
+      );
+    } else {
+      toast.warn("MISSING COLOUMN");
+    }
+  }
+
+  // useEffect(() => {
+  //   const decoded = jwt_decode(localStorage.getItem("token"));
+  //   if (decoded) console.log(decoded);
+  // }, []);
 
   const SSignin = () => {
     return (
-      <form action="#" class="sign-in-form formlogin">
+      <form onSubmit={loginHandler} class="sign-in-form formlogin">
         <h2 class="titlelogin">
           {" "}
           <b>Sign in</b>
         </h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Username" />
+          <input type="text" name="usernameLogin" placeholder="Username" />
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            name="passwordLogin"
+            placeholder="Password"
+            // onChange={(e) => setpassword(e.target.value)}
+          />
         </div>
         <input class="btnlogin solid" type="submit" value="Login" />
         <p class="social-text">Or Sign in with social platforms</p>
