@@ -6,7 +6,12 @@ export const getBuddyByCityReducer = (state = {}, action) => {
       console.log(action.payload);
       return { loading: false, success: true, buddy: action.payload };
     case "GET_BUDDY_BY_CITY_FAIL":
-      return { loading: false, success: false, buddy: [] };
+      return {
+        loading: false,
+        success: false,
+        error: action.payload,
+        buddy: [],
+      };
     default:
       return { loading: false, buddy: [] };
   }
