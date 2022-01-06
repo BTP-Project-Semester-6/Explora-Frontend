@@ -1,6 +1,6 @@
 export const getBuddyByCity = (city) => async (dispatch, getState) => {
   try {
-    dispatch({ type: "GET_CHALLENGE_BY_CITY_REQUEST", payload: city });
+    dispatch({ type: "GET_BUDDY_BY_CITY_REQUEST", payload: city });
     // console.log(city + " action");
     fetch("http://localhost:3001/api/buddy/getBuddyByCity", {
       method: "post",

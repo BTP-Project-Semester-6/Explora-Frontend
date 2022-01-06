@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -10,7 +10,22 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import "./buddy.scss";
+import { getBuddyByCity } from "../../actions/buddyAction";
+import { useDispatch, useSelector } from "react-redux";
 export default function Buddy() {
+  const dispatch = useDispatch();
+  const [city, setCity] = useState("");
+
+  const { buddy } = useSelector((state) => state.getBuddyByCityReducer);
+  console.log(buddy);
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    if (city === "") {
+      alert("Please enter city!");
+    } else {
+      dispatch(getBuddyByCity(city));
+    }
+  };
   return (
     <div
       style={{
@@ -31,6 +46,7 @@ export default function Buddy() {
       >
         <Paper
           component="form"
+          onSubmit={SubmitHandler}
           sx={{
             p: "2px 4px",
             display: "flex",
@@ -46,6 +62,8 @@ export default function Buddy() {
             sx={{ ml: 1, flex: 1 }}
             placeholder="City"
             inputProps={{ "aria-label": "search google maps" }}
+            style={{ textTransform: "lowercase" }}
+            onChange={(e) => setCity(e.target.value)}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
@@ -76,7 +94,7 @@ export default function Buddy() {
             height: "90vh",
           }}
         >
-          <div class="twelve">
+          <div className="twelve">
             <h1>GUIDES</h1>
           </div>
           <div
@@ -177,7 +195,7 @@ export default function Buddy() {
             height: "90vh",
           }}
         >
-          <div class="twelve">
+          <div className="twelve">
             <h1>BUDDYS</h1>
           </div>
 

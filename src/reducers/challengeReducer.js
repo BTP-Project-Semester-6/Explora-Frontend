@@ -5,7 +5,7 @@ export const getChallengeByCityReducer = (state = {}, action) => {
     case "GET_CHALLENGE_BY_CITY_SUCCESS":
       console.log(action.payload);
       return action.payload;
-    case "GET_CHALLENGE_BY_CITY_REQUEST":
+    case "GET_CHALLENGE_BY_CITY_FAIL":
       return action.payload;
     default:
       return [];
