@@ -11,19 +11,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import "./buddy.scss";
 import { getBuddyByCity } from "../../actions/buddyAction";
+import { getGuideByCity } from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
 export default function Buddy() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
 
   const { buddy } = useSelector((state) => state.getBuddyByCityReducer);
+  const { guide } = useSelector((state) => state.getGuideByCityReducer);
   console.log(buddy);
+  console.log(guide);
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (city === "") {
       alert("Please enter city!");
     } else {
       dispatch(getBuddyByCity(city));
+      dispatch(getGuideByCity(city));
     }
   };
   return (
