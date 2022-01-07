@@ -182,7 +182,7 @@ export default function PrimarySearchAppBar() {
             Explora
           </Typography>
 
-          <Search className="search-bar-nav">
+          {/* <Search className="search-bar-nav">
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -190,7 +190,7 @@ export default function PrimarySearchAppBar() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
