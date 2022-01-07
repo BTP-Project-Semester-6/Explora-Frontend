@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -11,7 +11,36 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Navbar from "../navbar/navbar";
 import "./buddy.scss";
+import { getBuddyByCity } from "../../actions/buddyAction";
+import {
+  getGuideAndBuddyByCity,
+  getGuideByCity,
+} from "../../actions/guideAction";
+import { useDispatch, useSelector } from "react-redux";
 export default function Buddy() {
+  const dispatch = useDispatch();
+  const [city, setCity] = useState("");
+
+  const { buddy } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
+  const { guide } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
+
+  // const [buddys, setBuddys] = useState([]);
+
+  console.log(guide);
+  console.log(buddy);
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    if (city === "") {
+      alert("Please enter city!");
+    } else {
+      dispatch(getGuideAndBuddyByCity(city));
+      // dispatch(getGuideByCity(city));
+      // if (buddy !== []) {
+      //   setBuddys(buddy);
+      // }
+    }
+  };
   return (
     <div
       className="buddy-body"
@@ -34,6 +63,7 @@ export default function Buddy() {
       >
         <Paper
           component="form"
+          onSubmit={SubmitHandler}
           sx={{
             p: "2px 4px",
             display: "flex",
@@ -49,6 +79,8 @@ export default function Buddy() {
             sx={{ ml: 1, flex: 1 }}
             placeholder="City"
             inputProps={{ "aria-label": "search google maps" }}
+            style={{ textTransform: "lowercase" }}
+            onChange={(e) => setCity(e.target.value)}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
@@ -79,7 +111,7 @@ export default function Buddy() {
             height: "90vh",
           }}
         >
-          <div class="twelve">
+          <div className="twelve">
             <h1>GUIDES</h1>
           </div>
           <div
@@ -180,7 +212,7 @@ export default function Buddy() {
             height: "90vh",
           }}
         >
-          <div class="twelve">
+          <div className="twelve">
             <h1>BUDDYS</h1>
           </div>
 
