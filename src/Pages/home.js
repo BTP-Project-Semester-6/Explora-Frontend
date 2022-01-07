@@ -3,10 +3,12 @@ import LeftSideBar from "./leftSidebar/leftSidebar";
 import Post from "./Post/post";
 import RightSideBar from "./RightSidebar/rightSideBar";
 import Navbar from "./navbar/navbar";
+
 export default function Home() {
   return (
     <div className="home-body">
       <Navbar></Navbar>
+
       <div className="row">
         <div className="left-sidebar">
           <LeftSideBar></LeftSideBar>

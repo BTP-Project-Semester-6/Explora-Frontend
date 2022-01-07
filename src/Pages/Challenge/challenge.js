@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { getCityChallenge } from "../../actions/challengeAction";
 import "./challenge.scss";
+import Navbar from "../navbar/navbar";
 
 export default function Challenge() {
   const dispatch = useDispatch();
