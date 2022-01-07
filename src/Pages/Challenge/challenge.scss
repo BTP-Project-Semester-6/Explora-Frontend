@@ -129,6 +129,14 @@
   display: none;
 }
 
+.challengeLocationUl li::before {
+  color: red;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -2em;
+
+
 .challenge-body {
   background-color: #8bc6ec;
   background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
@@ -142,4 +150,5 @@
   );
   z-index: 2;
   backdrop-filter: blur(2rem);
+
 }

@@ -181,30 +181,18 @@ export default function Buddy() {
           }}
         >
           <div class="twelve">
-            <h1>CHALLENGES</h1>
+            <h1>BUDDYS</h1>
           </div>
+
           <div className="horizontal-card">
-            <div
-              style={{
-                width: "150px",
-                height: "100%",
-                padding: "auto",
-                marginTop: "30px",
-              }}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gwalior_1.JPG"
-                alt=""
-              />
-            </div>
             <div className="horizontal-card-body" style={{ width: "100%" }}>
               <div className="orders" style={{ width: "100%" }}>
                 <div>
                   <p className="name" style={{ float: "left" }}>
-                    challenge name
+                    host name (12/01/22 - 14/01/22)
                   </p>
                 </div>
-                <div style={{ float: "right" }}>⏱️24 hours 🗺️Gwalior</div>
+                <div style={{ float: "right" }}>👨‍👨‍👦‍👦5Buddies 🗺️Gwalior</div>
               </div>
               <div>
                 <p className="order">
@@ -218,56 +206,38 @@ export default function Buddy() {
                   been controlled by a number of different rulers in its
                   history.
                 </p>
-              </div>
-
-              <div className="profile">
-                <Button variant="contained" href="#contained-buttons">
-                  Start Challenge
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="horizontal-card">
-            <div
-              style={{
-                width: "150px",
-                height: "100%",
-                padding: "auto",
-                marginTop: "30px",
-              }}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gwalior_1.JPG"
-                alt=""
-              />
-            </div>
-            <div className="horizontal-card-body" style={{ width: "100%" }}>
-              <div className="orders" style={{ width: "100%" }}>
-                <div>
-                  <p className="name" style={{ float: "left" }}>
-                    challenge name
-                  </p>
-                </div>
-                <div style={{ float: "right" }}>⏱️24 hours 🗺️Gwalior</div>
-              </div>
-              <div>
-                <p className="order">
-                  The Gwalior Fort (Gwāliiyar Qila) is a hill fort near Gwalior,
-                  Madhya Pradesh, India. The fort has existed at least since the
-                  10th century, and the inscriptions and monuments found within
-                  what is now the fort campus indicate that it may have existed
-                  as early as the beginning of the 6th century. The modern-day
-                  fort, consisting a defensive structure and two palaces was
-                  built by Tomar Rajput ruler Man Singh Tomar.[1] The fort has
-                  been controlled by a number of different rulers in its
-                  history.
+                <p
+                  style={{
+                    backgroundColor: "#D4D4D4",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <b>Buddies</b>
+                  <br />
+                  <i>
+                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
+                      nalinagrawal333
+                    </a>
+                    ,
+                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
+                      prerit2001
+                    </a>{" "}
+                    ,{" "}
+                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
+                      him_reane
+                    </a>
+                    ,
+                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
+                      vijay_joshi
+                    </a>
+                  </i>
                 </p>
               </div>
 
               <div className="profile">
                 <Button variant="contained" href="#contained-buttons">
-                  Start Challenge
+                  Join Group
                 </Button>
               </div>
             </div>
