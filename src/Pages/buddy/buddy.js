@@ -9,17 +9,20 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Navbar from "../navbar/navbar";
 import "./buddy.scss";
 export default function Buddy() {
   return (
     <div
+      className="buddy-body"
       style={{
         width: "100%",
-        height: "80vh",
+        height: "100vh",
         margin: "0",
         padding: "0",
       }}
     >
+      <Navbar></Navbar>
       <div
         style={{
           width: "100%",
