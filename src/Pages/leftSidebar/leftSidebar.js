@@ -1,7 +1,6 @@
 import Suggestion from "../showFriend/suggestion";
 import Button from "@mui/material/Button";
 import "./leftSideBar.css";
-
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
