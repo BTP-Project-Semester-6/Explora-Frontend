@@ -9,17 +9,20 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Navbar from "../navbar/navbar";
 import "./challenge.scss";
 export default function Challenge() {
   return (
     <div
+      className="challenge-body"
       style={{
         width: "100%",
-        height: "80vh",
+        height: "100vh",
         margin: "0",
         padding: "0",
       }}
     >
+      <Navbar></Navbar>
       <div
         style={{
           width: "100%",
@@ -84,7 +87,7 @@ export default function Challenge() {
               alt=""
             />
           </div>
-          <div className="horizontal-card-body" style={{ width: "100%" }}>
+          <div className="horizontal-card-body glass" style={{ width: "100%" }}>
             <div className="orders" style={{ width: "100%" }}>
               <div>
                 <p className="name" style={{ float: "left" }}>
