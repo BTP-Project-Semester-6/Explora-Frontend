@@ -5,6 +5,8 @@ import Buddy from "./Pages/buddy/buddy";
 import Challenge from "./Pages/Challenge/challenge";
 import Home from "./Pages/home";
 import Login from "./Pages/Login/login";
+import Profile from "./Pages/Profile/Profile";
+import GuideProfile from "./Pages/GuideProfile/GuideProfile";
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
         <Route exact path="/home" element={<Home />} />
         <Route path="/buddy" element={<Buddy />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/guideprofile/:id" element={<GuideProfile />} />
       </Routes>
     </Router>
   );
