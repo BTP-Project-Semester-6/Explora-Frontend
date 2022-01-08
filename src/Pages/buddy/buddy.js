@@ -126,19 +126,24 @@ export default function Buddy() {
                   component="img"
                   alt="green iguana"
                   height="140"
-                  image="https://upload.wikimedia.org/wikipedia/commons/1/15/Gwalior_1.JPG"
+                  image={eachGuide.userId.picUrl}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Ramesh
+                    {eachGuide.userId.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Guide in gwalior fort. Rs.200 per trip. All seven forts and
-                    3 temples inside gwalior fort.
+                    Rate: <b>{eachGuide.rate}</b>
+                    <br />
+                    Experience:<b>{eachGuide.experience} Years</b>
+                    <br />
+                    Sub Locations:<b></b>
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">VIEW PROFILE</Button>
+                  <Button size="small" href={"/" + eachGuide.userId.guideId}>
+                    VIEW PROFILE
+                  </Button>
                 </CardActions>
               </Card>
             </div>
