@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -11,7 +11,36 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Navbar from "../navbar/navbar";
 import "./buddy.scss";
+import { getBuddyByCity } from "../../actions/buddyAction";
+import {
+  getGuideAndBuddyByCity,
+  getGuideByCity,
+} from "../../actions/guideAction";
+import { useDispatch, useSelector } from "react-redux";
 export default function Buddy() {
+  const dispatch = useDispatch();
+  const [city, setCity] = useState("");
+
+  const { buddy } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
+  const { guide } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
+
+  // const [buddys, setBuddys] = useState([]);
+
+  console.log(guide);
+  console.log(buddy);
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    if (city === "") {
+      alert("Please enter city!");
+    } else {
+      dispatch(getGuideAndBuddyByCity(city));
+      // dispatch(getGuideByCity(city));
+      // if (buddy !== []) {
+      //   setBuddys(buddy);
+      // }
+    }
+  };
   return (
     <div
       className="buddy-body"
@@ -34,6 +63,7 @@ export default function Buddy() {
       >
         <Paper
           component="form"
+          onSubmit={SubmitHandler}
           sx={{
             p: "2px 4px",
             display: "flex",
@@ -49,6 +79,8 @@ export default function Buddy() {
             sx={{ ml: 1, flex: 1 }}
             placeholder="City"
             inputProps={{ "aria-label": "search google maps" }}
+            style={{ textTransform: "lowercase" }}
+            onChange={(e) => setCity(e.target.value)}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
@@ -79,92 +111,43 @@ export default function Buddy() {
             height: "90vh",
           }}
         >
-          <div class="twelve">
+          <div className="twelve">
             <h1>GUIDES</h1>
           </div>
-          <div
-            style={{
-              marginTop: "20px",
-              marginLeft: "20px",
-            }}
-          >
-            <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                alt="green iguana"
-                height="140"
-                image="https://upload.wikimedia.org/wikipedia/commons/1/15/Gwalior_1.JPG"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Ramesh
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Guide in gwalior fort. Rs.200 per trip. All seven forts and 3
-                  temples inside gwalior fort.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">VIEW PROFILE</Button>
-              </CardActions>
-            </Card>
-          </div>
-
-          <div
-            style={{
-              marginTop: "20px",
-              marginLeft: "20px",
-            }}
-          >
-            <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                alt="green iguana"
-                height="140"
-                image="https://upload.wikimedia.org/wikipedia/commons/1/15/Gwalior_1.JPG"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Ramesh
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Guide in gwalior fort. Rs.200 per trip. All seven forts and 3
-                  temples inside gwalior fort.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">VIEW PROFILE</Button>
-              </CardActions>
-            </Card>
-          </div>
-
-          <div
-            style={{
-              marginTop: "20px",
-              marginLeft: "20px",
-            }}
-          >
-            <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                alt="green iguana"
-                height="140"
-                image="https://upload.wikimedia.org/wikipedia/commons/1/15/Gwalior_1.JPG"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Ramesh
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Guide in gwalior fort. Rs.200 per trip. All seven forts and 3
-                  temples inside gwalior fort.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">VIEW PROFILE</Button>
-              </CardActions>
-            </Card>
-          </div>
+          {guide.map((eachGuide) => (
+            <div
+              style={{
+                marginTop: "20px",
+                marginLeft: "20px",
+              }}
+            >
+              <Card sx={{ maxWidth: 345 }}>
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image={eachGuide.userId.picUrl}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {eachGuide.userId.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Rate: <b>{eachGuide.rate}</b>
+                    <br />
+                    Experience:<b>{eachGuide.experience} Years</b>
+                    <br />
+                    Sub Locations:<b></b>
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" href={"/" + eachGuide.userId.guideId}>
+                    VIEW PROFILE
+                  </Button>
+                </CardActions>
+              </Card>
+            </div>
+          ))}
         </div>
         <div
           className="buddy-scroll"
@@ -180,68 +163,68 @@ export default function Buddy() {
             height: "90vh",
           }}
         >
-          <div class="twelve">
+          <div className="twelve">
             <h1>BUDDYS</h1>
           </div>
-
-          <div className="horizontal-card">
-            <div className="horizontal-card-body" style={{ width: "100%" }}>
-              <div className="orders" style={{ width: "100%" }}>
+          {buddy.map((eachBuddy) => (
+            <div className="horizontal-card">
+              <div className="horizontal-card-body" style={{ width: "100%" }}>
+                <div className="orders" style={{ width: "100%" }}>
+                  <div>
+                    <p className="name" style={{ float: "left" }}>
+                      <a
+                        style={{ textDecoration: "none", color: "#3f51b5" }}
+                        href={"/" + eachBuddy.Host._id}
+                      >
+                        {eachBuddy.Host.name}
+                      </a>{" "}
+                      ({eachBuddy.dateOfArrival.substr(0, 2)}/
+                      {eachBuddy.dateOfArrival.substr(2, 2)}/
+                      {eachBuddy.dateOfArrival.substr(4, 4)} -{" "}
+                      {eachBuddy.dateOfDeparture.substr(0, 2)}/
+                      {eachBuddy.dateOfDeparture.substr(2, 2)}/
+                      {eachBuddy.dateOfDeparture.substr(4, 4)})
+                    </p>
+                  </div>
+                  <div style={{ float: "right" }}>
+                    👨‍👨‍👦‍👦{eachBuddy.groupMaxSize}Buddies 🗺️{eachBuddy.city}
+                  </div>
+                </div>
                 <div>
-                  <p className="name" style={{ float: "left" }}>
-                    host name (12/01/22 - 14/01/22)
+                  <p className="order">{eachBuddy.description}</p>
+                  <p
+                    style={{
+                      backgroundColor: "#D4D4D4",
+                      padding: "10px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <b>Buddies</b>
+                    <br />
+
+                    {eachBuddy.inGroup.map((groupMember) => (
+                      <i>
+                        {" "}
+                        <a
+                          style={{ color: "#DD4AB", cursor: "pointer" }}
+                          href={"/" + groupMember._id}
+                        >
+                          {groupMember.username}
+                        </a>
+                        {" ,"}
+                      </i>
+                    ))}
                   </p>
                 </div>
-                <div style={{ float: "right" }}>👨‍👨‍👦‍👦5Buddies 🗺️Gwalior</div>
-              </div>
-              <div>
-                <p className="order">
-                  The Gwalior Fort (Gwāliiyar Qila) is a hill fort near Gwalior,
-                  Madhya Pradesh, India. The fort has existed at least since the
-                  10th century, and the inscriptions and monuments found within
-                  what is now the fort campus indicate that it may have existed
-                  as early as the beginning of the 6th century. The modern-day
-                  fort, consisting a defensive structure and two palaces was
-                  built by Tomar Rajput ruler Man Singh Tomar.[1] The fort has
-                  been controlled by a number of different rulers in its
-                  history.
-                </p>
-                <p
-                  style={{
-                    backgroundColor: "#D4D4D4",
-                    padding: "10px",
-                    borderRadius: "10px",
-                  }}
-                >
-                  <b>Buddies</b>
-                  <br />
-                  <i>
-                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
-                      nalinagrawal333
-                    </a>
-                    ,
-                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
-                      prerit2001
-                    </a>{" "}
-                    ,{" "}
-                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
-                      him_reane
-                    </a>
-                    ,
-                    <a style={{ color: "#DD4AB", cursor: "pointer" }}>
-                      vijay_joshi
-                    </a>
-                  </i>
-                </p>
-              </div>
 
-              <div className="profile">
-                <Button variant="contained" href="#contained-buttons">
-                  Join Group
-                </Button>
+                <div className="profile">
+                  <Button variant="contained" href="#contained-buttons">
+                    Join Group
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import { useDispatch, useSelector } from "react-redux";
-import { getCityChallenge } from "../../actions/challengeAction";
-import "./challenge.scss";
-import Navbar from "../navbar/navbar";
-
-export default function Challenge() {
+import React from "react";
+import "./prePlanning.scss";
+export default function prePlanning() {
   const dispatch = useDispatch();
 
   const [city, setCity] = useState("");
-  const challenges = useSelector((state) => state.getChallengeByCityReducer);
+  const prePlannings = [];
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -23,7 +14,6 @@ export default function Challenge() {
       dispatch(getCityChallenge(city));
     }
   };
-
   return (
     <div
       style={{
@@ -67,6 +57,7 @@ export default function Challenge() {
             <SearchIcon />
           </IconButton>
         </Paper>
+        <Button variant="contained">ADD PRE-PLANNING</Button>
       </div>
 
       <div
@@ -84,9 +75,9 @@ export default function Challenge() {
         }}
       >
         <div className="twelve">
-          <h1>CHALLENGES</h1>
+          <h1>PRE-PLANNING</h1>
         </div>
-        {challenges.map((challengeItem) => (
+        {prePlannings.map((prePlanningItem) => (
           <div className="horizontal-card">
             <div
               style={{
@@ -96,30 +87,19 @@ export default function Challenge() {
                 marginTop: "30px",
               }}
             >
-              <img src={challengeItem.badge} alt="" />
+              <img src={prePlanningItem.badge} alt="" />
             </div>
             <div className="horizontal-card-body" style={{ width: "100%" }}>
               <div className="orders" style={{ width: "100%" }}>
                 <div>
                   <p className="name" style={{ float: "left" }}>
-                    {challengeItem.name}
+                    {prePlanningItem.name}
                   </p>
                 </div>
-                <div style={{ float: "right" }}>{challengeItem.city}</div>
+                <div style={{ float: "right" }}>⌚{prePlanningItem.date}</div>
               </div>
               <div>
-                <ul style={{ listStyle: "none" }}>
-                  {challengeItem.locations.map((location) => (
-                    <li>📌 {location.name}</li>
-                  ))}
-                </ul>
-                <p className="order">{challengeItem.description}</p>
-              </div>
-
-              <div className="profile">
-                <Button variant="contained" href="#contained-buttons">
-                  Start Challenge
-                </Button>
+                <p className="order">{prePlanningItem.description}</p>
               </div>
             </div>
           </div>
