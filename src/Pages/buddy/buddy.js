@@ -172,7 +172,13 @@ export default function Buddy() {
                 <div className="orders" style={{ width: "100%" }}>
                   <div>
                     <p className="name" style={{ float: "left" }}>
-                      {eachBuddy.Host} ({eachBuddy.dateOfArrival.substr(0, 2)}/
+                      <a
+                        style={{ textDecoration: "none", color: "#3f51b5" }}
+                        href={"/" + eachBuddy.Host._id}
+                      >
+                        {eachBuddy.Host.name}
+                      </a>{" "}
+                      ({eachBuddy.dateOfArrival.substr(0, 2)}/
                       {eachBuddy.dateOfArrival.substr(2, 2)}/
                       {eachBuddy.dateOfArrival.substr(4, 4)} -{" "}
                       {eachBuddy.dateOfDeparture.substr(0, 2)}/
