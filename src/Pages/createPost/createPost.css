@@ -1,0 +1,61 @@
+.errorMsg {
+  color: red;
+  font: 25px;
+  margin: 3px 0;
+}
+.imgPreview {
+  width: 100%;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+  color: white;
+}
+.imgPreview input[type="file"] {
+  display: none;
+}
+.customFileUpload {
+  color: black;
+  font-size: 35px;
+  font-weight: 500;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.uploadbox {
+  padding: 20px;
+  border: 5px dotted black;
+  margin: auto;
+  width: 50%;
+}
+
+.createPost-body {
+  height: 100vh;
+  /* background-color: #8bc6ec;
+ background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%); */
+  background-image: url("https://image.freepik.com/free-vector/camping-area-landscape-concept_23-2148670950.jpg");
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.glass {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+}
+.outer-box-creatPost {
+  border-radius: 10px;
+  padding: 30px;
+  margin: auto;
+  width: 70%;
+  height: fit-content;
+}

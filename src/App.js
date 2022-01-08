@@ -5,6 +5,7 @@ import Buddy from "./Pages/buddy/buddy";
 import Challenge from "./Pages/Challenge/challenge";
 import Home from "./Pages/home";
 import Login from "./Pages/Login/login";
+import CreatePost from "./Pages/createPost/createPost";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route exact path="/home" element={<Home />} />
         <Route path="/buddy" element={<Buddy />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/createPost" element={<CreatePost />} />
       </Routes>
     </Router>
   );
