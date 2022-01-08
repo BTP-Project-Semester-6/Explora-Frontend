@@ -6,20 +6,22 @@ import Navbar from "./navbar/navbar";
 
 export default function Home() {
   return (
-    <div className="home-body">
-      <Navbar></Navbar>
+    <div>
+      <div className="home-body">
+        <Navbar></Navbar>
 
-      <div className="row">
-        <div className="left-sidebar">
-          <LeftSideBar></LeftSideBar>
-        </div>
-        <div className="post">
-          <Post></Post>
-          <Post></Post>
-          <Post></Post>
-        </div>
-        <div className="right-sidebar">
-          <RightSideBar></RightSideBar>
+        <div className="row">
+          <div className="left-sidebar">
+            <LeftSideBar></LeftSideBar>
+          </div>
+          <div className="post">
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+          </div>
+          <div className="right-sidebar">
+            <RightSideBar></RightSideBar>
+          </div>
         </div>
       </div>
     </div>
