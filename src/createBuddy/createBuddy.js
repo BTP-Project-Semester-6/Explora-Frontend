@@ -29,7 +29,7 @@ export default function CreatBuddy() {
     <div style={myStyle} className="creatBuddy-body">
       <Navbar></Navbar>
       <div className="him">
-        <div style={{ width: "60%" }} className="container glass">
+        <div style={{ width: "60%" }} className="container glass-createBuddy">
           <div className="row">
             <div style={{ width: "20%" }} class="form-group">
               <label for="formGroupExampleInput2">
