@@ -7,11 +7,13 @@ import Home from "./Pages/home";
 import Login from "./Pages/Login/login";
 import Profile from "./Pages/Profile/Profile";
 import GuideProfile from "./Pages/GuideProfile/GuideProfile";
+import Landing from "./Pages/Landing/landing";
 
 const App = () => {
   return (
     <Router>
       <Routes>
+        <Route exact path="/" element={<Landing />} />
         <Route exact path="/admin" element={<Admin />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route exact path="/home" element={<Home />} />
