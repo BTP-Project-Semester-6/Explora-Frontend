@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -7,26 +7,23 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { getCityChallenge } from "../../actions/challengeAction";
 import "./challenge.scss";
+import Navbar from "../navbar/navbar";
 
 export default function Challenge() {
   const dispatch = useDispatch();
 
   const [city, setCity] = useState("");
-  const [challenges, setChallenges] = useState([]);
-  const submitHandler = (e) => {
+  const challenges = useSelector((state) => state.getChallengeByCityReducer);
+
+  const SubmitHandler = (e) => {
     e.preventDefault();
     if (city === "") {
       alert("Please enter city!");
     } else {
       dispatch(getCityChallenge(city));
-      // const challengeList = useSelector(
-      //   (state) => state.getChallengeByCityReducer
-      // );
-      // setChallenges(challengeList.challenges);
     }
   };
 
-  // console.log(challengeList);
   return (
     <div
       style={{
@@ -47,7 +44,7 @@ export default function Challenge() {
       >
         <Paper
           component="form"
-          onSubmit={submitHandler}
+          onSubmit={SubmitHandler}
           sx={{
             p: "2px 4px",
             display: "flex",

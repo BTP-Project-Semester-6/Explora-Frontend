@@ -128,10 +128,25 @@
 .buddy-scroll .order::-webkit-scrollbar {
   display: none;
 }
+
 .challengeLocationUl li::before {
   color: red;
   font-weight: bold;
   display: inline-block;
   width: 1em;
   margin-left: -2em;
+}
+.challenge-body {
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+}
+.glass {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  z-index: 2;
+  backdrop-filter: blur(2rem);
 }
