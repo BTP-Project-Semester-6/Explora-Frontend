@@ -21,14 +21,23 @@ export default function CreatePost() {
       setError(true);
     }
   };
+  const myStyle = {
+    backgroundImage: "url(/post.jpg)",
+    height: "100vh",
+
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+  };
 
   return (
-    <div className="createPost-body">
+    <div style={myStyle} className="createPost-body">
       <Navbar></Navbar>
-      <div className="glass outer-box-creatPost">
+      <div className="glass-creatPost outer-box-creatPost">
         <div className="">
           <div className="row">
-            <div className="container uploadbox ">
+            <div style={{ width: "50%" }} className="container uploadbox ">
               {error && <p className="errorMsg">File not supported</p>}
               <div
                 className="imgPreview"
@@ -60,51 +69,67 @@ export default function CreatePost() {
                   <button
                     className="btn btn-outline-danger btn-lg btn-block btn-sm"
                     onClick={() => setImgPreview(null)}
-                    style={{ width: "100%", margin: "10px 0 0 0" }}
+                    style={{
+                      border: "none",
+                      width: "100%",
+                      margin: "10px 0 0 0",
+                    }}
                   >
                     Remove image
                   </button>
                 </>
               )}
             </div>
-            <div className="col">
-              <div style={{ width: "90%", margin: "auto" }} class="form-group">
-                <label for="exampleFormControlTextarea1">
-                  <b>Tag Someone</b>
-                </label>
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="1"
-                ></textarea>
-              </div>
+            <div style={{ width: "50%" }}>
+              <div className="col">
+                <div
+                  style={{ width: "90%", margin: "auto" }}
+                  class="form-group"
+                >
+                  <label for="exampleFormControlTextarea1">
+                    <b>Tag Someone</b>
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                  ></textarea>
+                </div>
 
-              <div
-                style={{ width: "90%", margin: "auto", marginTop: "20px" }}
-                class="form-group"
-              >
-                <label for="exampleFormControlTextarea1">
-                  <b>Location</b>
-                </label>
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="1"
-                ></textarea>
-              </div>
-              <div
-                style={{ width: "90%", margin: "auto", marginTop: "20px" }}
-                class="form-group"
-              >
-                <label for="exampleFormControlTextarea1">
-                  {" "}
-                  <b>Discription </b>
-                </label>
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="6"
-                ></textarea>
+                <div
+                  style={{ width: "90%", margin: "auto", marginTop: "20px" }}
+                  class="form-group"
+                >
+                  <label for="exampleFormControlTextarea1">
+                    <b>Location</b>
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                  ></textarea>
+                </div>
+                <div
+                  style={{ width: "90%", margin: "auto", marginTop: "20px" }}
+                  class="form-group"
+                >
+                  <label for="exampleFormControlTextarea1">
+                    {" "}
+                    <b>Discription </b>
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="6"
+                  ></textarea>
+                </div>
+                <div
+                  style={{ width: "10%", margin: "auto", marginTop: "10px" }}
+                >
+                  <button type="button" class="btn btn-success ">
+                    Post
+                  </button>
+                </div>
               </div>
             </div>
           </div>
