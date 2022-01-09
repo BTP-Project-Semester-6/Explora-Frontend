@@ -18,7 +18,7 @@ function LeftSideBar() {
         <div
           style={{
             width: "100%",
-            minHeight: "100px",
+            minHeight: "50px",
             margin: "0",
             padding: "auto",
             display: "flex",
@@ -31,7 +31,7 @@ function LeftSideBar() {
               display: "flex",
               alignItems: "center",
               width: 400,
-              height: 50,
+              height: 40,
             }}
             style={{
               margin: "auto",
