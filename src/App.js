@@ -5,6 +5,10 @@ import Buddy from "./Pages/buddy/buddy";
 import Challenge from "./Pages/Challenge/challenge";
 import Home from "./Pages/home";
 import Login from "./Pages/Login/login";
+
+import CreatePost from "./Pages/createPost/createPost";
+import CreatBuddy from "./createBuddy/createBuddy";
+
 import Profile from "./Pages/Profile/Profile";
 import GuideProfile from "./Pages/GuideProfile/GuideProfile";
 import Landing from "./Pages/Landing/landing";
@@ -19,6 +23,11 @@ const App = () => {
         <Route exact path="/home" element={<Home />} />
         <Route path="/buddy" element={<Buddy />} />
         <Route path="/login" element={<Login />} />
+
+        <Route path="/createPost" element={<CreatePost />} />
+
+        <Route path="/createBuddy" element={<CreatBuddy />} />
+
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
       </Routes>
