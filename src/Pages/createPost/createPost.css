@@ -42,7 +42,7 @@
   background-position: center;
   background-size: cover;
 }
-.glass {
+.glass-creatPost {
   background: white;
   background: linear-gradient(
     to right bottom,
@@ -50,7 +50,7 @@
     rgba(255, 255, 255, 0.3)
   );
   z-index: 2;
-  backdrop-filter: blur(2rem);
+  backdrop-filter: blur(0.4rem);
 }
 .outer-box-creatPost {
   border-radius: 10px;
