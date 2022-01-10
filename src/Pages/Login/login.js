@@ -27,27 +27,34 @@ const Login = () => {
     const username = e.target[0].value;
     const password = e.target[1].value;
     if (username != "" && password != "") {
-      dispatch(loginAction({ username: username, password: password })).then(
-        (res) => {
-          if (data.state != null) {
-            localStorage.setItem("token", data.state);
-            toast.success("LOGGED IN SUCCESSFUL");
-            sleep(3000).then(() => {
-              navigate("/home");
-              window.location.reload(false);
-            });
-          } else toast.error("LOGIN FAILED");
-        }
-      );
+      dispatch(loginAction({ username: username, password: password }));
+      sleep(3000).then(() => {
+        window.location.reload();
+      });
     } else {
       toast.warn("MISSING COLOUMN");
     }
   }
 
-  // useEffect(() => {
-  //   const decoded = jwt_decode(localStorage.getItem("token"));
-  //   if (decoded) console.log(decoded);
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      toast.warn("Please Login with valid credential");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+      } else {
+        if (decoded) {
+          toast.success("LOGGED IN SUCCESSFUL");
+          console.log("DECODED");
+          console.log(decoded);
+          navigate("/home");
+        }
+      }
+    } else {
+      toast.warn("Please Login with valid credential");
+    }
+  }, []);
 
   const SSignin = () => {
     return (
@@ -191,6 +198,7 @@ const Login = () => {
 
   return (
     <div>
+      {data.state != "null" && localStorage.setItem("token", data.state)}
       <b>
         <div class="containerlogin">
           <div class="forms-container">
