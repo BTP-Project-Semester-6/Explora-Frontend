@@ -4,8 +4,8 @@ export const loginReducer = (state = null, action) => {
     case "LOGIN_SUCCESS":
       return { state: action.payload };
     case "LOGIN_FAILED":
-      return { state: action.payload };
+      return { state: "null" };
     default:
-      return state;
+      return { state: "null" };
   }
 };
