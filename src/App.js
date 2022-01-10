@@ -12,6 +12,7 @@ import CreatBuddy from "./createBuddy/createBuddy";
 import Profile from "./Pages/Profile/Profile";
 import GuideProfile from "./Pages/GuideProfile/GuideProfile";
 import Landing from "./Pages/Landing/landing";
+import Register from "./Pages/Register/register";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route exact path="/home" element={<Home />} />
         <Route path="/buddy" element={<Buddy />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route path="/createPost" element={<CreatePost />} />
 
