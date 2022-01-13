@@ -42,6 +42,7 @@ export default function Post() {
     <Card
       style={{
         marginBottom: "3%",
+        marginTop: "3%",
         borderRadius: "2%",
       }}
     >

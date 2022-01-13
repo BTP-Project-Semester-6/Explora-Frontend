@@ -1,16 +1,18 @@
 .left-sidebar {
+  margin-top: 20px;
   width: 25%;
   float: left;
 }
 .right-sidebar {
+  margin-top: 20px;
   width: 25%;
   float: right;
 }
 .post {
   overflow-y: scroll;
   margin: auto;
+  margin-top: 0px;
   height: 100vh;
-  margin-top: 10px;
   width: 50%;
 }
 .post::-webkit-scrollbar {
