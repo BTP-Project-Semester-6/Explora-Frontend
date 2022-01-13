@@ -18,6 +18,7 @@ import CreateChallenge from "./Pages/createChallenge/createChallenge";
 
 import Register from "./Pages/Register/register";
 
+import Task from "./Pages/TaskPage/task";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/createBuddy" element={<CreatBuddy />} />
         <Route path="/prePlanningPost" element={<PrePlanningPost />} />
 
+        <Route path="/task/:id" element={<Task />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
       </Routes>
