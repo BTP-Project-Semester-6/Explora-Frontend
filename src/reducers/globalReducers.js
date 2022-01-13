@@ -7,6 +7,7 @@ import {
   getGuideByCityReducer,
   getGuideAndBuddyByCityReducer,
 } from "./guideReducer";
+import { getTaskByUSerIDReducer } from "./taskReducer";
 const reducers = combineReducers({
   sampleChangeTheNumber,
   loginReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   getBuddyByCityReducer,
   getGuideByCityReducer,
   getGuideAndBuddyByCityReducer,
+  getTaskByUSerIDReducer,
 });
 
 export default reducers;
