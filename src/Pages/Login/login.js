@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./login.scss";
-import LOGIN from "../../img/log.svg";
+import SPINNER from "../../img/Spinner.gif";
 import SIGNUP from "../../img/register.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../actions/login";
@@ -16,7 +16,7 @@ function sleep(time) {
 }
 
 const Login = () => {
-  const [state, setstate] = useState("login");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,27 +27,35 @@ const Login = () => {
     const username = e.target[0].value;
     const password = e.target[1].value;
     if (username != "" && password != "") {
-      dispatch(loginAction({ username: username, password: password })).then(
-        (res) => {
-          if (data.state != null) {
-            localStorage.setItem("token", data.state);
-            toast.success("LOGGED IN SUCCESSFUL");
-            sleep(3000).then(() => {
-              navigate("/home");
-              window.location.reload(false);
-            });
-          } else toast.error("LOGIN FAILED");
-        }
-      );
+      setLoading(true);
+      dispatch(loginAction({ username: username, password: password }));
+      sleep(3000).then(() => {
+        window.location.reload();
+      });
     } else {
       toast.warn("MISSING COLOUMN");
     }
   }
 
-  // useEffect(() => {
-  //   const decoded = jwt_decode(localStorage.getItem("token"));
-  //   if (decoded) console.log(decoded);
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      toast.warn("Please Login with valid credential");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+      } else {
+        if (decoded) {
+          toast.success("LOGGED IN SUCCESSFUL");
+          console.log("DECODED");
+          console.log(decoded);
+          navigate("/home");
+        }
+      }
+    } else {
+      toast.warn("Please Login with valid credential");
+    }
+  }, []);
 
   const SSignin = () => {
     return (
@@ -62,67 +70,17 @@ const Login = () => {
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input
-            type="password"
-            name="passwordLogin"
-            placeholder="Password"
-            // onChange={(e) => setpassword(e.target.value)}
-          />
+          <input type="password" name="passwordLogin" placeholder="Password" />
         </div>
-        <input class="btnlogin solid" type="submit" value="Login" />
+        {!loading ? (
+          <input class="btnlogin solid" type="submit" value="Login" />
+        ) : (
+          <div style={{ fontSize: "15px", color: "green" }}>
+            {" "}
+            <img src={SPINNER} width="80px" height="80px" /> Please Wait
+          </div>
+        )}
         <p class="social-text">Or Sign in with social platforms</p>
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
-      </form>
-    );
-  };
-
-  const SSignup = () => {
-    return (
-      <form action="#" class="sign-up-form formlogin">
-        <h2 class="titlelogin">
-          {" "}
-          <b>Sign up</b>
-        </h2>
-        <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input type="text" placeholder="Name" />
-        </div>
-        <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input type="text" placeholder="Username" />
-        </div>
-        <div class="input-field">
-          <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email" />
-        </div>
-        <div class="input-field">
-          <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Password" />
-        </div>
-        <div class="input-field">
-          <i class="fas fa-mars"></i>
-          <input type="text" placeholder="Age" />
-        </div>
-        <div class="input-field">
-          <i class="fas fa-mars"></i>
-          <input type="text" placeholder="Gender (male/female)" />
-        </div>
-
-        <input type="submit" class="btnlogin" value="Register" />
-        <p class="social-text">Or Sign up with social platforms</p>
         <div class="social-media">
           <a href="#" class="social-icon">
             <i class="fab fa-facebook-f"></i>
@@ -154,7 +112,7 @@ const Login = () => {
             <button
               class="btnlogin transparent"
               id="sign-up-btn"
-              onClick={(e) => setstate("register")}
+              onClick={(e) => navigate("/register")}
             >
               Sign Up
             </button>
@@ -165,40 +123,17 @@ const Login = () => {
     );
   };
 
-  const Contentsignup = () => {
-    return (
-      <div class="panels-container">
-        <div class="panellogin left-panellogin">
-          <div class="contentlogin">
-            <h3>Already Have an Account ?</h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
-            </p>
-            <button
-              class="btnlogin transparent"
-              id="sign-up-btn"
-              onClick={(e) => setstate("login")}
-            >
-              Sign In
-            </button>
-          </div>
-          <img src={LOGIN} class="image" alt="" />
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div>
+      {data.state != "null" && localStorage.setItem("token", data.state)}
       <b>
         <div class="containerlogin">
           <div class="forms-container">
             <div class="signin-signup">
-              {state == "login" ? <SSignin /> : <SSignup />}
+              <SSignin />
             </div>
           </div>
-          {state == "login" ? <Contentlogin /> : <Contentsignup />}
+          <Contentlogin />
         </div>
       </b>
     </div>
