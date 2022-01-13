@@ -21,7 +21,7 @@ export const loginAction = (user) => async (dispatch, getState) => {
         } else {
           dispatch({
             type: "LOGIN_FAILED",
-            payload: data.error,
+            payload: null,
           });
         }
       })
