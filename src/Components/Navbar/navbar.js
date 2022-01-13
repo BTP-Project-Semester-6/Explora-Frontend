@@ -44,7 +44,7 @@ const Navbar = () => {
           <NavbarContainer>
             <NavLogo to="/">
               <SiYourtraveldottv />
-              EXPLORA
+              <div style={{ marginLeft: "5px", fontSize: "25px" }}>EXPLORA</div>
             </NavLogo>
 
             <SideIcon onClick={handleclick}>
