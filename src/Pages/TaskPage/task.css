@@ -1,0 +1,35 @@
+.MuiStepLabel-labelContainer span {
+  font-size: large;
+}
+.task-body {
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+}
+.glass-task {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 30px;
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255),
+    rgba(255, 255, 255)
+  );
+  z-index: 2;
+  backdrop-filter: blur(0rem);
+}
+.task-taskPage {
+  border-radius: 20px;
+  padding: 10px;
+  margin: 20px;
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  z-index: 2;
+  backdrop-filter: blur(0rem);
+}

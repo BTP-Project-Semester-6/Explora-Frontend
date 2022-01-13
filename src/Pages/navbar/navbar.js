@@ -16,16 +16,25 @@ import MenuItem from "@mui/material/MenuItem";
 
 const pages = ["Home", "About"];
 const settings = ["Profile", "Logout"];
+const settings2 = ["Landing", "Home", "Challange", "Buddy", "Guide"];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser2, setAnchorElUser2] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenHeadingMenu = (event) => {
+    setAnchorElUser2(event.currentTarget);
+  };
+  const handleCloseHeadingMenu = (event) => {
+    setAnchorElUser2(null);
   };
 
   const handleCloseNavMenu = () => {
@@ -52,6 +61,7 @@ const Navbar = () => {
             src="btplogo2.svg"
             alt="logo"
           />
+
           <IconButton size="large" color="inherit"></IconButton>
           <Typography
             variant="h4"
@@ -64,8 +74,36 @@ const Navbar = () => {
               display: { xs: "none", md: "flex" },
             }}
           >
-            Explora
+            <button style={{ border: "none" }} onClick={handleOpenHeadingMenu}>
+              Explora
+            </button>
+            {/* <a>Explora</a> */}
           </Typography>
+
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser2}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser2)}
+            onClose={handleCloseHeadingMenu}
+          >
+            {settings2.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseHeadingMenu}>
+                <Typography style={{ fontSize: "15px" }} textAlign="center">
+                  {setting}
+                </Typography>
+              </MenuItem>
+            ))}
+          </Menu>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -148,7 +186,9 @@ const Navbar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography style={{ fontSize: "15px" }} textAlign="center">
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
