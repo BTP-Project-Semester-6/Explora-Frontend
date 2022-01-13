@@ -1,8 +1,7 @@
-.search-bar-nav {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.glass-navbar {
+}
+.navbar-body {
+  box-shadow: none;
+  z-index: 2;
+  backdrop-filter: blur(0.4rem);
 }
