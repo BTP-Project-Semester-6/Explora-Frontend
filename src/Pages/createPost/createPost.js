@@ -32,9 +32,12 @@ export default function CreatePost() {
   };
 
   return (
-    <div style={myStyle} className="createPost-body">
+    <div className="createPost-body">
       <Navbar></Navbar>
-      <div className="glass-creatPost outer-box-creatPost">
+      <div
+        style={{ marginTop: "4%" }}
+        className="glass-creatPost outer-box-creatPost"
+      >
         <div className="">
           <div className="row">
             <div style={{ width: "50%" }} className="container uploadbox ">

@@ -12,7 +12,13 @@ import CreatBuddy from "./createBuddy/createBuddy";
 import Profile from "./Pages/Profile/Profile";
 import GuideProfile from "./Pages/GuideProfile/GuideProfile";
 import Landing from "./Pages/Landing/landing";
+
+import PrePlanningPost from "./Pages/prePlanningPost/prePlanningPost";
+import CreateChallenge from "./Pages/createChallenge/createChallenge";
+
 import Register from "./Pages/Register/register";
+
+import Task from "./Pages/TaskPage/task";
 
 const App = () => {
   return (
@@ -27,9 +33,12 @@ const App = () => {
         <Route path="/register" element={<Register />} />
 
         <Route path="/createPost" element={<CreatePost />} />
+        <Route path="/createChallenge" element={<CreateChallenge />} />
 
         <Route path="/createBuddy" element={<CreatBuddy />} />
+        <Route path="/prePlanningPost" element={<PrePlanningPost />} />
 
+        <Route path="/task" element={<Task />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
       </Routes>

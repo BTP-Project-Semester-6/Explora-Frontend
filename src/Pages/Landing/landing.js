@@ -7,7 +7,7 @@ import Footer from "./../../Components/Footer/Footer";
 const Landing = () => {
   return (
     <div style={{ marginTop: "70px" }}>
-      <Navbar />
+      <Navbar></Navbar>
       <Infosection {...homeObjOne} />
       <Infosection {...homeObjTwo} />
       <Infosection {...homeObjThree} />

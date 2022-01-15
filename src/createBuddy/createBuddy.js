@@ -26,11 +26,11 @@ export default function CreatBuddy() {
     backgroundSize: "cover",
   };
   return (
-    <div style={myStyle} className="creatBuddy-body">
+    <div className="creatBuddy-body">
       <Navbar></Navbar>
-      <div className="him">
+      <div style={{ marginTop: "3%" }} className="him">
         <div style={{ width: "60%" }} className="container glass-createBuddy">
-          <div className="row">
+          <div style={{ width: "100%", margin: "auto" }} className="row">
             <div style={{ width: "20%" }} class="form-group">
               <label for="formGroupExampleInput2">
                 <b>Members</b>{" "}
@@ -60,7 +60,7 @@ export default function CreatBuddy() {
               </button>
             </div>
           </div>
-          <div class="form-group">
+          <div style={{ width: "98%", margin: "auto" }} class="form-group">
             <label for="formGroupExampleInput2">
               <b>City</b>
             </label>
@@ -71,7 +71,8 @@ export default function CreatBuddy() {
               placeholder="City"
             />
           </div>
-          <div className="row">
+
+          <div style={{ margin: "auto", marginTop: "24px" }} className="row">
             <div style={{ width: "50%" }} class="form-group">
               <label for="formGroupExampleInput2">
                 <b>Date of Journey</b>
@@ -111,6 +112,9 @@ export default function CreatBuddy() {
             {" "}
             Current Members :-<b> Nalin, Prerit, Joshi</b>{" "}
           </div>
+          <button type="button" class="btn btn-primary btn-sm btn-lg btn-block">
+            Create Group
+          </button>
         </div>
       </div>
     </div>
