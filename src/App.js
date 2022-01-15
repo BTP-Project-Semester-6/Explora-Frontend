@@ -21,6 +21,8 @@ import Register from "./Pages/Register/register";
 import Task from "./Pages/TaskPage/task";
 import { VisitingPlaces } from "./Pages/VisitingPlaces/visitingPlaces";
 
+import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
+
 const App = () => {
   return (
     <Router>
@@ -43,6 +45,8 @@ const App = () => {
         <Route path="/places" element={<VisitingPlaces />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
+
+        <Route path="/personalityquiz" element={<PersonalityQuiz />} />
       </Routes>
     </Router>
   );
