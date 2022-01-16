@@ -1,5 +1,3 @@
-import Axios from "axios";
-
 export const getAllChallenge = () => async (dispatch, getState) => {};
 
 export const getCityChallenge = (city) => async (dispatch, getState) => {

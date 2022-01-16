@@ -16,7 +16,7 @@ export default function CreateChallenge() {
   const [description, setDescription] = React.useState("");
 
   const result = useSelector((state) => state.createChallengeByCityReducer);
-  console.log(result);
+  // console.log(result);
   const addLocationHandler = (e) => {
     e.preventDefault();
     const loc = location.replace(/ /g, "+");
@@ -43,22 +43,30 @@ export default function CreateChallenge() {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    console.log(locations);
-    console.log(city);
-    console.log(description);
+    // console.log(locations);
+    // console.log(city);
+    // console.log(description);
     if (locations === []) {
       Toast("", "", "", "Please enter locations!");
-      // alert("Please enter locations!");
     } else if (city === "") {
       Toast("", "", "", "Please enter city!");
-      // alert("Please enter city!");
     } else if (description === "") {
       Toast("", "", "", "Please enter description!");
-      // alert("Please enter description!");
     } else {
-      dispatch(createCityChallenge(city, locations, description, name));
+      dispatch(
+        createCityChallenge(
+          city.toLocaleLowerCase(),
+          locations,
+          description,
+          name
+        )
+      );
+      console.log(result);
     }
   };
+
+  Toast(result.message, result.error, result.info, "");
+  console.log(result.message + result.error + result.message);
 
   return (
     <div className="creatBuddy-body">
