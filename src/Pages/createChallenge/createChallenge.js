@@ -3,12 +3,55 @@ import "./createChallenge.css";
 import Navbar from "../navbar/navbar";
 
 import { styled } from "@mui/system";
+import { useDispatch } from "react-redux";
+import { createCityChallenge } from "../../actions/challengeAction";
 export default function CreateChallenge() {
-  const [age, setAge] = React.useState("");
+  const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const [city, setCity] = React.useState("");
+  const [locations, setLocations] = React.useState([]);
+  const [location, setLocation] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  const addLocationHandler = (e) => {
+    e.preventDefault();
+    const loc = location.replace(/ /g, "+");
+    const url =
+      "http://api.positionstack.com/v1/forward?access_key=17f205afe4cdd599e9805bd1b7c6a7f5&query=" +
+      location;
+    // console.log(locations);
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        setLocations((locations) => [
+          ...locations,
+          {
+            lat: result.data[0].latitude,
+            lng: result.data[0].longitude,
+            name: location.toLocaleLowerCase(),
+          },
+        ]);
+        // console.log(locations);
+      });
+    // console.log(locations);
   };
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(locations);
+    console.log(city);
+    console.log(description);
+    if (locations === []) {
+      alert("Please enter locations!");
+    } else if (city === "") {
+      alert("Please enter city!");
+    } else if (description === "") {
+      alert("Please enter description!");
+    } else {
+      dispatch(createCityChallenge(city, locations, description));
+    }
+  };
+
   return (
     <div className="creatBuddy-body">
       <Navbar></Navbar>
@@ -24,6 +67,7 @@ export default function CreateChallenge() {
               class="form-control"
               id="formGroupExampleInput2"
               placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
             />
           </div>
           <div>
@@ -36,10 +80,15 @@ export default function CreateChallenge() {
                 class="form-control"
                 id="formGroupExampleInput2"
                 placeholder="AddMembers"
+                onChange={(e) => setLocation(e.target.value)}
               />
             </div>
             <div style={{ width: "15%" }}>
-              <button type="button" class="btn btn-primary">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={addLocationHandler}
+              >
                 {" "}
                 <b>Add Location</b>
               </button>
@@ -54,6 +103,7 @@ export default function CreateChallenge() {
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="4"
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
           <button type="button" class="btn btn-primary btn-sm btn-lg btn-block">
