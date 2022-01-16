@@ -28,3 +28,40 @@ export const createPrePlanning =
       console.log(e);
     }
   };
+
+export const getPrePlanningSubLocation =
+  (subLoation) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: "GET_PRE_PLANNING_SUB_LOCATION_REQUEST",
+        payload: subLoation,
+      });
+      // console.log(city + " action");
+      fetch(
+        `http://localhost:3001/api/prePlanning/getPrePlanningBySubLocation/${subLoation}`,
+        {
+          method: "get",
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: "GET_PRE_PLANNING_SUB_LOCATION_SUCCESS",
+            payload: data,
+          });
+        })
+        .catch((error) => {
+          const message =
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message;
+          dispatch({
+            type: "GET_PRE_PLANNING_SUB_LOCATION_FAIL",
+            payload: message,
+          });
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
