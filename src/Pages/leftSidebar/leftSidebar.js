@@ -49,23 +49,29 @@ function LeftSideBar() {
         </div>
         <div className="left-up">
           <div className="nav-buttons">
-            <Button variant="text">Option 2</Button>
-          </div>
-          <div className="nav-buttons">
-            <Button color="success" variant="text">
-              Option 2
+            <Button style={{ fontSize: "16px" }} variant="text">
+              Create Post
             </Button>
           </div>
           <div className="nav-buttons">
-            <Button color="secondary" variant="text">
+            <Button style={{ fontSize: "16px" }} color="success" variant="text">
+              Create Buddy
+            </Button>
+          </div>
+          <div className="nav-buttons">
+            <Button
+              style={{ fontSize: "16px" }}
+              color="secondary"
+              variant="text"
+            >
+              Create Challenge
+            </Button>
+          </div>
+          {/* <div className="nav-buttons">
+            <Button color="success" variant="text">
               Option 3
             </Button>
-          </div>
-          <div className="nav-buttons">
-            <Button color="success" variant="text">
-              Option 3
-            </Button>
-          </div>
+          </div> */}
         </div>
         <hr style={{ margin: "5px" }}></hr>
         <div className="heading-sug">Contacts</div>
