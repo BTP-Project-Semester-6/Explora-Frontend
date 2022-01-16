@@ -18,11 +18,8 @@ export default function CreateChallenge() {
   const result = useSelector((state) => state.createChallengeByCityReducer);
   const addLocationHandler = (e) => {
     e.preventDefault();
-    const loc = location.replace(/ /g, "+");
-    const url =
-      "http://api.positionstack.com/v1/forward?access_key=17f205afe4cdd599e9805bd1b7c6a7f5&query=" +
-      location;
-    fetch(url)
+
+    fetch(process.env.REACT_APP_GET_COORDINATES + location)
       .then((response) => response.json())
       .then((result) => {
         setLocations((locations) => [
