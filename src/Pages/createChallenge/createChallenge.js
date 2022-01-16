@@ -16,14 +16,12 @@ export default function CreateChallenge() {
   const [description, setDescription] = React.useState("");
 
   const result = useSelector((state) => state.createChallengeByCityReducer);
-  // console.log(result);
   const addLocationHandler = (e) => {
     e.preventDefault();
     const loc = location.replace(/ /g, "+");
     const url =
       "http://api.positionstack.com/v1/forward?access_key=17f205afe4cdd599e9805bd1b7c6a7f5&query=" +
       location;
-    // console.log(locations);
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
@@ -36,16 +34,11 @@ export default function CreateChallenge() {
           },
         ]);
         setLocation("");
-        // console.log(locations);
       });
-    // console.log(locations);
   };
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    // console.log(locations);
-    // console.log(city);
-    // console.log(description);
     if (locations === []) {
       Toast("", "", "", "Please enter locations!");
     } else if (city === "") {
