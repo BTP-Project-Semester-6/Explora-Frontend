@@ -36,7 +36,7 @@ export const getCityChallenge = (city) => async (dispatch, getState) => {
 };
 
 export const createCityChallenge =
-  (city, locations, description) => async (dispatch, getState) => {
+  (city, locations, description, name) => async (dispatch, getState) => {
     try {
       dispatch({ type: "ADD_CHALLENGE_BY_CITY_REQUEST", payload: city });
       // console.log(city + " action");
@@ -47,6 +47,7 @@ export const createCityChallenge =
           city: city,
           description: description,
           locations: locations,
+          name: name,
           badge:
             "https://www.shareicon.net/data/2017/03/29/881750_sport_512x512.png",
         }),

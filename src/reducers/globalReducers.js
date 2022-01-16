@@ -1,7 +1,10 @@
 import { combineReducers } from "redux";
 import sampleChangeTheNumber from "./sampleReducer";
 import { loginReducer } from "./loginReducer";
-import { getChallengeByCityReducer } from "./challengeReducer";
+import {
+  getChallengeByCityReducer,
+  createChallengeByCityReducer,
+} from "./challengeReducer";
 import { getBuddyByCityReducer } from "./buddyReducer";
 import {
   getGuideByCityReducer,
@@ -16,6 +19,7 @@ const reducers = combineReducers({
   getGuideByCityReducer,
   getGuideAndBuddyByCityReducer,
   getTaskByUSerIDReducer,
+  createChallengeByCityReducer,
 });
 
 export default reducers;
