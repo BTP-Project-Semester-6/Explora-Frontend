@@ -3,12 +3,38 @@ import "./prePlanningPost.css";
 import Navbar from "../navbar/navbar";
 import { useDispatch } from "react-redux";
 import Toast from "../../Components/Toast/toast";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export default function PrePlanningPost() {
   const [location, setLocation] = React.useState("");
   const [subLocation, setSubLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [user, setUser] = React.useState({});
+
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          console.log("DECODED");
+          console.log(decoded);
+          setUser(decoded);
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
   const dispatch = useDispatch();
+
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (location === "") {
@@ -22,6 +48,7 @@ export default function PrePlanningPost() {
       // dispatch(getCityChallenge(city));
     }
   };
+
   return (
     <div className="creatBuddy-body">
       <Navbar></Navbar>
