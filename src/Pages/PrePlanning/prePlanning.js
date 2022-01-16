@@ -19,7 +19,7 @@ export default function PrePlanning() {
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (subLocation === "") {
-      alert("Please enter subLocation!");
+      Toast("", "", "", "Please enter sub-location!");
     } else {
       dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase())).then(
         () => {
@@ -29,6 +29,7 @@ export default function PrePlanning() {
     }
   };
   Toast(prePlannings.message, prePlannings.error, "", "");
+  console.log(prePlannings);
   return (
     <div
       style={{
@@ -102,16 +103,18 @@ export default function PrePlanning() {
                 marginTop: "30px",
               }}
             >
-              <img src={prePlanningItem.badge} alt="" />
+              <img src={prePlanningItem.author.picUrl} alt="" />
             </div>
             <div className="horizontal-card-body" style={{ width: "100%" }}>
               <div className="orders" style={{ width: "100%" }}>
                 <div>
                   <p className="name" style={{ float: "left" }}>
-                    {prePlanningItem.name}
+                    {prePlanningItem.author.username}
                   </p>
                 </div>
-                <div style={{ float: "right" }}>⌚{prePlanningItem.date}</div>
+                <div style={{ float: "right" }}>
+                  ⌚{prePlanningItem.date.substr(0, 10)}
+                </div>
               </div>
               <div>
                 <p className="order">{prePlanningItem.description}</p>
