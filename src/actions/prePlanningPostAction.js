@@ -1,8 +1,8 @@
-export const addPrePlanning =
+export const createPrePlanning =
   (location, subLocation, author, description) =>
   async (dispatch, getState) => {
     try {
-      dispatch({ type: "ADD_PRE_PLANNING_REQUEST", payload: sublocation });
+      dispatch({ type: "CREATE_PRE_PLANNING_REQUEST", payload: sublocation });
       fetch("http://localhost:3001/api/prePlanning/newPrePlanning", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -15,14 +15,14 @@ export const addPrePlanning =
       })
         .then((res) => res.json())
         .then((data) => {
-          dispatch({ type: "ADD_PRE_PLANNING_SUCCESS", payload: data });
+          dispatch({ type: "CREATE_PRE_PLANNING_SUCCESS", payload: data });
         })
         .catch((error) => {
           const message =
             error.response && error.response.data.message
               ? error.response.data.message
               : error.message;
-          dispatch({ type: "ADD_PRE_PLANNING_FAIL", payload: message });
+          dispatch({ type: "CREATE_PRE_PLANNING_FAIL", payload: message });
         });
     } catch (e) {
       console.log(e);
