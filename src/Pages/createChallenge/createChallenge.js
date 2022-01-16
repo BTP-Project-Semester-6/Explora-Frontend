@@ -5,6 +5,7 @@ import Navbar from "../navbar/navbar";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { createCityChallenge } from "../../actions/challengeAction";
+import Toast from "../../Components/Toast/toast";
 export default function CreateChallenge() {
   const dispatch = useDispatch();
 
@@ -46,11 +47,14 @@ export default function CreateChallenge() {
     console.log(city);
     console.log(description);
     if (locations === []) {
-      alert("Please enter locations!");
+      Toast("", "", "", "Please enter locations!");
+      // alert("Please enter locations!");
     } else if (city === "") {
-      alert("Please enter city!");
+      Toast("", "", "", "Please enter city!");
+      // alert("Please enter city!");
     } else if (description === "") {
-      alert("Please enter description!");
+      Toast("", "", "", "Please enter description!");
+      // alert("Please enter description!");
     } else {
       dispatch(createCityChallenge(city, locations, description, name));
     }
