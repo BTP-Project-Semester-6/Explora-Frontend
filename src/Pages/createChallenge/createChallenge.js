@@ -96,6 +96,7 @@ export default function CreateChallenge() {
                 class="form-control"
                 id="formGroupExampleInput2"
                 placeholder="AddMembers"
+                value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
             </div>
