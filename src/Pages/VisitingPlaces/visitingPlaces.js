@@ -12,11 +12,10 @@ export const VisitingPlaces = () => {
   const [age, setAge] = React.useState("coffee;mall;monuments;garden;");
   const [placed, setPlaced] = React.useState([]);
 
-  const handleChange = (event) => {
-    setAge(event.target.value + ";").then(() => {
-      ApiCall();
-    });
-  };
+  async function handleChange(event) {
+    setAge(event.target.value);
+    ApiCall();
+  }
 
   function ApiCall() {
     try {
@@ -55,11 +54,11 @@ export const VisitingPlaces = () => {
 
   function CardPlace(props) {
     return (
-      <div class="card">
-        <div class="bg"></div>
-        <div class="content">
-          <h1 class="heading">{props.data.id}</h1>
-          <p class="info">
+      <div class="card1">
+        <div class="bg1"></div>
+        <div class="content1">
+          <h1 class="heading1">{props.data.id}</h1>
+          <p class="info1">
             <b>
               {props.data.placeName} {props.data.distance + "m"}
             </b>
@@ -106,10 +105,12 @@ export const VisitingPlaces = () => {
         </div>
         <div style={{ margin: "40px" }}>
           <div className="bodyPlace">
-            {placed.map((data, id) => {
-              data.num = id;
-              <CardPlace data={data} />;
-            })}
+            {placed.map((data, id) => (
+              <div>
+                {(data.id = id)}
+                <CardPlace data={data} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
