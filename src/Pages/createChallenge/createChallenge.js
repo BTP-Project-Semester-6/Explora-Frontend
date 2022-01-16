@@ -3,16 +3,19 @@ import "./createChallenge.css";
 import Navbar from "../navbar/navbar";
 
 import { styled } from "@mui/system";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createCityChallenge } from "../../actions/challengeAction";
 export default function CreateChallenge() {
   const dispatch = useDispatch();
 
   const [city, setCity] = React.useState("");
+  const [name, setName] = React.useState("");
   const [locations, setLocations] = React.useState([]);
   const [location, setLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
 
+  const result = useSelector((state) => state.createChallengeByCityReducer);
+  console.log(result);
   const addLocationHandler = (e) => {
     e.preventDefault();
     const loc = location.replace(/ /g, "+");
@@ -31,6 +34,7 @@ export default function CreateChallenge() {
             name: location.toLocaleLowerCase(),
           },
         ]);
+        setLocation("");
         // console.log(locations);
       });
     // console.log(locations);
@@ -48,7 +52,7 @@ export default function CreateChallenge() {
     } else if (description === "") {
       alert("Please enter description!");
     } else {
-      dispatch(createCityChallenge(city, locations, description));
+      dispatch(createCityChallenge(city, locations, description, name));
     }
   };
 
@@ -68,6 +72,18 @@ export default function CreateChallenge() {
               id="formGroupExampleInput2"
               placeholder="City"
               onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">
+              <b>Name</b>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              placeholder="Name of Badge"
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div>
@@ -106,7 +122,11 @@ export default function CreateChallenge() {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
-          <button type="button" class="btn btn-primary btn-sm btn-lg btn-block">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm btn-lg btn-block"
+            onClick={SubmitHandler}
+          >
             Create Challenge
           </button>
         </div>

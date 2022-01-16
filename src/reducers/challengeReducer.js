@@ -11,3 +11,15 @@ export const getChallengeByCityReducer = (state = {}, action) => {
       return [];
   }
 };
+export const createChallengeByCityReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_CHALLENGE_BY_CITY_REQUEST":
+      return [];
+    case "ADD_CHALLENGE_BY_CITY_SUCCESS":
+      return action.payload;
+    case "ADD_CHALLENGE_BY_CITY_FAIL":
+      return action.payload;
+    default:
+      return [];
+  }
+};
