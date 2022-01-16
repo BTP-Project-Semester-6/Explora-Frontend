@@ -7,24 +7,28 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import "./prePlanning.scss";
 import Toast from "../../Components/Toast/toast";
+import { getPrePlanningSubLocation } from "../../actions/prePlanningPostAction";
 
 export default function PrePlanning() {
   const dispatch = useDispatch();
 
   const [subLocation, setsubLocation] = useState("");
-  const prePlannings = [];
-
+  const prePlannings = useSelector(
+    (state) => state.getPrePlanningBySubLocationReducer
+  );
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (subLocation === "") {
       alert("Please enter subLocation!");
     } else {
-      //   dispatch(getsubLocationChallenge(subLocation));
-
-      Toast("", "", "Searching... ", "");
+      dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase())).then(
+        () => {
+          Toast("", "", "Searching... ", "");
+        }
+      );
     }
   };
-  //   Toast(result.message, result.error, "", "");
+  Toast(prePlannings.message, prePlannings.error, "", "");
   return (
     <div
       style={{
@@ -88,7 +92,7 @@ export default function PrePlanning() {
         <div className="twelve">
           <h1>PRE-PLANNING</h1>
         </div>
-        {prePlannings.map((prePlanningItem) => (
+        {prePlannings.prePlanning.map((prePlanningItem) => (
           <div className="horizontal-card">
             <div
               style={{

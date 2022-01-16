@@ -11,7 +11,10 @@ import {
   getGuideAndBuddyByCityReducer,
 } from "./guideReducer";
 import { getTaskByUSerIDReducer } from "./taskReducer";
-import { createPrePlanningReducer } from "./prePlanningReducer";
+import {
+  createPrePlanningReducer,
+  getPrePlanningBySubLocationReducer,
+} from "./prePlanningReducer";
 const reducers = combineReducers({
   sampleChangeTheNumber,
   loginReducer,
@@ -22,6 +25,7 @@ const reducers = combineReducers({
   getTaskByUSerIDReducer,
   createChallengeByCityReducer,
   createPrePlanningReducer,
+  getPrePlanningBySubLocationReducer,
 });
 
 export default reducers;
