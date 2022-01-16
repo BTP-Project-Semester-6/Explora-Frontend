@@ -2,7 +2,7 @@ export const createPrePlanning =
   (location, subLocation, author, description) =>
   async (dispatch, getState) => {
     try {
-      dispatch({ type: "CREATE_PRE_PLANNING_REQUEST", payload: sublocation });
+      dispatch({ type: "CREATE_PRE_PLANNING_REQUEST", payload: subLocation });
       fetch("http://localhost:3001/api/prePlanning/newPrePlanning", {
         method: "post",
         headers: { "Content-Type": "application/json" },
