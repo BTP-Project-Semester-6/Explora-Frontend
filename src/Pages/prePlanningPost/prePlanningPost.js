@@ -2,6 +2,7 @@ import * as React from "react";
 import "./prePlanningPost.css";
 import Navbar from "../navbar/navbar";
 import { useDispatch } from "react-redux";
+import Toast from "../../Components/Toast/toast";
 
 export default function PrePlanningPost() {
   const [location, setLocation] = React.useState("");
@@ -11,11 +12,12 @@ export default function PrePlanningPost() {
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (location === "") {
-      alert("Please enter location !");
+      console.log(location);
+      Toast("", "", "", "Please enter location !");
     } else if (subLocation === "") {
-      alert("Please enter subLocation !");
+      Toast("", "", "", "Please enter subLocation !");
     } else if (description === "") {
-      alert("Please enter description !");
+      Toast("", "", "", "Please enter description !");
     } else {
       // dispatch(getCityChallenge(city));
     }
@@ -65,7 +67,7 @@ export default function PrePlanningPost() {
               ></textarea>
             </div>
             <button
-              type="button"
+              type="submit"
               class="btn btn-primary btn-sm btn-lg btn-block"
             >
               Post
