@@ -48,10 +48,17 @@ export default function PrePlanningPost() {
     } else if (description === "") {
       Toast("", "", "", "Please enter description !");
     } else {
-      dispatch(createPrePlanning(location, subLocation, user, description));
+      dispatch(
+        createPrePlanning(location, subLocation, user, description)
+      ).then(() => {
+        setLocation("");
+        setSubLocation("");
+        setDescription("");
+        Toast("", "", "Request Sent", "");
+      });
     }
   };
-  Toast(result.message, result.error, result.info, "");
+  Toast(result.message, result.error, "", "");
   return (
     <div className="creatBuddy-body">
       <Navbar></Navbar>
@@ -68,6 +75,7 @@ export default function PrePlanningPost() {
                 className="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Location"
+                value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
             </div>
@@ -80,6 +88,7 @@ export default function PrePlanningPost() {
                 className="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Sub-Location"
+                value={subLocation}
                 onChange={(e) => setSubLocation(e.target.value)}
               />
             </div>
@@ -92,6 +101,7 @@ export default function PrePlanningPost() {
               <textarea
                 className="form-control"
                 id="exampleFormControlTextarea1"
+                value={description}
                 rows="4"
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
