@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { style } from "@mui/system";
 
-export default function ShowComment() {
+export default function ShowComment(props) {
   return (
     <Card style={{ boxShadow: "none" }} sx={{ maxWidth: "100%" }}>
       <CardActionArea>
@@ -17,10 +17,10 @@ export default function ShowComment() {
             variant="h7"
             component="div"
           >
-            Himanshu Rane
+            {props.name}
           </Typography>
           <Typography variant="body2" color="text.primary">
-            Lizards are a widespread group of squamate reptiles
+            {props.commentString} <br /> {props.created_at}
           </Typography>
         </CardContent>
       </CardActionArea>
