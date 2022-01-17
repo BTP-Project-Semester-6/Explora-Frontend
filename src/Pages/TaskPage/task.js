@@ -25,12 +25,12 @@ const steps = [
   "Chill Baby Restaurant",
 ];
 export default function Task() {
-  const userId = "61d1e29522cf92e8a1d62ccc";
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  dispatch(getTaskByID(id));
-  const task = useSelector((state) => state.getTaskByUSerIDReducer);
-  console.log(task);
+  // const userId = "61d1e29522cf92e8a1d62ccc";
+  // const { id } = useParams();
+  // const dispatch = useDispatch();
+  // dispatch(getTaskByID(id));
+  // const task = useSelector((state) => state.getTaskByUSerIDReducer);
+  // console.log(task);
 
   //below code is for frontend
 
