@@ -18,6 +18,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SendIcon from "@mui/icons-material/Send";
 
 import ShowComment from "../comment/showComment";
+import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 //darksalmon
 
 const ExpandMore = styled((props) => {
@@ -31,8 +33,31 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Post() {
+export default function Post(props) {
   const [expanded, setExpanded] = React.useState(false);
+  const [inp, setInp] = React.useState("");
+
+  const handleSubmit = () => {
+    fetch("http://localhost:3001/api/posts/newcomment", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: inp,
+        postId: props._id,
+        userId: jwt_decode(localStorage.getItem("token"))._id,
+        username: jwt_decode(localStorage.getItem("token")).name,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        toast.success("Comment Published");
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -55,8 +80,8 @@ export default function Post() {
           ></Avatar>
         }
         action={<IconButton aria-label="settings"></IconButton>}
-        title="Himanshu Rane"
-        subheader="September 14, 2016"
+        title={jwt_decode(localStorage.getItem("token")).name}
+        subheader={props.created_at}
       />
       <CardMedia
         component="img"
@@ -66,9 +91,7 @@ export default function Post() {
           height: "inherit",
           width: "80%",
         }}
-        src={
-          "https://image.freepik.com/free-photo/hiker-stand-camping-front-orange-tent-backpack-mountains_1150-9163.jpg"
-        }
+        src={props.photoUrl}
       />
       <CardContent>
         <Typography
@@ -76,8 +99,7 @@ export default function Post() {
           variant="body3"
           color="text.primary"
         >
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests.
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -102,24 +124,32 @@ export default function Post() {
                 class="form-control input-field"
                 type="text"
                 placeholder="Comment Here..."
+                onChange={(e) => setInp(e.target.value)}
                 readonly
               />
             </div>
             <div className="col-1">
-              <Button variant="contained" endIcon={<SendIcon />}>
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                onClick={handleSubmit}
+              >
                 Send
               </Button>
             </div>
           </div>
           <div className="show-comment-section">
             <CardContent>
-              <ShowComment></ShowComment>
-              <ShowComment></ShowComment>
-              <ShowComment></ShowComment>
+              {props.comments.map((comment) => (
+                <div>
+                  <ShowComment {...comment} />
+                </div>
+              ))}
             </CardContent>
           </div>
         </div>
       </Collapse>
+      <div style={{ height: "30px" }}></div>
     </Card>
   );
 }
