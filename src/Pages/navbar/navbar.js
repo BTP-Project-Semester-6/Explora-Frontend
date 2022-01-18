@@ -1,315 +1,379 @@
 import * as React from "react";
-import "./navbar.css";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import CardTravelIcon from "@mui/icons-material/CardTravel";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import MmsIcon from "@mui/icons-material/Mms";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import HomeIcon from "@mui/icons-material/Home";
+import NearMeIcon from "@mui/icons-material/NearMe";
 
-const pages = ["Home", "About"];
-const settings = ["Profile", "Logout"];
-const settings2 = ["Landing", "Home", "Challange", "Buddy", "Guide"];
+import { styled, useTheme } from "@mui/material/styles";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import MuiAppBar from "@mui/material/AppBar";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import TourIcon from "@mui/icons-material/Tour";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import NearbyErrorIcon from "@mui/icons-material/NearbyError";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import AssistantDirectionIcon from "@mui/icons-material/AssistantDirection";
+import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
+import ExplicitIcon from "@mui/icons-material/Explicit";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react/cjs/react.development";
+import jwt_decode from "jwt-decode";
+import LoginIcon from "@mui/icons-material/Login";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
-const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorElUser2, setAnchorElUser2] = React.useState(null);
+const drawerWidth = 240;
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+const styles = (theme) => ({
+  listItemText: {
+    fontSize: "0.7em", //Insert your required size
+  },
+});
+
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  })
+);
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
+
+export default function ButtonAppBar() {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      setLoggedIn(false);
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          setUser(decoded);
+          setLoggedIn(true);
+        }
+      }
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
-  const handleOpenHeadingMenu = (event) => {
-    setAnchorElUser2(event.currentTarget);
-  };
-  const handleCloseHeadingMenu = (event) => {
-    setAnchorElUser2(null);
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  function handleNavigation(text) {
+    if (text == "Profile") {
+      navigate(`/profile/${user._id}`);
+    } else if (text == "Home") {
+      navigate("/home");
+    } else if (text == "Challenges") {
+      navigate("/challenge");
+    } else if (text == "Buddies") {
+      navigate("/buddy");
+    } else if (text == "PrePlanning") {
+      navigate("/preplanning");
+    } else if (text == "Logout") {
+      localStorage.removeItem("token");
+      window.location.reload(false);
+    } else if (text == "Explora") {
+      navigate("/");
+    } else if (text == "Login") {
+      navigate("/login");
+    } else if (text == "Register") {
+      navigate("/register");
+    } else if (text == "Visit Nearby") {
+      navigate("/places");
+    }
+  }
 
   return (
-    <AppBar
-      className="navbar-body "
-      style={{
-        boxShadow: "none",
-        background: "#EEEEEE",
-      }}
-      position="static"
-    >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <img
-            style={{ width: "50px", height: "50px" }}
-            src="btplogo2.svg"
-            alt="logo"
-          />
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        style={{
+          boxShadow: "none",
+          background: "#EEEEEE",
+        }}
+        position="static"
+      >
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <div style={{ width: "100%" }}>
+              <img
+                style={{
+                  float: "left",
+                  width: "80px",
+                  height: "50px",
+                  cursor: "pointer",
+                }}
+                src="btplogo2.svg"
+                alt="logo"
+                onClick={(e) => navigate("/")}
+              />
+            </div>
 
-          <IconButton size="large" color="inherit"></IconButton>
+            <IconButton
+              onClick={handleDrawerClose}
+              style={{ transform: "scale(1.8)" }}
+            >
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          {loggedIn && (
+            <div>
+              <List>
+                {[
+                  "Profile",
+                  "Home",
+                  "Challenges",
+                  "Buddies",
+                  "PrePlanning",
+                  "Visit Nearby",
+                  "Logout",
+                ].map((text, index) => (
+                  <ListItem
+                    button
+                    key={text}
+                    onClick={(e) => handleNavigation(text)}
+                  >
+                    <ListItemIcon>
+                      {text == "Profile" && (
+                        <PersonPinIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Home" && (
+                        <HomeIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Logout" && (
+                        <PowerSettingsNewIcon
+                          style={{ fontSize: "20px", color: "red" }}
+                        />
+                      )}
+                      {text == "PrePlanning" && (
+                        <TourIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Buddies" && (
+                        <GroupAddIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Challenges" && (
+                        <NearbyErrorIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Visit Nearby" && (
+                        <NearMeIcon style={{ fontSize: "20px" }} />
+                      )}
+                    </ListItemIcon>
+                    {text == "Logout" && (
+                      <ListItemText
+                        primaryTypographyProps={{
+                          fontSize: "15px",
+                          color: "red",
+                        }}
+                        primary={text}
+                      />
+                    )}
+                    {text != "Logout" && (
+                      <ListItemText
+                        primaryTypographyProps={{ fontSize: "15px" }}
+                        primary={text}
+                      />
+                    )}
+                  </ListItem>
+                ))}
+              </List>
+
+              <Divider />
+
+              <List>
+                {["Guide Section", "Why Explora ?", "About Us", "Feedback"].map(
+                  (text, index) => (
+                    <ListItem button key={text}>
+                      <ListItemIcon>
+                        {text == "Guide Section" && (
+                          <AssistantDirectionIcon
+                            style={{ fontSize: "20px" }}
+                          />
+                        )}
+                        {text == "Feedback" && (
+                          <ThumbUpAltIcon style={{ fontSize: "20px" }} />
+                        )}
+                        {text == "Why Explora ?" && (
+                          <ExplicitIcon style={{ fontSize: "20px" }} />
+                        )}
+                        {text == "About Us" && (
+                          <DeveloperModeIcon style={{ fontSize: "20px" }} />
+                        )}
+                      </ListItemIcon>
+                      <ListItemText
+                        primaryTypographyProps={{ fontSize: "15px" }}
+                        primary={text}
+                      />
+                    </ListItem>
+                  )
+                )}
+              </List>
+
+              <Divider />
+            </div>
+          )}
+          {!loggedIn && (
+            <List>
+              {["Login", "Register", "Why Explora ?", "About Us"].map(
+                (text, index) => (
+                  <ListItem
+                    button
+                    key={text}
+                    onClick={(e) => handleNavigation(text)}
+                  >
+                    <ListItemIcon>
+                      {text == "Login" && (
+                        <LoginIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Register" && (
+                        <AppRegistrationIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Why Explora ?" && (
+                        <ExplicitIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "About Us" && (
+                        <DeveloperModeIcon style={{ fontSize: "20px" }} />
+                      )}
+                    </ListItemIcon>
+                    <ListItemText
+                      primaryTypographyProps={{ fontSize: "15px" }}
+                      primary={text}
+                    />
+                  </ListItem>
+                )
+              )}
+            </List>
+          )}
+        </Drawer>
+        <Toolbar>
+          <IconButton
+            onClick={handleDrawerOpen}
+            style={{ transform: "scale(1.8)" }}
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2, color: "black" }}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography
             variant="h4"
-            noWrap
             component="div"
-            style={{ fontWeight: "bolder" }}
-            sx={{
-              color: "#F05454",
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-            }}
-          >
-            <button style={{ border: "none" }} onClick={handleOpenHeadingMenu}>
-              Explora
-            </button>
-            {/* <a>Explora</a> */}
-          </Typography>
-
-          <Menu
-            sx={{ mt: "45px" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser2}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser2)}
-            onClose={handleCloseHeadingMenu}
-          >
-            {settings2.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseHeadingMenu}>
-                <Typography style={{ fontSize: "15px" }} textAlign="center">
-                  {setting}
-                </Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{ flexGrow: 1, color: "#FE7E6D", cursor: "pointer" }}
+            style={{ fontWeight: 600 }}
+            onClick={(e) => navigate("/")}
           >
             Explora
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                style={{ fontSize: "12px" }}
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="image2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+          {!loggedIn && (
+            <Button
+              style={{ fontSize: "15px" }}
+              sx={{ color: "black" }}
+              color="inherit"
+              onClick={(e) => navigate("/login")}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography style={{ fontSize: "15px" }} textAlign="center">
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              Login
+            </Button>
+          )}
+
+          {loggedIn && (
+            <div>
+              <HomeIcon
+                style={{ color: "black", fontSize: "30px", cursor: "pointer" }}
+                onClick={(e) => navigate("/home")}
+              />
+              <PersonPinIcon
+                style={{
+                  color: "black",
+                  fontSize: "30px",
+                  marginLeft: "20px",
+                  cursor: "pointer",
+                }}
+                onClick={(e) => navigate(`/profile/${user._id}`)}
+              />
+              <PowerSettingsNewIcon
+                style={{
+                  color: "red",
+                  fontSize: "30px",
+                  marginLeft: "20px",
+                  cursor: "pointer",
+                }}
+                onClick={(e) => {
+                  localStorage.removeItem("token");
+                  window.location.reload(false);
+                }}
+              />
+            </div>
+          )}
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
-};
-export default Navbar;
-
-// import * as React from "react";
-// import "./navbar.css";
-// import { styled, alpha } from "@mui/material/styles";
-// import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-// import Toolbar from "@mui/material/Toolbar";
-// import IconButton from "@mui/material/IconButton";
-// import Typography from "@mui/material/Typography";
-// import InputBase from "@mui/material/InputBase";
-// import Badge from "@mui/material/Badge";
-// import MenuItem from "@mui/material/MenuItem";
-// import Menu from "@mui/material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
-// import AccountCircle from "@mui/icons-material/AccountCircle";
-// import MailIcon from "@mui/icons-material/Mail";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
-// import MoreIcon from "@mui/icons-material/MoreVert";
-
-// const Search = styled("div")(({ theme }) => ({
-//   position: "relative",
-
-//   borderRadius: theme.shape.borderRadius,
-//   backgroundColor: alpha(theme.palette.common.white, 0.25),
-//   "&:hover": {
-//     backgroundColor: alpha(theme.palette.common.white, 0.35),
-//   },
-//   marginRight: theme.spacing(2),
-//   width: "100%",
-
-//   [theme.breakpoints.up("md")]: {
-//     // marginLeft: theme.spacing(35),
-//     width: "48%",
-//   },
-// }));
-
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-// }));
-
-// export default function PrimarySearchAppBar() {
-//   return (
-//     <div>
-//       <nav className=" navbar navbar-expand-lg navbar-light bg-light ">
-//         <button
-//           className="navbar-toggler navbar-right"
-//           type="button"
-//           data-toggle="collapse"
-//           data-target="#navbarTogglerDemo01"
-//           aria-controls="navbarTogglerDemo01"
-//           aria-expanded="false"
-//           aria-label="Toggle navigation"
-//         >
-//           <span className="navbar-toggler-icon"></span>
-//         </button>
-
-//         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-//           <nav>
-//             <a class="navbar-brand" href="#">
-//               <img
-//                 src="btplogo.svg"
-//                 width="50"
-//                 height="30"
-//                 class="d-inline-block align-top"
-//                 alt=""
-//               />
-//               Bootstrap
-//             </a>
-//           </nav>
-//           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-//             <li className="nav-item active">
-//               <a className="nav-link" href="#">
-//                 Home <span className="sr-only">(current)</span>
-//               </a>
-//             </li>
-//             <li className="nav-item">
-//               <a className="nav-link" href="#">
-//                 About
-//               </a>
-//             </li>
-//           </ul>
-//           <ul class="nav navbar-nav navbar-right">
-//             <li>
-//               <a href="#about">Logout</a>
-//             </li>
-//             <li>
-//               <a href="#contact">Login</a>
-//             </li>
-//           </ul>
-//         </div>
-//       </nav>
-//     </div>
-//   );
-// }
+}

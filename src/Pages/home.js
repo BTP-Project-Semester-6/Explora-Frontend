@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 
 export default function Home() {
   const [user, setUser] = useState({});
+  const [posts, setPosts] = useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -21,9 +22,22 @@ export default function Home() {
         navigate("/login");
       } else {
         if (decoded) {
-          console.log("DECODED");
-          console.log(decoded);
           setUser(decoded);
+          fetch("http://localhost:3001/api/posts/getpostbyid", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: decoded._id,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data.posts);
+              setPosts(data.posts);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
       }
     } else {
@@ -34,16 +48,18 @@ export default function Home() {
   return (
     <div>
       <div className="home-body">
-        <Navbar></Navbar>
-        {/* {user.name} */}
         <div className="row">
           <div className="left-sidebar">
             <LeftSideBar></LeftSideBar>
           </div>
           <div className="post">
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
+            {posts
+              .sort((a, b) => Date(a.created_at) - Date(b.created_at))
+              .map((data) => (
+                <div>
+                  <Post {...data} />
+                </div>
+              ))}
           </div>
           <div className="right-sidebar">
             <RightSideBar></RightSideBar>

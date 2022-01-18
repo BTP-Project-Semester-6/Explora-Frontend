@@ -7,18 +7,22 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Navbar from "../../Components/Navbar/navbar";
 import { toast } from "react-toastify";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 export const VisitingPlaces = () => {
   const [age, setAge] = React.useState("coffee;mall;monuments;garden;");
   const [placed, setPlaced] = React.useState([]);
 
-  const handleChange = (event) => {
-    setAge(event.target.value + ";").then(() => {
-      ApiCall();
-    });
-  };
+  async function handleChange(event) {
+    setAge(event.target.value);
+    ApiCall(event.target.value);
+  }
 
-  function ApiCall() {
+  function ApiCall(place) {
     try {
       navigator.geolocation.getCurrentPosition(function (position) {
         let lat = position.coords.latitude;
@@ -28,7 +32,7 @@ export const VisitingPlaces = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             location: lat + "," + long,
-            keywords: age,
+            keywords: place,
           }),
         })
           .then((res) => res.json())
@@ -50,30 +54,50 @@ export const VisitingPlaces = () => {
   }
 
   useEffect(() => {
-    ApiCall();
+    ApiCall("coffee;mall;monuments;garden;");
   }, []);
+
+  const bull = (
+    <Box
+      component="span"
+      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+    >
+      •
+    </Box>
+  );
 
   function CardPlace(props) {
     return (
-      <div class="card">
-        <div class="bg"></div>
-        <div class="content">
-          <h1 class="heading">{props.data.id}</h1>
-          <p class="info">
-            <b>
-              {props.data.placeName} {props.data.distance + "m"}
-            </b>
-            <br />
-            {props.data.placeAddress}
-          </p>
-        </div>
-      </div>
+      <Box sx={{ minWidth: 375, margin: "10px" }}>
+        <Card variant="outlined">
+          <React.Fragment>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Popular Destination #{props.id}
+              </Typography>
+              <Typography variant="h5" component="div">
+                {props.data.placeName}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                {props.data.distance + "m"}
+              </Typography>
+              <Typography variant="body2">{props.data.placeAddress}</Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Learn More</Button>
+            </CardActions>
+          </React.Fragment>
+        </Card>
+      </Box>
     );
   }
 
   return (
     <div>
-      {/* <Navbar /> */}
       <div
         style={{
           textAlign: "center",
@@ -104,12 +128,13 @@ export const VisitingPlaces = () => {
             </Select>
           </FormControl>
         </div>
-        <div style={{ margin: "40px" }}>
+        <div style={{}}>
           <div className="bodyPlace">
-            {placed.map((data, id) => {
-              data.num = id;
-              <CardPlace data={data} />;
-            })}
+            {placed.map((data, id) => (
+              <div>
+                <CardPlace data={data} id={id} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
