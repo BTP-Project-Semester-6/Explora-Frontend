@@ -98,7 +98,6 @@ export const VisitingPlaces = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
       <div
         style={{
           textAlign: "center",

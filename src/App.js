@@ -21,10 +21,12 @@ import Register from "./Pages/Register/register";
 import Task from "./Pages/TaskPage/task";
 import { VisitingPlaces } from "./Pages/VisitingPlaces/visitingPlaces";
 import PrePlanning from "./Pages/PrePlanning/prePlanning";
+import Navbar from "./Pages/navbar/navbar";
 
 const App = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/admin" element={<Admin />} />
