@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@material-ui/icons/Add";
+import SPINNER from "../../img/Spinner.gif";
 import Navbar from "../navbar/navbar";
 import "./buddy.scss";
 import { getBuddyByCity } from "../../actions/buddyAction";
@@ -19,13 +20,14 @@ import {
 } from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
 import { textAlign } from "@mui/system";
+import Toast from "../../Components/Toast/toast";
 export default function Buddy() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
 
   const { buddy } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   const { guide } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
-
+  const result = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   // const [buddys, setBuddys] = useState([]);
 
   console.log(guide);
@@ -34,15 +36,18 @@ export default function Buddy() {
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (city === "") {
-      alert("Please enter city!");
+      Toast("", "", "", "Please enter city!!");
     } else {
+      Toast("", "", "Searching...", "");
       dispatch(getGuideAndBuddyByCity(city));
-      // dispatch(getGuideByCity(city));
-      // if (buddy !== []) {
-      //   setBuddys(buddy);
-      // }
     }
   };
+  const done = false;
+  if (result.message.length || result.error.length) {
+    Toast(result.message, result.error, "", "");
+    dispatch({ type: "GET_BUDDY_AND_CITY_BY_CITY_DEFAULT" });
+  }
+
   return (
     <div
       className="buddy-body"
@@ -145,7 +150,10 @@ export default function Buddy() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" href={"/" + eachGuide.userId.guideId}>
+                  <Button
+                    size="small"
+                    href={"/profile/" + eachGuide.userId.guideId}
+                  >
                     VIEW PROFILE
                   </Button>
                 </CardActions>
@@ -179,9 +187,13 @@ export default function Buddy() {
                 marginTop: "20%",
               }}
             >
-              <p style={{ textAlign: "center" }}>
-                Please enter city you want to seach🔍.
-              </p>
+              {result.loading === true ? (
+                <img src={SPINNER} width="80px" height="80px" />
+              ) : (
+                <p style={{ textAlign: "center" }}>
+                  Please enter city you want to seach🔍.
+                </p>
+              )}
             </div>
           )}
           {buddy.map((eachBuddy) => (
@@ -192,7 +204,7 @@ export default function Buddy() {
                     <p className="name" style={{ float: "left" }}>
                       <a
                         style={{ textDecoration: "none", color: "#3f51b5" }}
-                        href={"/" + eachBuddy.Host._id}
+                        href={"/profile/" + eachBuddy.Host._id}
                       >
                         {eachBuddy.Host.name}
                       </a>{" "}
@@ -225,7 +237,7 @@ export default function Buddy() {
                         {" "}
                         <a
                           style={{ color: "#DD4AB", cursor: "pointer" }}
-                          href={"/" + groupMember._id}
+                          href={"/profile/" + groupMember._id}
                         >
                           {groupMember.username}
                         </a>
