@@ -61,7 +61,6 @@ function FeedBack() {
 export default function Admin() {
   return (
     <div>
-      <Navbar></Navbar>
       <div className="container">
         <div class="accordion" id="accordionExample">
           <div style={{ border: "none" }} class="card">

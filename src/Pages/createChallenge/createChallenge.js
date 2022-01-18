@@ -3,16 +3,64 @@ import "./createChallenge.css";
 import Navbar from "../navbar/navbar";
 
 import { styled } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { createCityChallenge } from "../../actions/challengeAction";
+import Toast from "../../Components/Toast/toast";
 export default function CreateChallenge() {
-  const [age, setAge] = React.useState("");
+  const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const [city, setCity] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [locations, setLocations] = React.useState([]);
+  const [location, setLocation] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  const result = useSelector((state) => state.createChallengeByCityReducer);
+  const addLocationHandler = (e) => {
+    e.preventDefault();
+
+    fetch(process.env.REACT_APP_GET_COORDINATES + location)
+      .then((response) => response.json())
+      .then((result) => {
+        setLocations((locations) => [
+          ...locations,
+          {
+            lat: result.data[0].latitude,
+            lng: result.data[0].longitude,
+            name: location.toLocaleLowerCase(),
+          },
+        ]);
+        setLocation("");
+      });
   };
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    if (locations === []) {
+      Toast("", "", "", "Please enter locations!");
+    } else if (city === "") {
+      Toast("", "", "", "Please enter city!");
+    } else if (description === "") {
+      Toast("", "", "", "Please enter description!");
+    } else {
+      dispatch(
+        createCityChallenge(
+          city.toLocaleLowerCase(),
+          locations,
+          description,
+          name
+        )
+      );
+      console.log(result);
+    }
+  };
+
+  Toast(result.message, result.error, result.info, "");
+  console.log(result.message + result.error + result.message);
+
   return (
     <div className="creatBuddy-body">
-      <Navbar></Navbar>
-      <div style={{ marginTop: "4%" }} className="him">
+      <div style={{ paddingTop: "4%" }} className="him">
         <div style={{ width: "60%" }} className="container glass-createBuddy">
           <div className="row"></div>
           <div class="form-group">
@@ -24,6 +72,19 @@ export default function CreateChallenge() {
               class="form-control"
               id="formGroupExampleInput2"
               placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">
+              <b>Name</b>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              placeholder="Name of Badge"
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div>
@@ -36,10 +97,16 @@ export default function CreateChallenge() {
                 class="form-control"
                 id="formGroupExampleInput2"
                 placeholder="AddMembers"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               />
             </div>
             <div style={{ width: "15%" }}>
-              <button type="button" class="btn btn-primary">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={addLocationHandler}
+              >
                 {" "}
                 <b>Add Location</b>
               </button>
@@ -54,9 +121,14 @@ export default function CreateChallenge() {
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="4"
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
-          <button type="button" class="btn btn-primary btn-sm btn-lg btn-block">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm btn-lg btn-block"
+            onClick={SubmitHandler}
+          >
             Create Challenge
           </button>
         </div>
