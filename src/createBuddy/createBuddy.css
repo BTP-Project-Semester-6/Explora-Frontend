@@ -15,7 +15,7 @@
 }
 .container {
   border-radius: 20px;
-  margin: auto;
+  /* margin: auto; */
   padding: 20px;
   height: fit-content;
   width: fit-content;

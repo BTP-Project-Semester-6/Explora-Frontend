@@ -27,8 +27,7 @@ export default function CreatBuddy() {
   };
   return (
     <div className="creatBuddy-body">
-      <Navbar></Navbar>
-      <div style={{ marginTop: "3%" }} className="him">
+      <div style={{ paddingTop: "4%" }} className="him">
         <div style={{ width: "60%" }} className="container glass-createBuddy">
           <div style={{ width: "100%", margin: "auto" }} className="row">
             <div style={{ width: "20%" }} class="form-group">
