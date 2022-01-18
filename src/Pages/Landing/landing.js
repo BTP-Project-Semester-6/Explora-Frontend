@@ -8,7 +8,6 @@ import Navbar from "../navbar/navbar";
 const Landing = () => {
   return (
     <div>
-      <Navbar></Navbar>
       <Infosection {...homeObjOne} />
       <Infosection {...homeObjTwo} />
       <Infosection {...homeObjThree} />

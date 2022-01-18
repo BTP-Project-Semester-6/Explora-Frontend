@@ -64,7 +64,6 @@ export default function Task() {
 
   return (
     <div className="task-body">
-      <Navbar></Navbar>
       <div className="container">
         <div className="row">
           <div className="col-5 ">

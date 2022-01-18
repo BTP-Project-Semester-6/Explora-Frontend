@@ -20,7 +20,8 @@ export default function ShowComment(props) {
             {props.name}
           </Typography>
           <Typography variant="body2" color="text.primary">
-            {props.commentString} <br /> {props.created_at}
+            <b style={{ fontSize: "14px" }}>{props.commentString}</b> <br />{" "}
+            {Date(props.created_at)}
           </Typography>
         </CardContent>
       </CardActionArea>
