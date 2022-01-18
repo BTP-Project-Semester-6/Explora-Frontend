@@ -51,7 +51,6 @@ export default function Buddy() {
         padding: "0",
       }}
     >
-      <Navbar></Navbar>
       <div
         style={{
           width: "100%",
