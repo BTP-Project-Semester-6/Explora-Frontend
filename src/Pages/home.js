@@ -48,17 +48,18 @@ export default function Home() {
   return (
     <div>
       <div className="home-body">
-        <Navbar></Navbar>
         <div className="row">
           <div className="left-sidebar">
             <LeftSideBar></LeftSideBar>
           </div>
           <div className="post">
-            {posts.map((data) => (
-              <div>
-                <Post {...data} />
-              </div>
-            ))}
+            {posts
+              .sort((a, b) => Date(a.created_at) - Date(b.created_at))
+              .map((data) => (
+                <div>
+                  <Post {...data} />
+                </div>
+              ))}
           </div>
           <div className="right-sidebar">
             <RightSideBar></RightSideBar>

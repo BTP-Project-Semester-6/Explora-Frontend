@@ -81,7 +81,7 @@ export default function Post(props) {
         }
         action={<IconButton aria-label="settings"></IconButton>}
         title={jwt_decode(localStorage.getItem("token")).name}
-        subheader={props.created_at}
+        subheader={props.location + " - " + Date(props.created_at)}
       />
       <CardMedia
         component="img"
@@ -140,11 +140,14 @@ export default function Post(props) {
           </div>
           <div className="show-comment-section">
             <CardContent>
-              {props.comments.map((comment) => (
-                <div>
-                  <ShowComment {...comment} />
-                </div>
-              ))}
+              {props.comments &&
+                props.comments
+                  .sort((a, b) => Date(a.created_at) - Date(b.created_at))
+                  .map((comment) => (
+                    <div>
+                      <ShowComment {...comment} />
+                    </div>
+                  ))}
             </CardContent>
           </div>
         </div>
