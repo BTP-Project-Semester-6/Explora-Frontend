@@ -6,9 +6,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import MmsIcon from "@mui/icons-material/Mms";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import HomeIcon from "@mui/icons-material/Home";
+import NearMeIcon from "@mui/icons-material/NearMe";
 
 import { styled, useTheme } from "@mui/material/styles";
-
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
@@ -21,6 +25,18 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import TourIcon from "@mui/icons-material/Tour";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import NearbyErrorIcon from "@mui/icons-material/NearbyError";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import AssistantDirectionIcon from "@mui/icons-material/AssistantDirection";
+import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
+import ExplicitIcon from "@mui/icons-material/Explicit";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react/cjs/react.development";
+import jwt_decode from "jwt-decode";
+import LoginIcon from "@mui/icons-material/Login";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 const drawerWidth = 240;
 
@@ -62,6 +78,29 @@ export default function ButtonAppBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      setLoggedIn(false);
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          setUser(decoded);
+          setLoggedIn(true);
+        }
+      }
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -69,6 +108,30 @@ export default function ButtonAppBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  function handleNavigation(text) {
+    if (text == "Profile") {
+      navigate(`/profile/${user._id}`);
+    } else if (text == "Home") {
+      navigate("/home");
+    } else if (text == "Challenges") {
+      navigate("/challenge");
+    } else if (text == "Buddies") {
+      navigate("/buddy");
+    } else if (text == "PrePlanning") {
+      navigate("/preplanning");
+    } else if (text == "Logout") {
+      localStorage.removeItem("token");
+      window.location.reload(false);
+    } else if (text == "Explora") {
+      navigate("/");
+    } else if (text == "Login") {
+      navigate("/login");
+    } else if (text == "Register") {
+      navigate("/register");
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -94,9 +157,15 @@ export default function ButtonAppBar() {
           <DrawerHeader>
             <div style={{ width: "100%" }}>
               <img
-                style={{ float: "left", width: "80px", height: "50px" }}
+                style={{
+                  float: "left",
+                  width: "80px",
+                  height: "50px",
+                  cursor: "pointer",
+                }}
                 src="btplogo2.svg"
                 alt="logo"
+                onClick={(e) => navigate("/")}
               />
             </div>
 
@@ -112,37 +181,133 @@ export default function ButtonAppBar() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <List>
-            {["Home", "Challenge", "Buddy", "Profile", "PrePlaning"].map(
-              (text, index) => (
-                <ListItem button key={text}>
-                  {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
-                  <ListItemText
-                    primaryTypographyProps={{ fontSize: "15px" }}
-                    primary={text}
-                  />
-                </ListItem>
-              )
-            )}
-          </List>
+          {loggedIn && (
+            <div>
+              <List>
+                {[
+                  "Profile",
+                  "Home",
+                  "Challenges",
+                  "Buddies",
+                  "PrePlanning",
+                  "Visit Nearby",
+                  "Logout",
+                ].map((text, index) => (
+                  <ListItem
+                    button
+                    key={text}
+                    onClick={(e) => handleNavigation(text)}
+                  >
+                    <ListItemIcon>
+                      {text == "Profile" && (
+                        <PersonPinIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Home" && (
+                        <HomeIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Logout" && (
+                        <PowerSettingsNewIcon
+                          style={{ fontSize: "20px", color: "red" }}
+                        />
+                      )}
+                      {text == "PrePlanning" && (
+                        <TourIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Buddies" && (
+                        <GroupAddIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Challenges" && (
+                        <NearbyErrorIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Visit Nearby" && (
+                        <NearMeIcon style={{ fontSize: "20px" }} />
+                      )}
+                    </ListItemIcon>
+                    {text == "Logout" && (
+                      <ListItemText
+                        primaryTypographyProps={{
+                          fontSize: "15px",
+                          color: "red",
+                        }}
+                        primary={text}
+                      />
+                    )}
+                    {text != "Logout" && (
+                      <ListItemText
+                        primaryTypographyProps={{ fontSize: "15px" }}
+                        primary={text}
+                      />
+                    )}
+                  </ListItem>
+                ))}
+              </List>
 
-          <Divider />
+              <Divider />
 
-          <List>
-            {["Profile", "Login", "Logout", "Register"].map((text, index) => (
-              <ListItem button key={text}>
-                {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
-                <ListItemText
-                  primaryTypographyProps={{ fontSize: "15px" }}
-                  primary={text}
-                />
-              </ListItem>
-            ))}
-          </List>
+              <List>
+                {["Guide Section", "Why Explora ?", "About Us", "Feedback"].map(
+                  (text, index) => (
+                    <ListItem button key={text}>
+                      <ListItemIcon>
+                        {text == "Guide Section" && (
+                          <AssistantDirectionIcon
+                            style={{ fontSize: "20px" }}
+                          />
+                        )}
+                        {text == "Feedback" && (
+                          <ThumbUpAltIcon style={{ fontSize: "20px" }} />
+                        )}
+                        {text == "Why Explora ?" && (
+                          <ExplicitIcon style={{ fontSize: "20px" }} />
+                        )}
+                        {text == "About Us" && (
+                          <DeveloperModeIcon style={{ fontSize: "20px" }} />
+                        )}
+                      </ListItemIcon>
+                      <ListItemText
+                        primaryTypographyProps={{ fontSize: "15px" }}
+                        primary={text}
+                      />
+                    </ListItem>
+                  )
+                )}
+              </List>
+
+              <Divider />
+            </div>
+          )}
+          {!loggedIn && (
+            <List>
+              {["Login", "Register", "Why Explora ?", "About Us"].map(
+                (text, index) => (
+                  <ListItem
+                    button
+                    key={text}
+                    onClick={(e) => handleNavigation(text)}
+                  >
+                    <ListItemIcon>
+                      {text == "Login" && (
+                        <LoginIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Register" && (
+                        <AppRegistrationIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Why Explora ?" && (
+                        <ExplicitIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "About Us" && (
+                        <DeveloperModeIcon style={{ fontSize: "20px" }} />
+                      )}
+                    </ListItemIcon>
+                    <ListItemText
+                      primaryTypographyProps={{ fontSize: "15px" }}
+                      primary={text}
+                    />
+                  </ListItem>
+                )
+              )}
+            </List>
+          )}
         </Drawer>
         <Toolbar>
           <IconButton
@@ -159,18 +324,52 @@ export default function ButtonAppBar() {
           <Typography
             variant="h4"
             component="div"
-            sx={{ flexGrow: 1, color: "#FE7E6D" }}
+            sx={{ flexGrow: 1, color: "#FE7E6D", cursor: "pointer" }}
             style={{ fontWeight: 600 }}
+            onClick={(e) => navigate("/")}
           >
             Explora
           </Typography>
-          <Button
-            style={{ fontSize: "15px" }}
-            sx={{ color: "black" }}
-            color="inherit"
-          >
-            Login
-          </Button>
+          {!loggedIn && (
+            <Button
+              style={{ fontSize: "15px" }}
+              sx={{ color: "black" }}
+              color="inherit"
+              onClick={(e) => navigate("/login")}
+            >
+              Login
+            </Button>
+          )}
+
+          {loggedIn && (
+            <div>
+              <HomeIcon
+                style={{ color: "black", fontSize: "30px", cursor: "pointer" }}
+                onClick={(e) => navigate("/home")}
+              />
+              <PersonPinIcon
+                style={{
+                  color: "black",
+                  fontSize: "30px",
+                  marginLeft: "20px",
+                  cursor: "pointer",
+                }}
+                onClick={(e) => navigate(`/profile/${user._id}`)}
+              />
+              <PowerSettingsNewIcon
+                style={{
+                  color: "red",
+                  fontSize: "30px",
+                  marginLeft: "20px",
+                  cursor: "pointer",
+                }}
+                onClick={(e) => {
+                  localStorage.removeItem("token");
+                  window.location.reload(false);
+                }}
+              />
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
