@@ -47,13 +47,14 @@ export const createGroup =
           dateOfArrival: dateOfArrival,
           dateOfDeparture: dateOfDeparture,
           description: description,
-          host: host,
-          hostID: hostID,
+          HostName: host,
+          HostId: hostID,
         }),
       })
         .then((res) => res.json())
         .then((data) => {
           dispatch({ type: "CREATE_GROUP_SUCCESS", payload: data });
+          console.log(data);
         })
         .catch((error) => {
           const message =
@@ -61,6 +62,7 @@ export const createGroup =
               ? error.response.data.message
               : error.message;
           dispatch({ type: "CREATE_GROUP_FAIL", payload: message });
+          console.log(error);
         });
     } catch (e) {
       console.log(e);
