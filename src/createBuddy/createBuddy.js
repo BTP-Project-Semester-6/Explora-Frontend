@@ -70,7 +70,7 @@ export default function CreatBuddy() {
           dateOfArrival,
           dateOfDeparture,
           description,
-          hostID,
+          host,
           hostID
         )
       );
@@ -89,6 +89,9 @@ export default function CreatBuddy() {
     backgroundSize: "cover",
   };
   Toast(result.message, result.error, "", "");
+  if (result.message === "Success") {
+    navigate("/buddy");
+  }
   return (
     <div className="creatBuddy-body">
       <div style={{ paddingTop: "4%" }} className="him">

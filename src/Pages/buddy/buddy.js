@@ -9,6 +9,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import AddIcon from "@material-ui/icons/Add";
 import Navbar from "../navbar/navbar";
 import "./buddy.scss";
 import { getBuddyByCity } from "../../actions/buddyAction";
@@ -17,6 +18,7 @@ import {
   getGuideByCity,
 } from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
+import { textAlign } from "@mui/system";
 export default function Buddy() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
@@ -83,6 +85,9 @@ export default function Buddy() {
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
+          </IconButton>
+          <IconButton type="button" href="/createBuddy">
+            <AddIcon />
           </IconButton>
         </Paper>
       </div>
@@ -165,6 +170,20 @@ export default function Buddy() {
           <div className="twelve">
             <h1>BUDDYS</h1>
           </div>
+          {buddy.length ? (
+            <div></div>
+          ) : (
+            <div
+              style={{
+                margin: "auto",
+                marginTop: "20%",
+              }}
+            >
+              <p style={{ textAlign: "center" }}>
+                Please enter city you want to seach🔍.
+              </p>
+            </div>
+          )}
           {buddy.map((eachBuddy) => (
             <div className="horizontal-card">
               <div className="horizontal-card-body" style={{ width: "100%" }}>
