@@ -1,6 +1,8 @@
 import * as React from "react";
 import "./createBuddy.css";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,12 +12,45 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Navbar from "../Pages/navbar/navbar";
 
 import { styled } from "@mui/system";
+import { DatePicker } from "@mui/lab";
 export default function CreatBuddy() {
-  const [age, setAge] = React.useState("");
+  // const [age, setAge] = React.useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setAge(event.target.value);
+  // };
+  const [groupMaxSize, setGroupMaxSize] = useState(1);
+  const [city, setCity] = useState("");
+  const [dateOfArrival, setDateOfArrival] = useState(new Date());
+  const [dateOfDeparture, setDateOfDeparture] = useState(new Date());
+  const [description, setDescription] = useState("");
+  const [host, setHost] = useState("");
+  const [hostID, setHostID] = useState("");
+
+  // const [user, setUser] = useState({});
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          console.log("DECODED");
+          console.log(decoded);
+          setHostID(decoded._id);
+          setHost(decoded.username);
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
   const myStyle = {
     backgroundImage: "url(/buddy.jpg)",
     height: "100vh",
@@ -32,16 +67,18 @@ export default function CreatBuddy() {
           <div style={{ width: "100%", margin: "auto" }} className="row">
             <div style={{ width: "20%" }} class="form-group">
               <label for="formGroupExampleInput2">
-                <b>Members</b>{" "}
+                <b>Total Members</b>{" "}
               </label>
               <input
                 type="number"
+                value={groupMaxSize}
                 class="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Members"
+                onChange={(e) => setGroupMaxSize(e.target.value)}
               />
             </div>
-            <div style={{ width: "60%" }} class="form-group">
+            {/* <div style={{ width: "60%" }} class="form-group">
               <label for="formGroupExampleInput2">
                 <b>Add Members</b>
               </label>
@@ -51,12 +88,12 @@ export default function CreatBuddy() {
                 id="formGroupExampleInput2"
                 placeholder="AddMembers"
               />
-            </div>
+            </div> */}
             <div style={{ marginTop: "24px", width: "20%" }}>
-              <button type="button" class="btn btn-outline-dark">
+              {/* <button type="button" class="btn btn-outline-dark">
                 {" "}
                 <b>Add</b>
-              </button>
+              </button> */}
             </div>
           </div>
           <div style={{ width: "98%", margin: "auto" }} class="form-group">
@@ -65,9 +102,11 @@ export default function CreatBuddy() {
             </label>
             <input
               type="text"
+              value={city}
               class="form-control"
               id="formGroupExampleInput2"
               placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
             />
           </div>
 
@@ -81,6 +120,8 @@ export default function CreatBuddy() {
                 class="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Date"
+                value={dateOfDeparture}
+                onChange={(e) => setDateOfDeparture(e.target.value)}
               />
             </div>
             <div style={{ width: "50%" }} class="form-group">
@@ -92,6 +133,8 @@ export default function CreatBuddy() {
                 class="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Date"
+                value={dateOfArrival}
+                onChange={(e) => setDateOfArrival(e.target.value)}
               />
             </div>
           </div>
@@ -105,11 +148,13 @@ export default function CreatBuddy() {
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="4"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
           <div style={{ fontSize: "18px", marginTop: "10px" }}>
             {" "}
-            Current Members :-<b> Nalin, Prerit, Joshi</b>{" "}
+            {/* Current Members :-<b> Nalin, Prerit, Joshi</b>{" "} */}
           </div>
           <button type="button" class="btn btn-primary btn-sm btn-lg btn-block">
             Create Group
