@@ -129,6 +129,8 @@ export default function ButtonAppBar() {
       navigate("/login");
     } else if (text == "Register") {
       navigate("/register");
+    } else if (text == "Visit Nearby") {
+      navigate("/places");
     }
   }
 
