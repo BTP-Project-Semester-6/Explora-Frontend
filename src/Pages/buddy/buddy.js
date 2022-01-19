@@ -11,16 +11,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import SPINNER from "../../img/Spinner.gif";
-import Navbar from "../navbar/navbar";
 import "./buddy.scss";
-import { getBuddyByCity } from "../../actions/buddyAction";
-import {
-  getGuideAndBuddyByCity,
-  getGuideByCity,
-} from "../../actions/guideAction";
+import { getGuideAndBuddyByCity } from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
-import { textAlign } from "@mui/system";
 import Toast from "../../Components/Toast/toast";
+
 export default function Buddy() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
@@ -28,10 +23,6 @@ export default function Buddy() {
   const { buddy } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   const { guide } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   const result = useSelector((state) => state.getGuideAndBuddyByCityReducer);
-  // const [buddys, setBuddys] = useState([]);
-
-  console.log(guide);
-  console.log(buddy);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -39,14 +30,12 @@ export default function Buddy() {
       Toast("", "", "", "Please enter city!!");
     } else {
       Toast("", "", "Searching...", "");
-      dispatch(getGuideAndBuddyByCity(city));
+      dispatch(getGuideAndBuddyByCity(city.toLowerCase()));
+      setCity("");
     }
   };
-  const done = false;
-  if (result.message.length || result.error.length) {
-    Toast(result.message, result.error, "", "");
-    dispatch({ type: "GET_BUDDY_AND_CITY_BY_CITY_DEFAULT" });
-  }
+
+  Toast(result.message, result.error, "", "");
 
   return (
     <div
@@ -84,6 +73,7 @@ export default function Buddy() {
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="City"
+            value={city}
             inputProps={{ "aria-label": "search google maps" }}
             style={{ textTransform: "lowercase" }}
             onChange={(e) => setCity(e.target.value)}
@@ -187,13 +177,13 @@ export default function Buddy() {
                 marginTop: "20%",
               }}
             >
-              {result.loading === true ? (
-                <img src={SPINNER} width="80px" height="80px" />
-              ) : (
-                <p style={{ textAlign: "center" }}>
-                  Please enter city you want to seach🔍.
-                </p>
-              )}
+              <p style={{ textAlign: "center" }}>
+                {result.loading === true ? (
+                  <img src={SPINNER} width="80px" height="80px" />
+                ) : (
+                  "Please enter city you want to seach🔍."
+                )}
+              </p>
             </div>
           )}
           {buddy.map((eachBuddy) => (
