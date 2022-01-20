@@ -24,6 +24,10 @@ export const getGuideByCity = (city) => async (dispatch, getState) => {
 
 export const getGuideAndBuddyByCity = (city) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: "GET_BUDDY_AND_CITY_BY_CITY_REQUEST",
+      payload: city,
+    });
     // console.log(city + " action");
     fetch(`http://localhost:3001/api/guide/location/${city}`, {
       method: "get",
@@ -32,11 +36,11 @@ export const getGuideAndBuddyByCity = (city) => async (dispatch, getState) => {
       .then((res) => res.json())
       .then((data1) => {
         try {
-          dispatch({
-            type: "GET_BUDDY_AND_CITY_BY_CITY_REQUEST",
-            payload: city,
-          });
-          // console.log(city + " action");
+          // dispatch({
+          //   type: "GET_BUDDY_AND_CITY_BY_CITY_REQUEST",
+          //   payload: city,
+          // });
+          console.log(data1);
           fetch("http://localhost:3001/api/buddy/getBuddyByCity", {
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -46,6 +50,7 @@ export const getGuideAndBuddyByCity = (city) => async (dispatch, getState) => {
           })
             .then((res) => res.json())
             .then((data2) => {
+              console.log({ guide: data2, buddy: data1 });
               dispatch({
                 type: "GET_BUDDY_AND_CITY_BY_CITY_SUCCESS",
                 payload1: data1,
