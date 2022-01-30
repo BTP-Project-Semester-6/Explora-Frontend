@@ -3,8 +3,13 @@ import profile_bg from "../../img/profile-bg.jpg";
 import person from "../../img/person.jpg";
 import Grid from "@mui/material/Grid";
 import Post from "../Post/post";
+import { useState } from "react";
 
 const Profile = () => {
+  const [userData, setUserData] = useState(undefined);
+
+  useState(() => {}, []);
+
   return (
     <div className="profile_page">
       <div className="all_profile_content">
