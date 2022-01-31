@@ -23,6 +23,8 @@ import { VisitingPlaces } from "./Pages/VisitingPlaces/visitingPlaces";
 import PrePlanning from "./Pages/PrePlanning/prePlanning";
 import Navbar from "./Pages/navbar/navbar";
 
+import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
+
 const App = () => {
   return (
     <Router>
@@ -46,6 +48,8 @@ const App = () => {
         <Route path="/places" element={<VisitingPlaces />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
+
+        <Route path="/personalityquiz" element={<PersonalityQuiz />} />
       </Routes>
     </Router>
   );
