@@ -54,6 +54,7 @@ export default function PrePlanningPost() {
         setLocation("");
         setSubLocation("");
         setDescription("");
+        navigate("/prePlanning");
       });
     }
   };
