@@ -44,7 +44,6 @@ export const getPrePlanningBySubLocationReducer = (state = {}, action) => {
       };
     case "GET_PRE_PLANNING_SUB_LOCATION_SUCCESS":
       // console.log(action.payload);
-      Toast("Success", "", "", "");
       if (action.payload.length == 0) {
         Toast(
           "",
@@ -52,6 +51,8 @@ export const getPrePlanningBySubLocationReducer = (state = {}, action) => {
           "",
           "We currently dont have any challenges in this location"
         );
+      } else {
+        Toast("Success", "", "", "");
       }
       return {
         message: "Success",
