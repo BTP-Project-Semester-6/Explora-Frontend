@@ -6,7 +6,6 @@ export const getChallengeByCityReducer = (state = {}, action) => {
       Toast("", "", "Request Sent", "");
       return [];
     case "GET_CHALLENGE_BY_CITY_SUCCESS":
-      Toast("Success", "", "", "");
       if (action.payload.length == 0) {
         Toast(
           "",
@@ -14,6 +13,8 @@ export const getChallengeByCityReducer = (state = {}, action) => {
           "",
           "We currently dont have any pre planning on this location"
         );
+      } else {
+        Toast("Success", "", "", "");
       }
       console.log(action.payload);
       return action.payload;
