@@ -1,13 +1,14 @@
 import * as React from "react";
 import "./createChallenge.css";
 import Navbar from "../navbar/navbar";
-
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { createCityChallenge } from "../../actions/challengeAction";
 import Toast from "../../Components/Toast/toast";
 export default function CreateChallenge() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [city, setCity] = React.useState("");
   const [name, setName] = React.useState("");
@@ -30,6 +31,7 @@ export default function CreateChallenge() {
             name: location.toLocaleLowerCase(),
           },
         ]);
+        Toast("Location added", "", "", "");
         setLocation("");
       });
   };
@@ -51,12 +53,13 @@ export default function CreateChallenge() {
           name
         )
       );
-      console.log(result);
+      navigate("/challenge");
+      // console.log(result);
     }
   };
 
-  Toast(result.message, result.error, result.info, "");
-  console.log(result.message + result.error + result.message);
+  // Toast(result.message, result.error, result.info, "");
+  // console.log(result.message + result.error + result.message);
 
   return (
     <div className="creatBuddy-body">
@@ -92,11 +95,16 @@ export default function CreateChallenge() {
               <label for="formGroupExampleInput2">
                 <b>Locations</b>
               </label>
+              <ul>
+                {locations.map((loc) => (
+                  <li>{loc.name}</li>
+                ))}
+              </ul>
               <input
                 type="text"
                 class="form-control"
                 id="formGroupExampleInput2"
-                placeholder="AddMembers"
+                placeholder="Ad Location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />

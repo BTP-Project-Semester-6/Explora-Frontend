@@ -1,3 +1,5 @@
+import Toast from "../Components/Toast/toast";
+
 export const getGuideByCityReducer = (state = {}, action) => {
   switch (action.type) {
     case "GET_GUIDE_BY_CITY_REQUEST":
@@ -20,6 +22,7 @@ export const getGuideByCityReducer = (state = {}, action) => {
 export const getGuideAndBuddyByCityReducer = (state = {}, action) => {
   switch (action.type) {
     case "GET_BUDDY_AND_CITY_BY_CITY_REQUEST":
+      Toast("", "", "Searching...", "");
       return {
         loading: true,
         guide: [],
@@ -28,6 +31,16 @@ export const getGuideAndBuddyByCityReducer = (state = {}, action) => {
         error: "",
       };
     case "GET_BUDDY_AND_CITY_BY_CITY_SUCCESS":
+      if (action.payload1.data.length == 0) {
+        Toast("", "", "", "We currently dont have any guide on this location");
+      } else {
+        Toast("Successflly Found Guide", "", "", "");
+      }
+      if (action.payload2.length == 0) {
+        Toast("", "", "", "We currently dont have any buddy on this location");
+      } else {
+        Toast("Successflly Found Buddies", "", "", "");
+      }
       console.log(action.payload);
       return {
         loading: false,
@@ -38,6 +51,7 @@ export const getGuideAndBuddyByCityReducer = (state = {}, action) => {
         buddy: action.payload2,
       };
     case "GET_BUDDY_AND_CITY_BY_CITY_FAIL":
+      Toast("", action.payload, "", "");
       return {
         loading: false,
         success: false,

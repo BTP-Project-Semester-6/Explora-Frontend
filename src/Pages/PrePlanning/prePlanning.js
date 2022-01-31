@@ -23,15 +23,11 @@ export default function PrePlanning() {
     if (subLocation === "") {
       Toast("", "", "", "Please enter sub-location!");
     } else {
-      dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase())).then(
-        () => {
-          Toast("", "", "Searching... ", "");
-        }
-      );
+      dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
     }
   };
-  Toast(prePlannings.message, prePlannings.error, "", "");
-  console.log(prePlannings);
+  // Toast(prePlannings.message, prePlannings.error, "", "");
+  // console.log(prePlannings);
   return (
     <div
       style={{

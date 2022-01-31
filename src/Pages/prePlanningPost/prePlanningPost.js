@@ -54,11 +54,11 @@ export default function PrePlanningPost() {
         setLocation("");
         setSubLocation("");
         setDescription("");
-        Toast("", "", "Request Sent", "");
+        navigate("/prePlanning");
       });
     }
   };
-  Toast(result.message, result.error, "", "");
+  // Toast(result.message, result.error, "", "");
   return (
     <div className="creatBuddy-body">
       <div style={{ marginTop: "4%" }} className="him">
