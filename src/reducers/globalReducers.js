@@ -5,7 +5,7 @@ import {
   getChallengeByCityReducer,
   createChallengeByCityReducer,
 } from "./challengeReducer";
-import { getBuddyByCityReducer } from "./buddyReducer";
+import { getBuddyByCityReducer, createGroupReducer } from "./buddyReducer";
 import {
   getGuideByCityReducer,
   getGuideAndBuddyByCityReducer,
@@ -26,6 +26,7 @@ const reducers = combineReducers({
   createChallengeByCityReducer,
   createPrePlanningReducer,
   getPrePlanningBySubLocationReducer,
+  createGroupReducer,
 });
 
 export default reducers;
