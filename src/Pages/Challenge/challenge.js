@@ -86,6 +86,20 @@ export default function Challenge() {
         <div className="twelve">
           <h1>CHALLENGES</h1>
         </div>
+        {challenges.length ? (
+          <div></div>
+        ) : (
+          <div
+            style={{
+              margin: "auto",
+              marginTop: "20%",
+            }}
+          >
+            <p style={{ textAlign: "center" }}>
+              {"Please enter location you want to seach🔍."}
+            </p>
+          </div>
+        )}
         {challenges.map((challengeItem) => (
           <div className="horizontal-card">
             <div
