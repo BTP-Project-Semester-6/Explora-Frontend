@@ -16,3 +16,26 @@ export const getBuddyByCityReducer = (state = {}, action) => {
       return { loading: false, buddy: [] };
   }
 };
+export const createGroupReducer = (state = {}, action) => {
+  console.log(action.payload);
+  switch (action.type) {
+    case "CREATE_GROUP_REQUEST":
+      return { message: "", error: "", info: "request sent!" };
+    case "CREATE_GROUP_SUCCESS":
+      return {
+        message: action.payload.message,
+        error: "",
+        info: "",
+        success: true,
+      };
+    case "CREATE_GROUP_FAIL":
+      return {
+        message: "",
+        error: action.payload,
+        info: "",
+        success: false,
+      };
+    default:
+      return { message: "", error: "", info: "" };
+  }
+};
