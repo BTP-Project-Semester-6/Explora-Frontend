@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { getCityChallenge } from "../../actions/challengeAction";
+import AddIcon from "@material-ui/icons/Add";
 import "./challenge.scss";
 import Navbar from "../navbar/navbar";
 
@@ -66,6 +67,9 @@ export default function Challenge() {
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
           </IconButton>
+          <IconButton type="button" href="/createChallenge">
+            <AddIcon />
+          </IconButton>
         </Paper>
       </div>
 
@@ -86,6 +90,20 @@ export default function Challenge() {
         <div className="twelve">
           <h1>CHALLENGES</h1>
         </div>
+        {challenges.length ? (
+          <div></div>
+        ) : (
+          <div
+            style={{
+              margin: "auto",
+              marginTop: "20%",
+            }}
+          >
+            <p style={{ textAlign: "center" }}>
+              {"Please enter location you want to seach🔍."}
+            </p>
+          </div>
+        )}
         {challenges.map((challengeItem) => (
           <div className="horizontal-card">
             <div
