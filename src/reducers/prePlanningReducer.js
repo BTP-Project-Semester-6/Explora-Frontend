@@ -4,10 +4,10 @@ export const createPrePlanningReducer = (state = {}, action) => {
   console.log(action.payload);
   switch (action.type) {
     case "CREATE_PRE_PLANNING_REQUEST":
+      Toast("", "", "Request Sent", "");
       return { message: "", error: "", loading: true, info: "request sent!" };
     case "CREATE_PRE_PLANNING_SUCCESS":
       Toast("Success", "", "", "");
-
       return {
         message: action.payload.message,
         error: "",
