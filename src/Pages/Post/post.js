@@ -11,6 +11,7 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { useEffect } from "react";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
@@ -36,6 +37,9 @@ const ExpandMore = styled((props) => {
 export default function Post(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [inp, setInp] = React.useState("");
+  const [liked, isLiked] = React.useState(false);
+
+  // console.log(props);
 
   const handleSubmit = () => {
     fetch("http://localhost:3001/api/posts/newcomment", {
@@ -59,9 +63,39 @@ export default function Post(props) {
       });
   };
 
+  const handleLike = () => {
+    if (!liked) {
+      fetch("http://localhost:3001/api/posts/likepost", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId: props._id,
+          userId: jwt_decode(localStorage.getItem("token"))._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          toast.success("Liked");
+          window.location.reload(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  useEffect(() => {
+    const userID = jwt_decode(localStorage.getItem("token"))._id;
+    props.likes.forEach((element) => {
+      if (element.userId === userID) {
+        isLiked(true);
+      }
+    });
+  }, []);
 
   return (
     <Card
@@ -88,8 +122,8 @@ export default function Post(props) {
         style={{
           margin: "auto",
           borderRadius: "10px",
-          height: "inherit",
-          width: "80%",
+          height: "384px",
+          width: "512px",
         }}
         src={props.photoUrl}
       />
@@ -104,8 +138,13 @@ export default function Post(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          {!liked ? (
+            <FavoriteIcon onClick={handleLike} />
+          ) : (
+            <FavoriteIcon onClick={handleLike} style={{ color: "red" }} />
+          )}
         </IconButton>
+        {props.likes.length} Like
         <IconButton aria-label="share"></IconButton>
         <ExpandMore
           expand={expanded}
