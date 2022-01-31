@@ -29,13 +29,12 @@ export default function Buddy() {
     if (city === "") {
       Toast("", "", "", "Please enter city!!");
     } else {
-      Toast("", "", "Searching...", "");
       dispatch(getGuideAndBuddyByCity(city.toLowerCase()));
       setCity("");
     }
   };
 
-  Toast(result.message, result.error, "", "");
+  // Toast(result.message, result.error, "", "");
 
   return (
     <div
