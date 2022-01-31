@@ -29,7 +29,7 @@ export default function CreatBuddy() {
   const navigate = useNavigate();
 
   const result = useSelector((state) => state.createGroupReducer);
-  console.log(result);
+  // console.log(result);
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       navigate("/login");
@@ -62,7 +62,6 @@ export default function CreatBuddy() {
       dateOfDeparture &&
       description
     ) {
-      Toast("", "", "Request Sent", "");
       dispatch(
         createGroup(
           groupMaxSize,
@@ -88,7 +87,7 @@ export default function CreatBuddy() {
     backgroundPosition: "center",
     backgroundSize: "cover",
   };
-  Toast(result.message, result.error, "", "");
+  // Toast(result.message, result.error, "", "");
   if (result.message === "Success") {
     navigate("/buddy");
   }

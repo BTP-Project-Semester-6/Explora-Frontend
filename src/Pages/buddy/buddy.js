@@ -29,13 +29,12 @@ export default function Buddy() {
     if (city === "") {
       Toast("", "", "", "Please enter city!!");
     } else {
-      Toast("", "", "Searching...", "");
       dispatch(getGuideAndBuddyByCity(city.toLowerCase()));
       setCity("");
     }
   };
 
-  Toast(result.message, result.error, "", "");
+  // Toast(result.message, result.error, "", "");
 
   return (
     <div
@@ -198,12 +197,8 @@ export default function Buddy() {
                       >
                         {eachBuddy.Host.name}
                       </a>{" "}
-                      ({eachBuddy.dateOfArrival.substr(0, 2)}/
-                      {eachBuddy.dateOfArrival.substr(2, 2)}/
-                      {eachBuddy.dateOfArrival.substr(4, 4)} -{" "}
-                      {eachBuddy.dateOfDeparture.substr(0, 2)}/
-                      {eachBuddy.dateOfDeparture.substr(2, 2)}/
-                      {eachBuddy.dateOfDeparture.substr(4, 4)})
+                      ({eachBuddy.dateOfArrival} {" to "}
+                      {eachBuddy.dateOfDeparture})
                     </p>
                   </div>
                   <div style={{ float: "right" }}>

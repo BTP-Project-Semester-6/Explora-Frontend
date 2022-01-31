@@ -37,6 +37,7 @@ import { useState, useEffect } from "react/cjs/react.development";
 import jwt_decode from "jwt-decode";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const drawerWidth = 240;
 
@@ -193,6 +194,7 @@ export default function ButtonAppBar() {
                   "Buddies",
                   "PrePlanning",
                   "Visit Nearby",
+                  "Find Friends",
                   "Logout",
                 ].map((text, index) => (
                   <ListItem
@@ -223,6 +225,9 @@ export default function ButtonAppBar() {
                       )}
                       {text == "Visit Nearby" && (
                         <NearMeIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Find Friends" && (
+                        <PersonAddIcon style={{ fontSize: "20px" }} />
                       )}
                     </ListItemIcon>
                     {text == "Logout" && (
