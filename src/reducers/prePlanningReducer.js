@@ -1,9 +1,13 @@
+import Toast from "../Components/Toast/toast";
+
 export const createPrePlanningReducer = (state = {}, action) => {
   console.log(action.payload);
   switch (action.type) {
     case "CREATE_PRE_PLANNING_REQUEST":
       return { message: "", error: "", loading: true, info: "request sent!" };
     case "CREATE_PRE_PLANNING_SUCCESS":
+      Toast("Success", "", "", "");
+
       return {
         message: action.payload.message,
         error: "",
@@ -11,7 +15,9 @@ export const createPrePlanningReducer = (state = {}, action) => {
         success: true,
         loading: false,
       };
+
     case "CREATE_PRE_PLANNING_FAIL":
+      Toast("", action.payload, "", "");
       return {
         message: "",
         error: action.payload,
@@ -25,9 +31,10 @@ export const createPrePlanningReducer = (state = {}, action) => {
 };
 
 export const getPrePlanningBySubLocationReducer = (state = {}, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case "GET_PRE_PLANNING_SUB_LOCATION_REQUEST":
+      Toast("", "", "Searching... ", "");
       return {
         message: "",
         error: "",
@@ -36,6 +43,16 @@ export const getPrePlanningBySubLocationReducer = (state = {}, action) => {
         loading: true,
       };
     case "GET_PRE_PLANNING_SUB_LOCATION_SUCCESS":
+      console.log(action.payload);
+      Toast("Success", "", "", "");
+      if (action.payload.length == 0) {
+        Toast(
+          "",
+          "",
+          "",
+          "We currently dont have any pre planning on this location"
+        );
+      }
       return {
         message: "Success",
         error: "",
@@ -45,6 +62,7 @@ export const getPrePlanningBySubLocationReducer = (state = {}, action) => {
         prePlanning: action.payload,
       };
     case "GET_PRE_PLANNING_SUB_LOCATION_FAIL":
+      Toast("", action.payload, "", "");
       return {
         message: "",
         error: action.payload,
