@@ -197,12 +197,8 @@ export default function Buddy() {
                       >
                         {eachBuddy.Host.name}
                       </a>{" "}
-                      ({eachBuddy.dateOfArrival.substr(0, 2)}/
-                      {eachBuddy.dateOfArrival.substr(2, 2)}/
-                      {eachBuddy.dateOfArrival.substr(4, 4)} -{" "}
-                      {eachBuddy.dateOfDeparture.substr(0, 2)}/
-                      {eachBuddy.dateOfDeparture.substr(2, 2)}/
-                      {eachBuddy.dateOfDeparture.substr(4, 4)})
+                      ({eachBuddy.dateOfArrival} {" to "}
+                      {eachBuddy.dateOfDeparture})
                     </p>
                   </div>
                   <div style={{ float: "right" }}>
