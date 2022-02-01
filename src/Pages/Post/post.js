@@ -157,24 +157,28 @@ export default function Post(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="collepes-section">
-          <div style={{ width: "90%" }} className=" container row">
-            <div className="col-11">
-              <input
-                class="form-control input-field"
-                type="text"
-                placeholder="Comment Here..."
-                onChange={(e) => setInp(e.target.value)}
-                readonly
-              />
-            </div>
-            <div className="col-1">
-              <Button
-                variant="contained"
-                endIcon={<SendIcon />}
-                onClick={handleSubmit}
-              >
-                Send
-              </Button>
+          <div>
+            <div style={{ margin: "auto" }} className="row ">
+              <div className="col-8">
+                <input
+                  style={{ margin: "auto", width: "100%", float: "right" }}
+                  class="form-control input-field"
+                  type="text"
+                  placeholder="Comment Here..."
+                  onChange={(e) => setInp(e.target.value)}
+                  readonly
+                />
+              </div>
+              <div style={{ margin: "auto", float: "left" }} className="col-4">
+                <Button
+                  style={{ float: "left" }}
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                  onClick={handleSubmit}
+                >
+                  Send
+                </Button>
+              </div>
             </div>
           </div>
           <div className="show-comment-section">

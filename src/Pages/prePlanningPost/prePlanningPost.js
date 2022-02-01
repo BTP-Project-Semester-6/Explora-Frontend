@@ -61,8 +61,11 @@ export default function PrePlanningPost() {
   // Toast(result.message, result.error, "", "");
   return (
     <div className="creatBuddy-body">
-      <div style={{ marginTop: "4%" }} className="him">
-        <div style={{ width: "60%" }} className="container glass-createBuddy">
+      <div style={{}} className="him">
+        <div
+          style={{ marginTop: "4%", width: "60%" }}
+          className="container glass-createBuddy"
+        >
           <div className="row"></div>
           <form onSubmit={SubmitHandler}>
             <div className="form-group">

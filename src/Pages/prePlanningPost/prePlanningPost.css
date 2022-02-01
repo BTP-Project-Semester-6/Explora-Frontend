@@ -1,0 +1,6 @@
+.creatBuddy-body {
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+}
