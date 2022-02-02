@@ -104,57 +104,61 @@ export default function Challenge() {
             </p>
           </div>
         )}
-        {challenges.map((challengeItem) => (
-          <div className="horizontal-card">
-            <div
-              style={{
-                width: "150px",
-                height: "100%",
-                padding: "auto",
-                marginTop: "30px",
-              }}
-            >
-              <img src={challengeItem.badge} alt="" />
-            </div>
-            <div className="horizontal-card-body" style={{ width: "100%" }}>
-              <div className="orders" style={{ width: "100%" }}>
-                <div>
-                  <p className="name" style={{ float: "left" }}>
-                    {challengeItem.name}
-                  </p>
+        {challenges.map((challengeItem) =>
+          challengeItem.isvalid ? (
+            <div className="horizontal-card">
+              <div
+                style={{
+                  width: "150px",
+                  height: "100%",
+                  padding: "auto",
+                  marginTop: "30px",
+                }}
+              >
+                <img src={challengeItem.badge} alt="" />
+              </div>
+              <div className="horizontal-card-body" style={{ width: "100%" }}>
+                <div className="orders" style={{ width: "100%" }}>
+                  <div>
+                    <p className="name" style={{ float: "left" }}>
+                      {challengeItem.name}
+                    </p>
+                  </div>
+                  <div style={{ float: "right" }}>{challengeItem.city}</div>
                 </div>
-                <div style={{ float: "right" }}>{challengeItem.city}</div>
-              </div>
-              <div>
-                <ul style={{ listStyle: "none" }}>
-                  {challengeItem.locations.map((location) => (
-                    <li>
-                      📌
-                      <a
-                        href={
-                          "https://maps.google.com?q=" +
-                          location.lat +
-                          "," +
-                          location.lng
-                        }
-                        target="_blank"
-                      >
-                        {location.name}
-                      </a>{" "}
-                    </li>
-                  ))}
-                </ul>
-                <p className="order">{challengeItem.description}</p>
-              </div>
+                <div>
+                  <ul style={{ listStyle: "none" }}>
+                    {challengeItem.locations.map((location) => (
+                      <li>
+                        📌
+                        <a
+                          href={
+                            "https://maps.google.com?q=" +
+                            location.lat +
+                            "," +
+                            location.lng
+                          }
+                          target="_blank"
+                        >
+                          {location.name}
+                        </a>{" "}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="order">{challengeItem.description}</p>
+                </div>
 
-              <div className="profile">
-                <Button variant="contained" href="#contained-buttons">
-                  Start Challenge
-                </Button>
+                <div className="profile">
+                  <Button variant="contained" href="#contained-buttons">
+                    Start Challenge
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ) : (
+            <></>
+          )
+        )}
       </div>
     </div>
   );
