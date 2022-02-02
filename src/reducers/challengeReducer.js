@@ -56,7 +56,7 @@ export const getAllNotValidatedChallengesReducer = (state = {}, action) => {
   switch (action.type) {
     case "GET_ALL_NOT_VALIDATED_REQUEST":
       Toast("", "", "Request Sent", "");
-      return [];
+      return { challenges: [], loading: true, success: false };
     case "GET_ALL_NOT_VALIDATED_SUCCESS":
       if (action.payload.length == 0) {
         Toast("", "", "", "No currently not validated challenges.");
@@ -64,11 +64,11 @@ export const getAllNotValidatedChallengesReducer = (state = {}, action) => {
         Toast("Success", "", "", "");
       }
       console.log(action.payload);
-      return action.payload;
+      return { challenges: action.payload, loading: false, success: true };
     case "GET_ALL_NOT_VALIDATED_FAIL":
       Toast("", action.payload, "", "");
-      return action.payload;
+      return { challenges: [], loading: false, success: false };
     default:
-      return [];
+      return { challenges: [], loading: false, success: false };
   }
 };
