@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCityChallenge } from "../../actions/challengeAction";
 import AddIcon from "@material-ui/icons/Add";
 import "./challenge.scss";
-import Navbar from "../navbar/navbar";
 
 export default function Challenge() {
   const dispatch = useDispatch();
@@ -21,7 +20,7 @@ export default function Challenge() {
     if (city === "") {
       alert("Please enter city!");
     } else {
-      dispatch(getCityChallenge(city));
+      dispatch(getCityChallenge(city.toLocaleLowerCase()));
     }
   };
 
@@ -63,6 +62,7 @@ export default function Challenge() {
             inputProps={{ "aria-label": "search google maps" }}
             style={{ textTransform: "lowercase" }}
             onChange={(e) => setCity(e.target.value)}
+            value={city}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
@@ -128,7 +128,20 @@ export default function Challenge() {
               <div>
                 <ul style={{ listStyle: "none" }}>
                   {challengeItem.locations.map((location) => (
-                    <li>📌 {location.name}</li>
+                    <li>
+                      📌
+                      <a
+                        href={
+                          "https://maps.google.com?q=" +
+                          location.lat +
+                          "," +
+                          location.lng
+                        }
+                        target="_blank"
+                      >
+                        {location.name}
+                      </a>{" "}
+                    </li>
                   ))}
                 </ul>
                 <p className="order">{challengeItem.description}</p>
