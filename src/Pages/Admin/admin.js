@@ -1,21 +1,40 @@
-import Navbar from "../navbar/navbar";
-function ChallengeRequest() {
+import { useDispatch, useSelector } from "react-redux";
+import { getAllNotValidatedChallenges } from "../../actions/challengeAction";
+
+function ChallengeRequest({ data }) {
   return (
     <div>
       <div className="container">
         <div>
-          <h2>Challeng Heading</h2>
+          <h2>{data.name}</h2>
         </div>
         <div>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          <b>City:</b>
+          {data.city}
+          <br />
+          <b>Locations:</b>
+          <br />
+          <ul style={{ listStyle: "none" }}>
+            {data.locations.map((location) => (
+              <li>
+                📌
+                <a
+                  href={
+                    "https://maps.google.com?q=" +
+                    location.lat +
+                    "," +
+                    location.lng
+                  }
+                  target="_blank"
+                >
+                  {location.name}
+                </a>{" "}
+              </li>
+            ))}
+          </ul>
+          <b>Description:</b>
+          <br />
+          {data.description}
         </div>
         <div style={{ margin: "10px" }} className="row">
           <button style={{ width: "20%" }} className="btn btn-primary ">
@@ -59,6 +78,15 @@ function FeedBack() {
   );
 }
 export default function Admin() {
+  const dispatch = useDispatch();
+  const getAllNotValidatedChallengesHandler = (e) => {
+    e.preventDefault();
+    dispatch(getAllNotValidatedChallenges());
+  };
+  const challenges = useSelector(
+    (state) => state.getAllNotValidatedChallengesReducer
+  );
+  console.log(challenges);
   return (
     <div>
       <div className="container">
@@ -73,6 +101,7 @@ export default function Admin() {
                   data-target="#collapseTwo"
                   aria-expanded="false"
                   aria-controls="collapseTwo"
+                  onClick={getAllNotValidatedChallengesHandler}
                 >
                   New Challenge Requests
                 </button>
@@ -85,12 +114,9 @@ export default function Admin() {
               data-parent="#accordionExample"
             >
               <div class="card-body">
-                <ChallengeRequest></ChallengeRequest>
-                <ChallengeRequest></ChallengeRequest>
-                <ChallengeRequest></ChallengeRequest>
-                <ChallengeRequest></ChallengeRequest>
-                <ChallengeRequest></ChallengeRequest>
-                <ChallengeRequest></ChallengeRequest>
+                {challenges.challenges.map((challenge) => (
+                  <ChallengeRequest data={challenge} />
+                ))}
               </div>
             </div>
           </div>
