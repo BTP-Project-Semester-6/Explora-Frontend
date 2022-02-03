@@ -2,6 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllNotValidatedChallenges } from "../../actions/challengeAction";
 
 function ChallengeRequest({ data }) {
+  const includeHandler = (id) => {
+    console.log(id);
+  };
+
+  const deleteHandler = (id) => {
+    console.log(id);
+  };
   return (
     <div>
       <div className="container">
@@ -37,10 +44,18 @@ function ChallengeRequest({ data }) {
           {data.description}
         </div>
         <div style={{ margin: "10px" }} className="row">
-          <button style={{ width: "20%" }} className="btn btn-primary ">
+          <button
+            style={{ width: "20%", marginRight: "10px" }}
+            className="btn btn-primary "
+            onClick={(e) => includeHandler(data._id)}
+          >
             Include
           </button>
-          <button style={{ width: "20%" }} className="btn btn-danger">
+          <button
+            style={{ width: "20%" }}
+            className="btn btn-danger"
+            onClick={(e) => deleteHandler(data._id)}
+          >
             Delete
           </button>
         </div>
