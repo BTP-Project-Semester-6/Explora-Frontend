@@ -23,19 +23,32 @@ export default function CreateChallenge() {
     fetch(process.env.REACT_APP_GET_COORDINATES + location)
       .then((response) => response.json())
       .then((result) => {
-        setLocations((locations) => [
-          ...locations,
-          {
-            lat: result.data[0].latitude,
-            lng: result.data[0].longitude,
-            name: location.toLocaleLowerCase(),
-          },
-        ]);
-        Toast("Location added", "", "", "");
-        setLocation("");
+        if (
+          result.data[0].latitude == undefined ||
+          result.data[0].longitude == undefined
+        ) {
+          console.log(result.data[0]);
+          Toast(
+            "",
+            "",
+            "",
+            "Some error occured in adding location, please try again"
+          );
+        } else {
+          setLocations((locations) => [
+            ...locations,
+            {
+              lat: result.data[0].latitude,
+              lng: result.data[0].longitude,
+              name: location.toLocaleLowerCase(),
+            },
+          ]);
+          Toast("Location added", "", "", "");
+          setLocation("");
+        }
       });
   };
-
+  console.log(locations);
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (locations === []) {
