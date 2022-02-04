@@ -96,6 +96,11 @@ export default function Post(props) {
       }
     });
   }, []);
+  var str = Date(props.created_at);
+  let date = JSON.stringify(str);
+  date = date.slice(1, 4) + ", " + date.slice(4, 11);
+
+  console.log(date);
 
   return (
     <Card
@@ -110,20 +115,26 @@ export default function Post(props) {
           <Avatar
             aria-label="recipe"
             alt="Remy Sharp"
-            src="https://image.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg"
+            src={props.picUrl}
           ></Avatar>
         }
         action={<IconButton aria-label="settings"></IconButton>}
         title={jwt_decode(localStorage.getItem("token")).name}
-        subheader={props.location + " - " + Date(props.created_at)}
+        subheader={props.location + " - " + date}
+        titleTypographyProps={{
+          variant: "h5",
+          fontWeight: 600,
+          color: "#fe7e6d",
+        }}
+        subheaderTypographyProps={{ variant: "h6", fontWeight: 600 }}
       />
       <CardMedia
         component="img"
         style={{
           margin: "auto",
           borderRadius: "10px",
-          height: "384px",
-          width: "512px",
+          height: "inherit",
+          width: "600px",
         }}
         src={props.photoUrl}
       />
