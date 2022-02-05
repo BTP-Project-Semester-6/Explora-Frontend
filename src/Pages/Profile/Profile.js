@@ -96,10 +96,6 @@ const Profile = (props) => {
           <Grid item xs={12} sm={6} md={8} lg={8} className="grid_content">
             <h3 className="post_heading">POSTS</h3>
             <Grid container>
-              {/* <Grid item xs={12} sm={12} md={6} lg={6} className="post_grid">
-                <Post />
-              </Grid> */}
-
               <div className="bodyPlace">
                 {posts
                   .sort((a, b) => Date(a.created_at) - Date(b.created_at))
