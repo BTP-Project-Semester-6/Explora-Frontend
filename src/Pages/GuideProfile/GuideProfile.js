@@ -54,26 +54,26 @@ const GuideProfile = () => {
                 <img src={userData.userId.picUrl} className="profile_pic" />
               </div>
               <div className="detail_container">
-                <h4>{userData.userId.name}</h4>
-                <h6>@{userData.userId.username}</h6>
+                <h3>{userData.userId.name}</h3>
+                <h5>@{userData.userId.username}</h5>
                 <div className="subdetail_container">
-                  <h3>BASIC DETAILS</h3>
+                  <h2>BASIC DETAILS</h2>
                   <br></br>
-                  <h6>Age: {userData.userId.age}</h6>
-                  <h6>Gender: {userData.userId.gender}</h6>
-                  <h6>Email: {userData.userId.email}</h6>
-                  <h6>Instagram: {userData.userId.instagram}</h6>
-                  <h6>Telegram: {userData.userId.telegram}</h6>
+                  <h5>Age: {userData.userId.age}</h5>
+                  <h5>Gender: {userData.userId.gender}</h5>
+                  <h5>Email: {userData.userId.email}</h5>
+                  <h5>Instagram: {userData.userId.instagram}</h5>
+                  <h5>Telegram: {userData.userId.telegram}</h5>
                   <br></br>
-                  <h3>GUIDE INSIGHTS</h3>
+                  <h2>GUIDE INSIGHTS</h2>
                   <br></br>
-                  <h6>Location: {userData.location}</h6>
-                  <h6>
+                  <h5>Location: {userData.location}</h5>
+                  <h5>
                     Sublocation: South Bombay, Ghatkopar, Thane, Navi Mumbai
-                  </h6>
-                  <h6>Guide Rate: {userData.rate}</h6>
-                  <h6>Experience: {userData.experience} years</h6>
-                  <h6>No. of trips: {userData.pastGuideExperiences.length}</h6>
+                  </h5>
+                  <h5>Guide Rate: {userData.rate}</h5>
+                  <h5>Experience: {userData.experience} years</h5>
+                  <h5>No. of trips: {userData.pastGuideExperiences.length}</h5>
                 </div>
               </div>
             </Grid>
