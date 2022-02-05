@@ -54,22 +54,22 @@ const Profile = () => {
                 <img src={userData.picUrl} className="profile_pic" />
               </div>
               <div className="detail_container">
-                <h4>{userData.name}</h4>
-                <h6>@{userData.username}</h6>
+                <h3>{userData.name}</h3>
+                <h5>@{userData.username}</h5>
                 <div className="subdetail_container">
-                  <h3>BASIC DETAILS</h3>
+                  <h2>BASIC DETAILS</h2>
                   <br></br>
-                  <h6>Age: {userData.age}</h6>
-                  <h6>Gender: {userData.gender}</h6>
-                  <h6>Email: {userData.email}</h6>
-                  <h6>Instagram: {userData.instagram}</h6>
-                  <h6>Telegram: {userData.telegram}</h6>
+                  <h5>Age: {userData.age}</h5>
+                  <h5>Gender: {userData.gender}</h5>
+                  <h5>Email: {userData.email}</h5>
+                  <h5>Instagram: {userData.instagram}</h5>
+                  <h5>Telegram: {userData.telegram}</h5>
                   <br></br>
-                  <h3>STATS</h3>
+                  <h2>STATS</h2>
                   <br></br>
-                  <h6>{userData.friends.length} Friends</h6>
-                  <h6>{userData.badges.length} Challenges Completed</h6>
-                  <h6>{userData.travelHistory.length} Places Travelled</h6>
+                  <h5>{userData.friends.length} Friends</h5>
+                  <h5>{userData.badges.length} Challenges Completed</h5>
+                  <h5>{userData.travelHistory.length} Places Travelled</h5>
                 </div>
               </div>
             </Grid>
