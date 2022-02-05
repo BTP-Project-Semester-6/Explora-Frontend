@@ -6,8 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { getCityChallenge } from "../../actions/challengeAction";
+import AddIcon from "@material-ui/icons/Add";
 import "./challenge.scss";
-import Navbar from "../navbar/navbar";
 
 export default function Challenge() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export default function Challenge() {
     if (city === "") {
       alert("Please enter city!");
     } else {
-      dispatch(getCityChallenge(city));
+      dispatch(getCityChallenge(city.toLocaleLowerCase()));
     }
   };
 
@@ -62,9 +62,13 @@ export default function Challenge() {
             inputProps={{ "aria-label": "search google maps" }}
             style={{ textTransform: "lowercase" }}
             onChange={(e) => setCity(e.target.value)}
+            value={city}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
+          </IconButton>
+          <IconButton type="button" href="/createChallenge">
+            <AddIcon />
           </IconButton>
         </Paper>
       </div>
@@ -86,44 +90,75 @@ export default function Challenge() {
         <div className="twelve">
           <h1>CHALLENGES</h1>
         </div>
-        {challenges.map((challengeItem) => (
-          <div className="horizontal-card">
-            <div
-              style={{
-                width: "150px",
-                height: "100%",
-                padding: "auto",
-                marginTop: "30px",
-              }}
-            >
-              <img src={challengeItem.badge} alt="" />
-            </div>
-            <div className="horizontal-card-body" style={{ width: "100%" }}>
-              <div className="orders" style={{ width: "100%" }}>
-                <div>
-                  <p className="name" style={{ float: "left" }}>
-                    {challengeItem.name}
-                  </p>
-                </div>
-                <div style={{ float: "right" }}>{challengeItem.city}</div>
-              </div>
-              <div>
-                <ul style={{ listStyle: "none" }}>
-                  {challengeItem.locations.map((location) => (
-                    <li>📌 {location.name}</li>
-                  ))}
-                </ul>
-                <p className="order">{challengeItem.description}</p>
-              </div>
-
-              <div className="profile">
-                <Button variant="contained" href="#contained-buttons">
-                  Start Challenge
-                </Button>
-              </div>
-            </div>
+        {challenges.length ? (
+          <div></div>
+        ) : (
+          <div
+            style={{
+              margin: "auto",
+              marginTop: "20%",
+            }}
+          >
+            <p style={{ textAlign: "center" }}>
+              {"Please enter location you want to seach🔍."}
+            </p>
           </div>
-        ))}
+        )}
+        {challenges.map((challengeItem) =>
+          challengeItem.isvalid ? (
+            <div className="horizontal-card">
+              <div
+                style={{
+                  width: "150px",
+                  height: "100%",
+                  padding: "auto",
+                  marginTop: "30px",
+                }}
+              >
+                <img src={challengeItem.badge} alt="" />
+              </div>
+              <div className="horizontal-card-body" style={{ width: "100%" }}>
+                <div className="orders" style={{ width: "100%" }}>
+                  <div>
+                    <p className="name" style={{ float: "left" }}>
+                      {challengeItem.name}
+                    </p>
+                  </div>
+                  <div style={{ float: "right" }}>{challengeItem.city}</div>
+                </div>
+                <div>
+                  <ul style={{ listStyle: "none" }}>
+                    {challengeItem.locations.map((location) => (
+                      <li>
+                        📌
+                        <a
+                          href={
+                            "https://maps.google.com?q=" +
+                            location.lat +
+                            "," +
+                            location.lng
+                          }
+                          target="_blank"
+                        >
+                          {location.name}
+                        </a>{" "}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="order">{challengeItem.description}</p>
+                </div>
+
+                <div className="profile">
+                  <Button variant="contained" href="#contained-buttons">
+                    Start Challenge
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )
+        )}
       </div>
     </div>
   );

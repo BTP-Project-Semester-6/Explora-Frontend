@@ -83,6 +83,7 @@ form.sign-up-form {
 }
 
 .input-field input {
+  border-radius: 0px 55px 55px 0px;
   background: none;
   outline: none;
   border: none;
@@ -93,8 +94,20 @@ form.sign-up-form {
 }
 
 .input-field input::placeholder {
+  display: none;
+
   color: #aaa;
   font-weight: 500;
+}
+
+input[type="text"]:focus {
+  background: transparent;
+}
+input[type="password"]:focus {
+  background: transparent;
+}
+input[type="email"]:focus {
+  background: transparent;
 }
 
 .btnlogin {
@@ -257,4 +270,7 @@ form.sign-up-form {
 .containerlogin.sign-up-mode form.sign-up-form {
   z-index: 2;
   opacity: 1;
+}
+input:focus {
+  background-color: yellow;
 }
