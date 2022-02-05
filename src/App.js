@@ -23,6 +23,8 @@ import { VisitingPlaces } from "./Pages/VisitingPlaces/visitingPlaces";
 import PrePlanning from "./Pages/PrePlanning/prePlanning";
 import Navbar from "./Pages/navbar/navbar";
 
+import AdminLogin from "./Pages/Admin/adminLogin";
+
 import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
 
 const App = () => {
@@ -50,6 +52,7 @@ const App = () => {
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
 
         <Route path="/personalityquiz" element={<PersonalityQuiz />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
       </Routes>
     </Router>
   );

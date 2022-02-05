@@ -9,38 +9,33 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Navbar from "../navbar/navbar";
+import AddIcon from "@material-ui/icons/Add";
+import SPINNER from "../../img/Spinner.gif";
 import "./buddy.scss";
-import { getBuddyByCity } from "../../actions/buddyAction";
-import {
-  getGuideAndBuddyByCity,
-  getGuideByCity,
-} from "../../actions/guideAction";
+import { getGuideAndBuddyByCity } from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
+import Toast from "../../Components/Toast/toast";
+
 export default function Buddy() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
 
   const { buddy } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   const { guide } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
-
-  // const [buddys, setBuddys] = useState([]);
-
-  console.log(guide);
-  console.log(buddy);
+  const result = useSelector((state) => state.getGuideAndBuddyByCityReducer);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (city === "") {
-      alert("Please enter city!");
+      Toast("", "", "", "Please enter city!!");
     } else {
-      dispatch(getGuideAndBuddyByCity(city));
-      // dispatch(getGuideByCity(city));
-      // if (buddy !== []) {
-      //   setBuddys(buddy);
-      // }
+      dispatch(getGuideAndBuddyByCity(city.toLowerCase()));
+      setCity("");
     }
   };
+
+  // Toast(result.message, result.error, "", "");
+
   return (
     <div
       className="buddy-body"
@@ -77,12 +72,16 @@ export default function Buddy() {
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="City"
+            value={city}
             inputProps={{ "aria-label": "search google maps" }}
             style={{ textTransform: "lowercase" }}
             onChange={(e) => setCity(e.target.value)}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
+          </IconButton>
+          <IconButton type="button" href="/createBuddy">
+            <AddIcon />
           </IconButton>
         </Paper>
       </div>
@@ -140,7 +139,10 @@ export default function Buddy() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" href={"/" + eachGuide.userId.guideId}>
+                  <Button
+                    size="small"
+                    href={"/profile/" + eachGuide.userId.guideId}
+                  >
                     VIEW PROFILE
                   </Button>
                 </CardActions>
@@ -165,6 +167,24 @@ export default function Buddy() {
           <div className="twelve">
             <h1>BUDDYS</h1>
           </div>
+          {buddy.length ? (
+            <div></div>
+          ) : (
+            <div
+              style={{
+                margin: "auto",
+                marginTop: "20%",
+              }}
+            >
+              <p style={{ textAlign: "center" }}>
+                {result.loading === true ? (
+                  <img src={SPINNER} width="80px" height="80px" />
+                ) : (
+                  "Please enter city you want to seach🔍."
+                )}
+              </p>
+            </div>
+          )}
           {buddy.map((eachBuddy) => (
             <div className="horizontal-card">
               <div className="horizontal-card-body" style={{ width: "100%" }}>
@@ -173,16 +193,12 @@ export default function Buddy() {
                     <p className="name" style={{ float: "left" }}>
                       <a
                         style={{ textDecoration: "none", color: "#3f51b5" }}
-                        href={"/" + eachBuddy.Host._id}
+                        href={"/profile/" + eachBuddy.Host._id}
                       >
                         {eachBuddy.Host.name}
                       </a>{" "}
-                      ({eachBuddy.dateOfArrival.substr(0, 2)}/
-                      {eachBuddy.dateOfArrival.substr(2, 2)}/
-                      {eachBuddy.dateOfArrival.substr(4, 4)} -{" "}
-                      {eachBuddy.dateOfDeparture.substr(0, 2)}/
-                      {eachBuddy.dateOfDeparture.substr(2, 2)}/
-                      {eachBuddy.dateOfDeparture.substr(4, 4)})
+                      ({eachBuddy.dateOfArrival} {" to "}
+                      {eachBuddy.dateOfDeparture})
                     </p>
                   </div>
                   <div style={{ float: "right" }}>
@@ -206,7 +222,7 @@ export default function Buddy() {
                         {" "}
                         <a
                           style={{ color: "#DD4AB", cursor: "pointer" }}
-                          href={"/" + groupMember._id}
+                          href={"/profile/" + groupMember._id}
                         >
                           {groupMember.username}
                         </a>
