@@ -115,11 +115,12 @@ export default function Post(props) {
           <Avatar
             aria-label="recipe"
             alt="Remy Sharp"
-            src={props.picUrl}
+            src={props.author.picUrl}
           ></Avatar>
         }
         action={<IconButton aria-label="settings"></IconButton>}
-        title={jwt_decode(localStorage.getItem("token")).name}
+        //title={jwt_decode(localStorage.getItem("token")).name}
+        title={props.author.name}
         subheader={props.location + " - " + date}
         titleTypographyProps={{
           variant: "h5",

@@ -23,7 +23,7 @@ export default function Home() {
       } else {
         if (decoded) {
           setUser(decoded);
-          fetch("http://localhost:3001/api/posts/getpostbyid", {
+          fetch("http://localhost:3001/api/posts/getallposts", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -32,8 +32,8 @@ export default function Home() {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data.posts);
-              setPosts(data.posts);
+              console.log(data.allPosts);
+              setPosts(data.allPosts.reverse());
             })
             .catch((error) => {
               console.log(error);
