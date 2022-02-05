@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "./prePlanning.scss";
 import Toast from "../../Components/Toast/toast";
 import { getPrePlanningSubLocation } from "../../actions/prePlanningPostAction";
+import AddIcon from "@material-ui/icons/Add";
+import SPINNER from "../../img/Spinner.gif";
 
 export default function PrePlanning() {
   const dispatch = useDispatch();
@@ -21,15 +23,11 @@ export default function PrePlanning() {
     if (subLocation === "") {
       Toast("", "", "", "Please enter sub-location!");
     } else {
-      dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase())).then(
-        () => {
-          Toast("", "", "Searching... ", "");
-        }
-      );
+      dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
     }
   };
-  Toast(prePlannings.message, prePlannings.error, "", "");
-  console.log(prePlannings);
+  // Toast(prePlannings.message, prePlannings.error, "", "");
+  // console.log(prePlannings);
   return (
     <div
       style={{
@@ -64,6 +62,7 @@ export default function PrePlanning() {
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
+            value={subLocation}
             placeholder="Sub-Location (e.g.: Red Fort)"
             inputProps={{ "aria-label": "search google maps" }}
             style={{ textTransform: "lowercase" }}
@@ -72,8 +71,10 @@ export default function PrePlanning() {
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
           </IconButton>
+          <IconButton type="button" href="/prePlanningPost">
+            <AddIcon />
+          </IconButton>
         </Paper>
-        <Button variant="contained">ADD PRE-PLANNING</Button>
       </div>
 
       <div
@@ -93,6 +94,24 @@ export default function PrePlanning() {
         <div className="twelve">
           <h1>PRE-PLANNING</h1>
         </div>
+        {prePlannings.prePlanning.length ? (
+          <div></div>
+        ) : (
+          <div
+            style={{
+              margin: "auto",
+              marginTop: "20%",
+            }}
+          >
+            <p style={{ textAlign: "center" }}>
+              {prePlannings.loading === true ? (
+                <img src={SPINNER} width="80px" height="80px" />
+              ) : (
+                "Please enter location inside city you want to seach🔍."
+              )}
+            </p>
+          </div>
+        )}
         {prePlannings.prePlanning.map((prePlanningItem) => (
           <div className="horizontal-card">
             <div

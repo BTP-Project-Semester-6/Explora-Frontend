@@ -11,6 +11,7 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { useEffect } from "react";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
@@ -36,6 +37,9 @@ const ExpandMore = styled((props) => {
 export default function Post(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [inp, setInp] = React.useState("");
+  const [liked, isLiked] = React.useState(false);
+
+  // console.log(props);
 
   const handleSubmit = () => {
     fetch("http://localhost:3001/api/posts/newcomment", {
@@ -59,9 +63,44 @@ export default function Post(props) {
       });
   };
 
+  const handleLike = () => {
+    if (!liked) {
+      fetch("http://localhost:3001/api/posts/likepost", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId: props._id,
+          userId: jwt_decode(localStorage.getItem("token"))._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          toast.success("Liked");
+          window.location.reload(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  useEffect(() => {
+    const userID = jwt_decode(localStorage.getItem("token"))._id;
+    props.likes.forEach((element) => {
+      if (element.userId === userID) {
+        isLiked(true);
+      }
+    });
+  }, []);
+  var str = Date(props.created_at);
+  let date = JSON.stringify(str);
+  date = date.slice(1, 4) + ", " + date.slice(4, 11);
+
+  console.log(date);
 
   return (
     <Card
@@ -76,12 +115,19 @@ export default function Post(props) {
           <Avatar
             aria-label="recipe"
             alt="Remy Sharp"
-            src="https://image.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg"
+            src={props.author.picUrl}
           ></Avatar>
         }
         action={<IconButton aria-label="settings"></IconButton>}
-        title={jwt_decode(localStorage.getItem("token")).name}
-        subheader={props.location + " - " + Date(props.created_at)}
+        //title={jwt_decode(localStorage.getItem("token")).name}
+        title={props.author.name}
+        subheader={props.location + " - " + date}
+        titleTypographyProps={{
+          variant: "h5",
+          fontWeight: 600,
+          color: "#fe7e6d",
+        }}
+        subheaderTypographyProps={{ variant: "h6", fontWeight: 600 }}
       />
       <CardMedia
         component="img"
@@ -89,7 +135,7 @@ export default function Post(props) {
           margin: "auto",
           borderRadius: "10px",
           height: "inherit",
-          width: "80%",
+          width: "600px",
         }}
         src={props.photoUrl}
       />
@@ -104,8 +150,13 @@ export default function Post(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          {!liked ? (
+            <FavoriteIcon onClick={handleLike} />
+          ) : (
+            <FavoriteIcon onClick={handleLike} style={{ color: "red" }} />
+          )}
         </IconButton>
+        {props.likes.length} Like
         <IconButton aria-label="share"></IconButton>
         <ExpandMore
           expand={expanded}
@@ -118,24 +169,28 @@ export default function Post(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="collepes-section">
-          <div style={{ width: "90%" }} className=" container row">
-            <div className="col-11">
-              <input
-                class="form-control input-field"
-                type="text"
-                placeholder="Comment Here..."
-                onChange={(e) => setInp(e.target.value)}
-                readonly
-              />
-            </div>
-            <div className="col-1">
-              <Button
-                variant="contained"
-                endIcon={<SendIcon />}
-                onClick={handleSubmit}
-              >
-                Send
-              </Button>
+          <div>
+            <div style={{ margin: "auto" }} className="row ">
+              <div className="col-8">
+                <input
+                  style={{ margin: "auto", width: "100%", float: "right" }}
+                  class="form-control input-field"
+                  type="text"
+                  placeholder="Comment Here..."
+                  onChange={(e) => setInp(e.target.value)}
+                  readonly
+                />
+              </div>
+              <div style={{ margin: "auto", float: "left" }} className="col-4">
+                <Button
+                  style={{ float: "left" }}
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                  onClick={handleSubmit}
+                >
+                  Send
+                </Button>
+              </div>
             </div>
           </div>
           <div className="show-comment-section">
