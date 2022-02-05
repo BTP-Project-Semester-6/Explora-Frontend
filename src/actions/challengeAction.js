@@ -71,3 +71,28 @@ export const createCityChallenge =
       console.log(e);
     }
   };
+
+export const getAllNotValidatedChallenges =
+  () => async (dispatch, getState) => {
+    try {
+      dispatch({ type: "GET_ALL_NOT_VALIDATED_REQUEST" });
+      // console.log(city + " action");
+      fetch("http://localhost:3001/api/challenge/getAdminAllNotValidCity", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({ type: "GET_ALL_NOT_VALIDATED_SUCCESS", payload: data });
+        })
+        .catch((error) => {
+          const message =
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message;
+          dispatch({ type: "GET_ALL_NOT_VALIDATED_FAIL", payload: message });
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
