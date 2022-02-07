@@ -41,6 +41,7 @@ const Profile = (props) => {
             .then((res) => res.json())
             .then((data) => {
               setPosts(data.posts);
+              console.log(data.posts);
             })
             .catch((error) => {
               console.log(error);
