@@ -78,10 +78,10 @@ export const quizQuestions = [
   {
     question: "How much do you value your personal space and independence?",
     options: [
-      "Always Avoids talking with people",
-      "May talk with people sometimes",
-      "Talk with people a lot of times",
-      "Can't stop talking the entire day!",
+      "Not at all",
+      "Somewhat",
+      "Do value it quite often",
+      "Value it the most!",
     ],
   },
   {
