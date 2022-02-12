@@ -26,6 +26,8 @@ import Navbar from "./Pages/navbar/navbar";
 import AdminLogin from "./Pages/Admin/adminLogin";
 
 import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
+import { Friends } from "./Pages/Friends/Friends";
+import { FriendRequests } from "./Pages/Friends/FriendsRequest";
 
 const App = () => {
   return (
@@ -53,6 +55,8 @@ const App = () => {
 
         <Route path="/personalityquiz" element={<PersonalityQuiz />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/friends" element={<Friends />} />
+        <Route path="/myfriends" element={<FriendRequests />} />
       </Routes>
     </Router>
   );
