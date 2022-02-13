@@ -41,10 +41,7 @@ const Profile = (props) => {
             .then((res) => res.json())
             .then((data) => {
               setPosts(data.posts);
-<<<<<<< HEAD
-=======
               console.log(data.posts);
->>>>>>> 88371d70c05241dfe5aa88f33f5e04c7b70fd783
             })
             .catch((error) => {
               console.log(error);
@@ -100,11 +97,6 @@ const Profile = (props) => {
           <Grid item xs={12} sm={6} md={8} lg={8} className="grid_content">
             <h3 className="post_heading">POSTS</h3>
             <Grid container>
-<<<<<<< HEAD
-              <div className="bodyPlace">
-                {posts
-                  // .sort((a, b) => Date(a.created_at) - Date(b.created_at))
-=======
               {/* <Grid item xs={12} sm={12} md={6} lg={6} className="post_grid">
                 <Post />
               </Grid> */}
@@ -112,7 +104,6 @@ const Profile = (props) => {
               <div className="bodyPlace">
                 {posts
                   .sort((a, b) => Date(a.created_at) - Date(b.created_at))
->>>>>>> 88371d70c05241dfe5aa88f33f5e04c7b70fd783
                   .map((data) => (
                     <div>
                       <Post {...data} style={{ width: "1000px" }} />
