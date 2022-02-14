@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
@@ -63,8 +62,6 @@ export default function PrePlanning() {
       })
         .then((res) => res.json())
         .then((data) => {
-          // toast.success("Liked");
-          // window.location.reload(false);
           dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
         })
         .catch((error) => {
@@ -81,8 +78,6 @@ export default function PrePlanning() {
       })
         .then((res) => res.json())
         .then((data) => {
-          // toast.success("Liked");
-          // window.location.reload(false);
           dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
         })
         .catch((error) => {
@@ -103,8 +98,6 @@ export default function PrePlanning() {
       })
         .then((res) => res.json())
         .then((data) => {
-          // toast.success("Liked");
-          // window.location.reload(false);
           dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
         })
         .catch((error) => {
@@ -124,8 +117,6 @@ export default function PrePlanning() {
       )
         .then((res) => res.json())
         .then((data) => {
-          // toast.success("Liked");
-          // window.location.reload(false);
           dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
         })
         .catch((error) => {
@@ -141,8 +132,7 @@ export default function PrePlanning() {
       dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
     }
   };
-  // Toast(prePlannings.message, prePlannings.error, "", "");
-  // console.log(prePlannings);
+
   return (
     <div
       style={{
