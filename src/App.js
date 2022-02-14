@@ -26,6 +26,7 @@ import Navbar from "./Pages/navbar/navbar";
 import AdminLogin from "./Pages/Admin/adminLogin";
 
 import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
+import LeaderBoard from "./Pages/LeaderBoard/leaderBoard";
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
 
         <Route path="/personalityquiz" element={<PersonalityQuiz />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/leaderboard" element={<LeaderBoard />} />
       </Routes>
     </Router>
   );
