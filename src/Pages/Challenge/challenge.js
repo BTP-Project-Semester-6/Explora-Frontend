@@ -24,6 +24,8 @@ export default function Challenge() {
     }
   };
 
+  const StartChallengeHandler = (challenge) => {};
+
   return (
     <div
       style={{
@@ -149,7 +151,10 @@ export default function Challenge() {
                 </div>
 
                 <div className="profile">
-                  <Button variant="contained" href="#contained-buttons">
+                  <Button
+                    variant="contained"
+                    onClick={(e) => StartChallengeHandler(challengeItem)}
+                  >
                     Start Challenge
                   </Button>
                 </div>
