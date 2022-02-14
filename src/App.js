@@ -27,6 +27,8 @@ import AdminLogin from "./Pages/Admin/adminLogin";
 
 import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
 
+import FriendSuggestion from "./Pages/FriendSuggestion/FriendSuggestion";
+
 const App = () => {
   return (
     <Router>
@@ -53,6 +55,8 @@ const App = () => {
 
         <Route path="/personalityquiz" element={<PersonalityQuiz />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
+
+        <Route path="/suggestfriends" element={<FriendSuggestion />} />
       </Routes>
     </Router>
   );
