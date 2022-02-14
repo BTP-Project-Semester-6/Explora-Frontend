@@ -10,6 +10,8 @@ import Toast from "../../Components/Toast/toast";
 import { getPrePlanningSubLocation } from "../../actions/prePlanningPostAction";
 import AddIcon from "@material-ui/icons/Add";
 import SPINNER from "../../img/Spinner.gif";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 export default function PrePlanning() {
   const dispatch = useDispatch();
@@ -137,6 +139,12 @@ export default function PrePlanning() {
               </div>
               <div>
                 <p className="order">{prePlanningItem.description}</p>
+                <IconButton>
+                  <ThumbUpIcon />
+                </IconButton>
+                <IconButton>
+                  <ThumbDownIcon />
+                </IconButton>
               </div>
             </div>
           </div>
