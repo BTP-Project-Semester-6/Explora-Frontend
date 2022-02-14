@@ -8,23 +8,55 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCityChallenge } from "../../actions/challengeAction";
 import AddIcon from "@material-ui/icons/Add";
 import "./challenge.scss";
+import { addTask } from "../../actions/task";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import Toast from "../../Components/Toast/toast";
 
 export default function Challenge() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [city, setCity] = useState("");
+  const [host, setHost] = useState("");
+  const [hostID, setHostID] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          console.log("DECODED");
+          console.log(decoded);
+          setHostID(decoded._id);
+          setHost(decoded.username);
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
   const challenges = useSelector((state) => state.getChallengeByCityReducer);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (city === "") {
-      alert("Please enter city!");
+      Toast("", "", "Please enter city!", "");
     } else {
       dispatch(getCityChallenge(city.toLocaleLowerCase()));
     }
   };
 
-  const StartChallengeHandler = (challenge) => {};
+  const StartChallengeHandler = (challenge) => {
+    dispatch(addTask(hostID, challenge._id));
+    navigate("/task");
+  };
 
   return (
     <div

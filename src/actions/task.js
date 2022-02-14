@@ -24,9 +24,9 @@ export const getTaskByID = (id) => async (dispatch, getState) => {
   }
 };
 
-export const addTask = (userId, challengeId) => {
+export const addTask = (userId, challengeId) => async (dispatch, getState) => {
   try {
-    dispatch({ type: "CREATE_TASK_REQUEST" });
+    dispatch({ type: "ADD_TASK_REQUEST", payload: challengeId });
     fetch("http://localhost:3001/api/task/addTask", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -37,7 +37,7 @@ export const addTask = (userId, challengeId) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: "CREATE_TASK_SUCCESS", payload: data });
+        dispatch({ type: "ADD_TASK_SUCCESS", payload: data });
         console.log(data);
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ export const addTask = (userId, challengeId) => {
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message;
-        dispatch({ type: "CREATE_TASK_FAIL", payload: message });
+        dispatch({ type: "ADD_TASK_FAIL", payload: message });
         console.log(error);
       });
   } catch (e) {
