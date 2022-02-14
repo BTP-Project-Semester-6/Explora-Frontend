@@ -11,7 +11,7 @@ import {
   getGuideByCityReducer,
   getGuideAndBuddyByCityReducer,
 } from "./guideReducer";
-import { getTaskByUSerIDReducer } from "./taskReducer";
+import { getTaskByUSerIDReducer, addTaskReducer } from "./taskReducer";
 import {
   createPrePlanningReducer,
   getPrePlanningBySubLocationReducer,
@@ -29,6 +29,7 @@ const reducers = combineReducers({
   getPrePlanningBySubLocationReducer,
   createGroupReducer,
   getAllNotValidatedChallengesReducer,
+  addTaskReducer,
 });
 
 export default reducers;
