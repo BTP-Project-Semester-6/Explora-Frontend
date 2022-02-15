@@ -1,23 +1,32 @@
 import { compose } from "redux";
 
-export const getTaskByID = (id) => async (dispatch, getState) => {
+export const getTaskByID = (id, userId) => async (dispatch, getState) => {
   try {
-    dispatch({ type: "GET_TASK_BY_USER_ID_REQUEST", payload: id });
-    fetch(`http://localhost:3001/api/task/getTaskByID/${id}`, {
-      method: "get",
+    dispatch({ type: "GET_TASK_BY_ID_REQUEST", payload: id });
+    fetch(`http://localhost:3001/api/task/getTaskByID`, {
+      method: "post",
+      body: JSON.stringify({
+        userId: userId,
+        taskId: id,
+      }),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        dispatch({ type: "GET_TASK_BY_USER_ID_SUCCESS", payload: data });
+        if (data.message === "Success") {
+          console.log(data);
+          dispatch({ type: "GET_TASK_BY_ID_SUCCESS", payload: data });
+        } else {
+          dispatch({ type: "GET_TASK_BY_ID_FAIL", payload: data.message });
+        }
       })
       .catch((error) => {
         const message =
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message;
-        dispatch({ type: "GET_TASK_BY_USER_ID_FAIL", payload: message });
+        dispatch({ type: "GET_TASK_BY_ID_FAIL", payload: message });
       });
   } catch (e) {
     console.log(e);
