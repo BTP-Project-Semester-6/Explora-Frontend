@@ -46,7 +46,7 @@ const App = () => {
         <Route path="/createBuddy" element={<CreatBuddy />} />
         <Route path="/prePlanningPost" element={<PrePlanningPost />} />
         <Route path="/prePlanning" element={<PrePlanning />} />
-        <Route path="/task" element={<Task />} />
+        <Route path="/task/:id" element={<Task />} />
         <Route path="/places" element={<VisitingPlaces />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
