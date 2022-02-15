@@ -55,7 +55,7 @@ export default function Challenge() {
 
   const StartChallengeHandler = (challenge) => {
     dispatch(addTask(hostID, challenge._id));
-    navigate("/task");
+    navigate("/home");
   };
 
   return (
