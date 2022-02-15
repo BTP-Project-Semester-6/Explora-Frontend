@@ -2,19 +2,19 @@ import Toast from "../Components/Toast/toast";
 
 export const getTaskByUSerIDReducer = (state = {}, action) => {
   switch (action.type) {
-    case "GET_TASK_BY_USER_ID_REQUEST":
-      return { loading: true, task: [] };
-    case "GET_GUIDE_BY_CITY_SUCCESS":
+    case "GET_TASK_BY_ID_REQUEST":
+      return { loading: true, task: {} };
+    case "GET_TASK_BY_ID_SUCCESS":
       return { loading: false, success: true, task: action.payload };
-    case "GET_GUIDE_BY_CITY_FAIL":
+    case "GET_TASK_BY_ID_FAIL":
       return {
         loading: false,
         success: false,
         error: action.payload,
-        task: [],
+        task: {},
       };
     default:
-      return { loading: false, task: [] };
+      return { loading: false, task: {} };
   }
 };
 
