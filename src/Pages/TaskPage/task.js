@@ -14,6 +14,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTaskByID } from "../../actions/task";
 import jwt_decode from "jwt-decode";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -61,10 +63,10 @@ export default function Task() {
   }, []);
 
   const { task } = useSelector((state) => state.getTaskByUSerIDReducer);
-  console.log(task.data);
+  // console.log(task.data);
+  // {task.data.challengeID.badge}
 
   //below code is for frontend
-
   return (
     <div className="task-body">
       {task.data === undefined ? (
@@ -92,74 +94,45 @@ export default function Task() {
                     fontWeight: "bold",
                   }}
                 >
-                  In publishing and graphic design, Lorem ipsum is a placeholder
-                  text commonly used to demonstrate the visual form of a
-                  document or a typeface without relying on meaningful content.
-                  Lorem ipsum may be used as a placeholder before the final copy
-                  is
+                  {task.data.challengeID.description}
                 </p>
               </div>
-              <img style={{ width: "50%" }} src="./Indore.svg"></img>
+              <img
+                style={{ width: "50%" }}
+                src={task.data.challengeID.badge}
+              ></img>
             </div>
             <div className="col-5  glass-task ">
               <FormGroup>
-                <FormControlLabel
-                  style={{ margin: "15px" }}
-                  control={<Checkbox defaultUnChecked />}
-                  label={
-                    <Typography variant="h4" color="textPrimary">
-                      Sarafa Market
-                    </Typography>
-                  }
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                />
-                <FormControlLabel
-                  style={{ margin: "15px" }}
-                  control={<Checkbox defaultUnChecked />}
-                  label={
-                    <Typography variant="h4" color="textPrimary">
-                      Chai sutta baar
-                    </Typography>
-                  }
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                />
-                <FormControlLabel
-                  style={{ margin: "15px" }}
-                  control={<Checkbox defaultUnChecked />}
-                  label={
-                    <Typography variant="h4" color="textPrimary">
-                      Chappan Dukan
-                    </Typography>
-                  }
-                  sx={{
-                    color: "blue",
-                    "& .MuiSvgIcon-root": { fontSize: 30 },
-                  }}
-                />
-                <FormControlLabel
-                  style={{ margin: "15px" }}
-                  control={<Checkbox defaultUnChecked />}
-                  icon={<LocationOnIcon />}
-                  checkedIcon={<LocationOnIcon />}
-                  label={
-                    <Typography variant="h4" color="textPrimary">
-                      C21 Mall
-                    </Typography>
-                  }
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                />
-                <FormControlLabel
-                  style={{ margin: "15px" }}
-                  control={<Checkbox defaultUnChecked />}
-                  label={
-                    <Typography variant="h4" color="textPrimary">
-                      Lotus Velly
-                    </Typography>
-                  }
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                />
+                {task.data.locations.map((location) => (
+                  <FormControlLabel
+                    style={{ margin: "15px" }}
+                    control={
+                      location.completed === true ? (
+                        <CheckCircleOutlineIcon style={{ color: "green" }} />
+                      ) : (
+                        <RadioButtonUncheckedIcon
+                          style={{ color: "	#87CEEB" }}
+                        />
+                      )
+                    }
+                    label={
+                      <Typography variant="h4" color="textPrimary">
+                        {" " + location.name}
+                      </Typography>
+                    }
+                    sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                  />
+                ))}
               </FormGroup>
-              <BorderLinearProgress variant="determinate" value={50} />
+              <BorderLinearProgress
+                variant="determinate"
+                value={
+                  (task.data.locations.filter((v) => v.completed).length *
+                    100) /
+                  task.data.locations.length
+                }
+              />
             </div>
           </div>
         </div>
