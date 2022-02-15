@@ -12,10 +12,11 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTaskByID } from "../../actions/task";
+import { getTaskByID, validateLocationTask } from "../../actions/task";
 import jwt_decode from "jwt-decode";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import IconButton from "@mui/material/IconButton";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -65,7 +66,10 @@ export default function Task() {
   const { task } = useSelector((state) => state.getTaskByUSerIDReducer);
   // console.log(task.data);
   // {task.data.challengeID.badge}
-
+  const checkLocationHandler = (loc) => {
+    dispatch(validateLocationTask(hostID, task, loc));
+    navigate("/home");
+  };
   //below code is for frontend
   return (
     <div className="task-body">
@@ -109,16 +113,39 @@ export default function Task() {
                     style={{ margin: "15px" }}
                     control={
                       location.completed === true ? (
-                        <CheckCircleOutlineIcon style={{ color: "green" }} />
+                        <IconButton
+                          color="primary"
+                          aria-label="upload picture"
+                          component="span"
+                        >
+                          <CheckCircleOutlineIcon style={{ color: "green" }} />
+                        </IconButton>
                       ) : (
-                        <RadioButtonUncheckedIcon
-                          style={{ color: "	#87CEEB" }}
-                        />
+                        <IconButton
+                          color="primary"
+                          aria-label="upload picture"
+                          component="span"
+                          onClick={(e) => checkLocationHandler(location)}
+                        >
+                          <RadioButtonUncheckedIcon
+                          // style={{ color: "	#87CEEB" }}
+                          />
+                        </IconButton>
                       )
                     }
                     label={
                       <Typography variant="h4" color="textPrimary">
-                        {" " + location.name}
+                        <a
+                          href={
+                            "https://maps.google.com?q=" +
+                            location.lat +
+                            "," +
+                            location.lng
+                          }
+                          target="_blank"
+                        >
+                          {location.name}
+                        </a>{" "}
                       </Typography>
                     }
                     sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
