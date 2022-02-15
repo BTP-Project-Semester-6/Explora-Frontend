@@ -1,4 +1,6 @@
 import { compose } from "redux";
+import { geolocated } from "react-geolocated";
+import { getPreciseDistance } from "geolib";
 
 export const getTaskByID = (id, userId) => async (dispatch, getState) => {
   try {
@@ -61,3 +63,67 @@ export const addTask = (userId, challengeId) => async (dispatch, getState) => {
     console.log(e);
   }
 };
+
+export const validateLocationTask =
+  (hostID, task, loc) => async (dispatch, getState) => {
+    console.log(task);
+    dispatch({
+      type: "ADD_SUB_LOCATION_TO_TASK_REQUEST",
+      payload: loc,
+    });
+    const showPosition = (data) => {
+      console.log(data.coords.latitude + " " + data.coords.longitude);
+      const dis = getPreciseDistance(
+        { latitude: data.coords.latitude, longitude: data.coords.longitude },
+        { latitude: loc.lat, longitude: loc.lng }
+      );
+      if (dis / 1000 < 5000) {
+        try {
+          fetch("http://localhost:3001/api/task/completeSubLocationInTask", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId: hostID,
+              taskId: task.data._id,
+              subLocation: loc.name,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              dispatch({
+                type: "ADD_SUB_LOCATION_TO_TASK_SUCCESS",
+                payload: data,
+              });
+              console.log(data);
+            })
+            .catch((error) => {
+              const message =
+                error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message;
+              dispatch({
+                type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
+                payload: message,
+              });
+              console.log(error);
+            });
+        } catch (e) {
+          dispatch({ type: "ADD_SUB_LOCATION_TO_TASK_FAIL", payload: e });
+          console.log(e);
+        }
+      } else {
+        dispatch({
+          type: "ADD_SUB_LOCATION_TO_TASK_NOT_IN_PLACE",
+          payload: { message: "Not in correct place" },
+        });
+      }
+    };
+
+    const showError = (err) => {
+      dispatch({ type: "ADD_SUB_LOCATION_TO_TASK_FAIL", payload: err.message });
+      console.log(err.message);
+    };
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    }
+  };
