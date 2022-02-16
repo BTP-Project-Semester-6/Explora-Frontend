@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
@@ -10,14 +9,121 @@ import Toast from "../../Components/Toast/toast";
 import { getPrePlanningSubLocation } from "../../actions/prePlanningPostAction";
 import AddIcon from "@material-ui/icons/Add";
 import SPINNER from "../../img/Spinner.gif";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export default function PrePlanning() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [subLocation, setsubLocation] = useState("");
+  const [helpful, setHelpful] = useState(false);
+  const [notHelpful, setNotHelpful] = useState(false);
+  const [host, setHost] = useState("");
+  const [hostID, setHostID] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          console.log("DECODED");
+          console.log(decoded);
+          setHostID(decoded._id);
+          setHost(decoded.username);
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
   const prePlannings = useSelector(
     (state) => state.getPrePlanningBySubLocationReducer
   );
+
+  const handleHelpful = (item) => {
+    console.log(item);
+    if (!item.helpful.some((i) => i.userId === hostID)) {
+      fetch("http://localhost:3001/api/prePlanning/helpfulPrePlanning", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId: item._id,
+          userId: jwt_decode(localStorage.getItem("token"))._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      fetch("http://localhost:3001/api/prePlanning/removeHelpfulPrePlanning", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId: item._id,
+          userId: jwt_decode(localStorage.getItem("token"))._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const handleNotHelpful = (item) => {
+    if (!item.notHelpful.some((i) => i.userId === hostID)) {
+      fetch("http://localhost:3001/api/prePlanning/notHelpfulPrePlanning", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId: item._id,
+          userId: jwt_decode(localStorage.getItem("token"))._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      fetch(
+        "http://localhost:3001/api/prePlanning/removeNotHelpfulPrePlanning",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            postId: item._id,
+            userId: jwt_decode(localStorage.getItem("token"))._id,
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (subLocation === "") {
@@ -26,8 +132,7 @@ export default function PrePlanning() {
       dispatch(getPrePlanningSubLocation(subLocation.toLocaleLowerCase()));
     }
   };
-  // Toast(prePlannings.message, prePlannings.error, "", "");
-  // console.log(prePlannings);
+
   return (
     <div
       style={{
@@ -137,6 +242,36 @@ export default function PrePlanning() {
               </div>
               <div>
                 <p className="order">{prePlanningItem.description}</p>
+                <IconButton>
+                  {prePlanningItem.helpful.some(
+                    (item) => item.userId === hostID
+                  ) ? (
+                    <ThumbUpIcon
+                      onClick={(e) => handleHelpful(prePlanningItem)}
+                      style={{ color: "green" }}
+                    />
+                  ) : (
+                    <ThumbUpIcon
+                      onClick={(e) => handleHelpful(prePlanningItem)}
+                    />
+                  )}
+                  {prePlanningItem.helpful.length}
+                </IconButton>
+                <IconButton>
+                  {prePlanningItem.notHelpful.some(
+                    (item) => item.userId === hostID
+                  ) ? (
+                    <ThumbDownIcon
+                      onClick={(e) => handleNotHelpful(prePlanningItem)}
+                      style={{ color: "red" }}
+                    />
+                  ) : (
+                    <ThumbDownIcon
+                      onClick={(e) => handleNotHelpful(prePlanningItem)}
+                    />
+                  )}
+                  {prePlanningItem.notHelpful.length}
+                </IconButton>
               </div>
             </div>
           </div>
