@@ -26,8 +26,12 @@ import Navbar from "./Pages/navbar/navbar";
 import AdminLogin from "./Pages/Admin/adminLogin";
 
 import PersonalityQuiz from "./Pages/PersonalityQuiz/PersonalityQuiz";
+
 import { Friends } from "./Pages/Friends/Friends";
 import { FriendRequests } from "./Pages/Friends/FriendsRequest";
+import LeaderBoard from "./Pages/LeaderBoard/leaderBoard";
+import FriendSuggestion from "./Pages/FriendSuggestion/FriendSuggestion";
+
 
 const App = () => {
   return (
@@ -48,7 +52,7 @@ const App = () => {
         <Route path="/createBuddy" element={<CreatBuddy />} />
         <Route path="/prePlanningPost" element={<PrePlanningPost />} />
         <Route path="/prePlanning" element={<PrePlanning />} />
-        <Route path="/task" element={<Task />} />
+        <Route path="/task/:id" element={<Task />} />
         <Route path="/places" element={<VisitingPlaces />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/guideprofile/:id" element={<GuideProfile />} />
@@ -57,6 +61,9 @@ const App = () => {
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/myfriends" element={<FriendRequests />} />
+        <Route path="/suggestfriends" element={<FriendSuggestion />} />
+        <Route path="/leaderboard" element={<LeaderBoard />} />
+
       </Routes>
     </Router>
   );
