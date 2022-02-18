@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -15,14 +15,19 @@ import "./buddy.scss";
 import { getGuideAndBuddyByCity } from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "../../Components/Toast/toast";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export default function Buddy() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
+  const [user, setUser] = useState({});
 
   const { buddy } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   const { guide } = useSelector((state) => state.getGuideAndBuddyByCityReducer);
   const result = useSelector((state) => state.getGuideAndBuddyByCityReducer);
+
+  const navigate = useNavigate();
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -33,6 +38,47 @@ export default function Buddy() {
       setCity("");
     }
   };
+
+  const addRequestHandler = (groupId) => {
+    console.log(user);
+    fetch("http://localhost:3001/api/buddy/addbuddyrequest", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: user._id,
+        groupId: groupId,
+        username: user.username,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        if (result.message === "Success") {
+          Toast(result.message, "", "", "");
+        } else {
+          Toast("", result.error, "", "");
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") !== null) {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        console.log(decoded);
+        setUser(decoded);
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
   // Toast(result.message, result.error, "", "");
 
@@ -187,6 +233,7 @@ export default function Buddy() {
           )}
           {buddy.map((eachBuddy) => (
             <div className="horizontal-card">
+              {console.log(eachBuddy)}
               <div className="horizontal-card-body" style={{ width: "100%" }}>
                 <div className="orders" style={{ width: "100%" }}>
                   <div>
@@ -233,7 +280,13 @@ export default function Buddy() {
                 </div>
 
                 <div className="profile">
-                  <Button variant="contained" href="#contained-buttons">
+                  <Button
+                    variant="contained"
+                    href="#contained-buttons"
+                    onClick={() => {
+                      addRequestHandler(eachBuddy._id);
+                    }}
+                  >
                     Join Group
                   </Button>
                 </div>

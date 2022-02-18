@@ -23,7 +23,7 @@ const Profile = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       navigate("/login");
-    } else if (localStorage.getItem("token") != "null") {
+    } else if (localStorage.getItem("token") != null) {
       const decoded = jwt_decode(localStorage.getItem("token"));
       if (decoded.exp < Date.now() / 1000) {
         localStorage.removeItem("token");
