@@ -1,63 +1,141 @@
-.profile_page {
-  margin: 40px 15px;
-  max-width: 1080px;
-  margin-left: auto;
-  margin-right: auto;
-}
+// .profile_page {
+// }
 
-.all_profile_content {
-  background: white;
-  max-width: 1024px;
-  background: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.3)
-  );
-  border-radius: 15px;
-  margin: 10px;
-}
+// .all_profile_content {
+//   background: white;
+//   background: linear-gradient(
+//     to right bottom,
+//     rgba(255, 255, 255, 0.7),
+//     rgba(255, 255, 255, 0.3)
+//   );
+//   border-radius: 15px;
+// }
 
-.bg_img {
-  border-radius: 15px 15px 0px 0px;
+// .bg_img {
+//   border-radius: 15px 15px 0px 0px;
+//   width: 100%;
+//   height: 250px;
+// }
+
+// .basic_detail {
+//   padding: 20px;
+//   background: black;
+// }
+
+// .grid_content {
+//   padding: 20px;
+// }
+
+// .profile_pic {
+//   width: 200px;
+//   height: 200px;
+//   border-radius: 50%;
+//   margin-top: -100px;
+//   border: 4px solid white;
+// }
+
+// .img_container {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .detail_container {
+//   text-align: center;
+//   margin: 10px;
+// }
+
+// .subdetail_container {
+//   text-align: left;
+//   margin: 20px 10px 20px;
+// }
+
+// .post_grid {
+//   padding: 5px;
+// }
+
+// .post_heading {
+//   text-align: center;
+// }
+.PostBoxProfile {
+  overflow: scroll;
+  height: 100vh;
+}
+.PostBoxProfile::-webkit-scrollbar {
+  display: none;
+}
+.ProfilePage {
+  overflow: hidden;
+  height: 140vh;
+}
+.All_profile_content {
+  width: 90%;
+  margin: auto;
+  margin-top: 25px;
+}
+.Bg_img {
   width: 100%;
   height: 250px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
 }
 
-.basic_detail {
-  padding: 20px;
+.userStateBox {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 100%;
+  height: 80px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 10px;
+}
+.stateOuterBox {
+  text-align: center;
+  margin-top: 18px;
+}
+.innerBoxText {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+.innerBoxNo {
+  font-weight: bolder;
+  font-size: 23px;
+  color: #ff6363;
 }
 
-.grid_content {
-  padding: 20px;
-}
+.BadgesBox {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 10px;
 
-.profile_pic {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  margin-top: -100px;
-  border: 4px solid white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
-
-.img_container {
+.badgesImges {
+  height: 250px;
+}
+.badgesArray {
+  overflow: scroll;
+  height: 100vh;
+}
+.badgesArray::-webkit-scrollbar {
+  display: none;
+}
+.badgesCountText {
+  font-weight: bolder;
+  font-size: 20px;
+  margin-top: 20px;
+  float: left;
+}
+.badgesCount {
+  margin-top: 20px;
+  font-weight: bolder;
+  font-size: 23px;
+  color: #ff6363;
+}
+.badgescountshow {
   display: flex;
   justify-content: center;
-}
-
-.detail_container {
-  text-align: center;
-  margin: 10px;
-}
-
-.subdetail_container {
-  text-align: left;
-  margin: 20px 10px 20px;
-}
-
-.post_grid {
-  padding: 5px;
-}
-
-.post_heading {
-  text-align: center;
 }
