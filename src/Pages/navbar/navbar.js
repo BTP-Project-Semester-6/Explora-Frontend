@@ -134,6 +134,8 @@ export default function ButtonAppBar() {
       navigate("/places");
     } else if (text == "Find Friends") {
       navigate("/friends");
+    } else if (text == "Leaderboard") {
+      navigate("/leaderboard");
     }
   }
 
@@ -192,6 +194,7 @@ export default function ButtonAppBar() {
                 {[
                   "Profile",
                   "Home",
+                  "Leaderboard",
                   "Challenges",
                   "Buddies",
                   "PrePlanning",
@@ -209,6 +212,9 @@ export default function ButtonAppBar() {
                         <PersonPinIcon style={{ fontSize: "20px" }} />
                       )}
                       {text == "Home" && (
+                        <HomeIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Leaderboard" && (
                         <HomeIcon style={{ fontSize: "20px" }} />
                       )}
                       {text == "Logout" && (
