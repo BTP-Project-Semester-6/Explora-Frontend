@@ -68,67 +68,103 @@ const Profile = (props) => {
   return (
     <div className="ProfilePage">
       <div className="All_profile_content">
-        <img src={profile_bg} className="Bg_img"></img>
+        <img
+          src="https://img.freepik.com/free-vector/travel-tourism-illustration-with-resort-sightseeing-elements_1284-30189.jpg?w=1060"
+          className="Bg_img"
+        ></img>
         <div className="row">
           <div className="col-3">
-            <div className="img_container">
-              <img src={profile.picUrl} className="profile_pic" />
-            </div>
+            <div className="UserDetailOuterBox">
+              <div className="img_container">
+                <img src={profile.picUrl} className="profile_pic" />
+              </div>
 
-            <div className="detail_container">
-              <h4>{profile.name}</h4>
-              <h6>@{profile.username}</h6>
-              <div className="subdetail_container">
-                <h3>BASIC DETAILS</h3>
-                <br></br>
-                <h6>Age: {profile.age}</h6>
-                <h6>Gender: {profile.gender}</h6>
-                <h6>Email: {profile.email}</h6>
-                <h6>Instagram: -NAN-</h6>
-                <h6>Telegram: -NAN-</h6>
-                <br></br>
-                {/* <h3>STATS</h3>
-              <br></br>
-              <h6>{profile.friends.length} Friends</h6>
-              <h6>{profile.badges.length} Challenges Completed</h6>
-              <h6>{profile.travelHistory.length} Places Travelled</h6> */}
+              <div className="UserDetailBox">
+                <div className="UserProfileName">{profile.name}</div>
+                <div className="UserProfileUsername">@{profile.username}</div>
+                <div className="UserSubdetailBox">
+                  <hr></hr>
+                  <div className="BasicDetailFiels ">
+                    <span className="BasicDetailFiels1 col">Age : </span>
+                    <span className="BasicDetailFiels2 col">{profile.age}</span>
+                  </div>
+                  <div className="BasicDetailFiels ">
+                    <span className="BasicDetailFiels1 col">Gender : </span>
+                    <span className="BasicDetailFiels2 col">
+                      {profile.gender}
+                    </span>
+                  </div>
+                  <div className="BasicDetailFiels ">
+                    <span className="BasicDetailFiels1 col">Email : </span>
+                    <span className="BasicDetailFiels2 col">
+                      {profile.email}
+                    </span>
+                  </div>
+                  <div className="BasicDetailFiels ">
+                    <span className="BasicDetailFiels1 col">Instagram : </span>
+                    <span className="BasicDetailFiels2 col">NaN</span>
+                  </div>
+                  <div className="BasicDetailFiels ">
+                    <span className="BasicDetailFiels1 col">Telegram : </span>
+                    <span className="BasicDetailFiels2 col">NaN</span>
+                  </div>
+                </div>
+                {/* <h4>{profile.name}</h4>
+                <h6>@{profile.username}</h6>
+                <div className="UserSubdetailBox">
+                  <h3>BASIC DETAILS</h3>
+                  <br></br>
+                  <h6>Age: {profile.age}</h6>
+                  <h6>Gender: {profile.gender}</h6>
+                  <h6>Email: {profile.email}</h6>
+                  <h6>Instagram: -NAN-</h6>
+                  <h6>Telegram: -NAN-</h6>
+                  <br></br>
+                  <h3>STATS</h3>
+                  <br></br>
+                  <h6>{profile.friends.length} Friends</h6>
+                  <h6>{profile.badges.length} Challenges Completed</h6>
+                  <h6>{profile.travelHistory.length} Places Travelled</h6>
+                </div> */}
               </div>
             </div>
           </div>
 
           <div className="col-6">
-            <div className="userStateBox">
-              <div className="row">
-                <div className="col-4">
-                  <div className="stateOuterBox">
-                    <div className="innerBoxNo">{profile.friends.length}</div>
-                    <div className="innerBoxText">Friends</div>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="stateOuterBox">
-                    <div className="innerBoxNo">{posts.length}</div>
-                    <div className="innerBoxText">Posts</div>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="stateOuterBox">
-                    <div className="innerBoxNo">
-                      {profile.travelHistory.length}
+            <div className="MiddleBox">
+              <div className="userStateBox">
+                <div className="row">
+                  <div className="col-4">
+                    <div className="stateOuterBox">
+                      <div className="innerBoxNo">{profile.friends.length}</div>
+                      <div className="innerBoxText">Friends</div>
                     </div>
-                    <div className="innerBoxText">Places Visited</div>
+                  </div>
+                  <div className="col-4">
+                    <div className="stateOuterBox">
+                      <div className="innerBoxNo">{posts.length}</div>
+                      <div className="innerBoxText">Posts</div>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div className="stateOuterBox">
+                      <div className="innerBoxNo">
+                        {profile.travelHistory.length}
+                      </div>
+                      <div className="innerBoxText">Places Visited</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="PostBoxProfile">
-              {posts
-                .sort((a, b) => Date(a.created_at) - Date(b.created_at))
-                .map((data) => (
-                  <div>
-                    <Post {...data} style={{ width: "1000px" }} />
-                  </div>
-                ))}
+              <div className="PostBoxProfile">
+                {posts
+                  .sort((a, b) => Date(a.created_at) - Date(b.created_at))
+                  .map((data) => (
+                    <div>
+                      <Post {...data} style={{ width: "1000px" }} />
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
           <div className="col-3">
@@ -139,6 +175,21 @@ const Profile = (props) => {
               </div>
 
               <div className="badgesArray">
+                <img
+                  className="badgesImges"
+                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
+                  alt=""
+                />
+                <img
+                  className="badgesImges"
+                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
+                  alt=""
+                />
+                <img
+                  className="badgesImges"
+                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
+                  alt=""
+                />
                 <img
                   className="badgesImges"
                   src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
