@@ -128,7 +128,9 @@ function LeftSideBar() {
             <Button color="success" variant="text">
               Option 3
             </Button>
-          </div> */}
+          </div> *
+          link toprofile  is still remians/
+          }
         </div>
         {/* <hr style={{ margin: "10px" }}></hr> */}
         <div
@@ -153,6 +155,7 @@ function LeftSideBar() {
                 src={users[0] == null ? "#" : `${users[0].picUrl}`}
                 alt=""
               />
+              
               <div>{users[0] == null ? "#" : users[0].name}</div>
             </div>
             <div className="row">
