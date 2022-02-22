@@ -124,7 +124,7 @@ export const VisitingPlaces = () => {
               <MenuItem value={"Coffee;"}>Food Court</MenuItem>
               <MenuItem value={"Monuments;"}>Monuments</MenuItem>
               <MenuItem value={"Mall;"}>Mall</MenuItem>
-              <MenuItem value={"Garder;"}>Garden </MenuItem>
+              <MenuItem value={"Garden;"}>Garden </MenuItem>
             </Select>
           </FormControl>
         </div>
