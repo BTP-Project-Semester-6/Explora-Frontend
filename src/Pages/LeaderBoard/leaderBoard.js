@@ -60,52 +60,59 @@ const LeaderBoard = () => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="brandimgbox col-2">
-          <img className="brandimg " src={`${steps}`} alt="" srcset="" />
-        </div>
-        <div className="lbbrand col-10">Explora Rank</div>
-      </div>
-      <hr></hr>
-      <div className="row">
-        <div className="col-4">
-          <div className="wcar">
-            <div className="wrankbadge">
-              <img className="wbadge" src={`${rankone}`} />
+      {users.length === 0 ? (
+        <div>loading</div>
+      ) : (
+        <div>
+          <div className="row">
+            <div className="brandimgbox col-2">
+              <img className="brandimg " src={`${steps}`} alt="" srcset="" />
             </div>
-            <div className="wpoints"></div>
-            <div className="wimgbox">
-              <img className="wimg" src={`${users[0].picUrl}`} alt="" />
-            </div>
-            <div className="row">
-              <div className=" rankCard col-2">
-                <div className="score">Score</div>
-                <div className="wrank">{users[0].count}</div>
-              </div>
+            <div className="lbbrand col-10">Explora Rank</div>
+          </div>
+          <hr></hr>
+          <div className="row">
+            <div className="col-4">
+              <div className="wcar">
+                <div className="wrankbadge">
+                  <img className="wbadge" src={`${rankone}`} />
+                </div>
+                <div className="wpoints"></div>
+                <div className="wimgbox">
+                  <img className="wimg" src={`${users[0].picUrl}`} alt="" />
+                </div>
+                <div className="row">
+                  <div className=" rankCard col-2">
+                    <div className="score">Score</div>
+                    <div className="wrank">{users[0].count}</div>
+                  </div>
 
-              <div className="winfo col-7">
-                <div className="wname ">{users[0].name}</div>
-                <div className="wusername ">{users[0].username}</div>
+                  <div className="winfo col-7">
+                    <div className="wname ">{users[0].name}</div>
+                    <div className="wusername ">{users[0].username}</div>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="col-8">
+              {users.map((user, index) => (
+                <div className="lbusers row ">
+                  <div className="lbuserrank col-1">{index + 1}</div>
+                  <div className="lbuserimgbox col-2">
+                    <img className="lbuserimg" src={`${user.picUrl}`}></img>
+                  </div>
+                  <div className="lbnamebox col-6">
+                    <div className="lbusername">{user.username}</div>
+                    <div className="lbname">{user.name}</div>
+                  </div>
+                  <div className="lbuserpoints col-3">{user.count}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="col-8">
-          {users.map((user, index) => (
-            <div className="lbusers row ">
-              <div className="lbuserrank col-1">{index + 1}</div>
-              <div className="lbuserimgbox col-2">
-                <img className="lbuserimg" src={`${user.picUrl}`}></img>
-              </div>
-              <div className="lbnamebox col-6">
-                <div className="lbusername">{user.username}</div>
-                <div className="lbname">{user.name}</div>
-              </div>
-              <div className="lbuserpoints col-3">{user.count}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+      )}
+      {/*  */}
     </div>
   );
 };
