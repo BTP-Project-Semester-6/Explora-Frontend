@@ -12,9 +12,63 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import crownimg from "../leftSidebar/Crowen.png";
+import React, { useState, useEffect } from "react";
+
+import jwt_decode from "jwt-decode";
 
 function LeftSideBar() {
   const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          // setUser(decoded);
+          fetch("http://localhost:3001/api/user/getAllUsers", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: decoded._id,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data.users);
+              // setPosts(data.allPosts.reverse());
+              data.users.map((user) => {
+                let like = 0;
+                let comment = 0;
+                user.posts.map((post) => {
+                  like += post.postId.likes.length;
+                  comment += post.postId.comments.length;
+                });
+
+                let count = like + comment + user.badges;
+                user.count = count;
+              });
+              data.users.sort((a, b) => {
+                return b.count - a.count;
+              });
+              console.log(data.users);
+
+              setUsers(data.users);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div>
@@ -74,7 +128,9 @@ function LeftSideBar() {
             <Button color="success" variant="text">
               Option 3
             </Button>
-          </div> */}
+          </div> *
+          link toprofile  is still remians/
+          }
         </div>
         {/* <hr style={{ margin: "10px" }}></hr> */}
         <div
@@ -88,67 +144,42 @@ function LeftSideBar() {
             background: "white",
           }}
         >
-          <div className="heading-sug" style={{ fontSize: "20px" }}>
-            <b>Friends</b>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              minHeight: "50px",
-              marginBottom: "10px",
-              padding: "auto",
-              display: "flex",
-            }}
-          >
-            <Paper
-              component="form"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                width: 300,
-                height: 40,
-              }}
-              style={{
-                margin: "auto",
-              }}
-            >
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Search"
-                inputProps={{ "aria-label": "search google maps" }}
+          <div className="LeaderboardTx">Explora Rank</div>
+          <div>
+            <div className="Crowen col">
+              <img className="CrowenImg row" src={`${crownimg}`} alt="" />
+
+              <img
+                className="RankOneImg row"
+                style={{ margin: "0px" }}
+                src={users[0] == null ? "#" : `${users[0].picUrl}`}
+                alt=""
               />
-              <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
-            </Paper>
-          </div>
-          <div
-            className="leftfriends"
-            style={{
-              paddingTop: "20px",
-              paddingBottom: "20px",
-              overflowY: "auto",
-              height: "250px",
-            }}
-          >
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
-            <Suggestion />
+              
+              <div>{users[0] == null ? "#" : users[0].name}</div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <div className="RankTwo">
+                  <img
+                    className="RankTwoImg"
+                    src={users[1] == null ? "#" : `${users[1].picUrl}`}
+                    alt=""
+                  />
+                  <div>{users[1] == null ? "#" : users[1].name}</div>
+                </div>
+              </div>
+              <div className="col-6">
+                <div className="RankThree">
+                  <img
+                    className="RankThreeImg"
+                    src={users[2] == null ? "#" : `${users[2].picUrl}`}
+                    alt=""
+                  />
+                  <div>{users[2] == null ? "#" : users[2].name}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
