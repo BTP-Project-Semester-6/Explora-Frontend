@@ -1,8 +1,42 @@
 import "./rightSideBar.css";
 import Task from "../task/task";
 import Suggestion from "../showFriend/suggestion";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import jwt_decode from "jwt-decode";
 
 function RightSideBar() {
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          // setUser(decoded);
+          fetch(`http://localhost:3001/api/task/getStatusTask/${decoded._id}`, {
+            method: "get",
+            headers: { "Content-Type": "application/json" },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  }, []);
   return (
     <div>
       <div>
