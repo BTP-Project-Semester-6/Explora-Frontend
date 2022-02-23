@@ -77,7 +77,7 @@ export const validateLocationTask =
         { latitude: data.coords.latitude, longitude: data.coords.longitude },
         { latitude: loc.lat, longitude: loc.lng }
       );
-      if (dis / 1000 < 5000) {
+      if (dis < 5000) {
         try {
           fetch("http://localhost:3001/api/task/completeSubLocationInTask", {
             method: "post",
