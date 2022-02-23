@@ -1,6 +1,4 @@
 import "./task.css";
-import Button from "@mui/material/Button";
-import ProgressBar from "../progressBar/progressBar";
 import { styled } from "@mui/material/styles";
 import LinearProgress from "@mui/material/LinearProgress";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
