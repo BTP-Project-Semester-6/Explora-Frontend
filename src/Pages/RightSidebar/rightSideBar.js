@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 
 function RightSideBar() {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
+  const [task, setTask] = useState([]);
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       navigate("/login");
@@ -27,6 +27,7 @@ function RightSideBar() {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
+              setTask(data);
             })
             .catch((error) => {
               console.log(error);
@@ -65,14 +66,9 @@ function RightSideBar() {
                 height: "230px",
               }}
             >
-              <Task></Task>
-              <Task></Task>
-              <Task></Task>
-              <Task></Task>
-              <Task></Task>
-              <Task></Task>
-              <Task></Task>
-              <Task></Task>
+              {task.map((data) => (
+                <Task data={data}></Task>
+              ))}
             </div>
           </div>
           {/* <hr style={{ margin: "10px" }}></hr> */}
