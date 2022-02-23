@@ -22,20 +22,27 @@ export const addTaskReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TASK_REQUEST":
       Toast("", "", "Request Sent", "");
-      return { loading: true, task: [] };
+      return { loading: true, task: {}, data: false };
     case "ADD_TASK_SUCCESS":
       Toast("Challenge Activation Success", "", "", "");
-      return { loading: false, success: true, task: action.payload };
+      console.log(action.payload);
+      return {
+        loading: false,
+        success: true,
+        task: action.payload,
+        data: true,
+      };
     case "ADD_TASK_FAIL":
       Toast("", "Challenge Activation Fail", "", "");
       return {
         loading: false,
         success: false,
         error: action.payload,
-        task: [],
+        task: {},
+        data: false,
       };
     default:
-      return { loading: false, task: [] };
+      return { loading: false, task: {}, data: false };
   }
 };
 
