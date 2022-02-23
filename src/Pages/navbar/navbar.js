@@ -38,7 +38,7 @@ import jwt_decode from "jwt-decode";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-
+import GroupIcon from "@mui/icons-material/Group";
 const drawerWidth = 240;
 
 const styles = (theme) => ({
@@ -132,6 +132,10 @@ export default function ButtonAppBar() {
       navigate("/register");
     } else if (text == "Visit Nearby") {
       navigate("/places");
+    } else if (text == "Find Friends") {
+      navigate("/friends");
+    } else if (text == "Leaderboard") {
+      navigate("/leaderboard");
     }
   }
 
@@ -190,6 +194,7 @@ export default function ButtonAppBar() {
                 {[
                   "Profile",
                   "Home",
+                  "Leaderboard",
                   "Challenges",
                   "Buddies",
                   "PrePlanning",
@@ -207,6 +212,9 @@ export default function ButtonAppBar() {
                         <PersonPinIcon style={{ fontSize: "20px" }} />
                       )}
                       {text == "Home" && (
+                        <HomeIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Leaderboard" && (
                         <HomeIcon style={{ fontSize: "20px" }} />
                       )}
                       {text == "Logout" && (
@@ -353,6 +361,15 @@ export default function ButtonAppBar() {
               <HomeIcon
                 style={{ color: "black", fontSize: "30px", cursor: "pointer" }}
                 onClick={(e) => navigate("/home")}
+              />
+              <GroupIcon
+                style={{
+                  color: "black",
+                  fontSize: "30px",
+                  marginLeft: "20px",
+                  cursor: "pointer",
+                }}
+                onClick={(e) => navigate(`/myfriends`)}
               />
               <PersonPinIcon
                 style={{
