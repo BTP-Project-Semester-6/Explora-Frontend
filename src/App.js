@@ -32,7 +32,6 @@ import { FriendRequests } from "./Pages/Friends/FriendsRequest";
 import LeaderBoard from "./Pages/LeaderBoard/leaderBoard";
 import FriendSuggestion from "./Pages/FriendSuggestion/FriendSuggestion";
 
-
 const App = () => {
   return (
     <Router>
@@ -63,10 +62,8 @@ const App = () => {
         <Route path="/myfriends" element={<FriendRequests />} />
         <Route path="/suggestfriends" element={<FriendSuggestion />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
-
       </Routes>
     </Router>
   );
 };
-
 export default App;
