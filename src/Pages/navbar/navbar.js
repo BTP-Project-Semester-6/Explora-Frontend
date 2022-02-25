@@ -136,6 +136,8 @@ export default function ButtonAppBar() {
       navigate("/friends");
     } else if (text == "Leaderboard") {
       navigate("/leaderboard");
+    } else if (text == "Feedback") {
+      navigate("/feedback");
     }
   }
 
@@ -262,7 +264,11 @@ export default function ButtonAppBar() {
               <List>
                 {["Guide Section", "Why Explora ?", "About Us", "Feedback"].map(
                   (text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem
+                      button
+                      key={text}
+                      onClick={(e) => handleNavigation(text)}
+                    >
                       <ListItemIcon>
                         {text == "Guide Section" && (
                           <AssistantDirectionIcon
