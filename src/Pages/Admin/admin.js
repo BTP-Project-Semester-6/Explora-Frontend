@@ -1,13 +1,50 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNotValidatedChallenges } from "../../actions/challengeAction";
+import Toast from "../../Components/Toast/toast";
 
 function ChallengeRequest({ data }) {
   const includeHandler = (id) => {
-    console.log(id);
+    fetch("http://localhost:3001/api/challenge/validateChallenge", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Success") {
+          Toast("Challenge Validated", "", "", "");
+          window.location.reload(false);
+        } else {
+          Toast("", "Something went wrong", "", "");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const deleteHandler = (id) => {
-    console.log(id);
+    fetch("http://localhost:3001/api/challenge/removeChallenge", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Success") {
+          Toast("Challenge Removed", "", "", "");
+          window.location.reload(false);
+        } else {
+          Toast("", "Something went wrong", "", "");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>
