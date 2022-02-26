@@ -65,9 +65,9 @@ const App = () => {
         <Route path="/suggestfriends" element={<FriendSuggestion />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
         <Route path="/feedback" element={<Feedback />} />
+
       </Routes>
     </Router>
   );
 };
-
 export default App;
