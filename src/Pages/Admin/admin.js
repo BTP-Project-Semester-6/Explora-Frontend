@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNotValidatedChallenges } from "../../actions/challengeAction";
 import Toast from "../../Components/Toast/toast";
@@ -101,28 +102,19 @@ function ChallengeRequest({ data }) {
   );
 }
 
-function FeedBack() {
+function FeedBack(data) {
+  console.log(data);
   return (
     <div>
       <div className="container">
         <div>
           {" "}
-          <h2>Issue Heading</h2>
+          <h2>{data.data.subject}</h2>
         </div>
-        <div>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </div>
+        <div>{data.data.description}</div>
         <div style={{ margin: "10px" }} className="row">
-          <button style={{ width: "20%" }} className="btn btn-primary">
-            Resolved
+          <button style={{ width: "20%" }} className="btn btn-primary" disabled>
+            {data.data.rating} Star
           </button>
         </div>
       </div>
@@ -131,6 +123,7 @@ function FeedBack() {
 }
 export default function Admin() {
   const dispatch = useDispatch();
+  const [feedbackAll, setfeedbackAll] = useState([]);
   const getAllNotValidatedChallengesHandler = (e) => {
     e.preventDefault();
     dispatch(getAllNotValidatedChallenges());
@@ -138,7 +131,21 @@ export default function Admin() {
   const challenges = useSelector(
     (state) => state.getAllNotValidatedChallengesReducer
   );
-  console.log(challenges);
+  // console.log(challenges);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/user/feedbackall", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setfeedbackAll(data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <div>
       <div className="container">
@@ -194,12 +201,15 @@ export default function Admin() {
               data-parent="#accordionExample"
             >
               <div class="card-body">
+                {/* <FeedBack></FeedBack>
                 <FeedBack></FeedBack>
                 <FeedBack></FeedBack>
                 <FeedBack></FeedBack>
                 <FeedBack></FeedBack>
-                <FeedBack></FeedBack>
-                <FeedBack></FeedBack>
+                <FeedBack></FeedBack> */}
+                {feedbackAll.map((data) => (
+                  <FeedBack data={data} />
+                ))}
               </div>
             </div>
           </div>
