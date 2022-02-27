@@ -31,7 +31,7 @@ import { Friends } from "./Pages/Friends/Friends";
 import { FriendRequests } from "./Pages/Friends/FriendsRequest";
 import LeaderBoard from "./Pages/LeaderBoard/leaderBoard";
 import FriendSuggestion from "./Pages/FriendSuggestion/FriendSuggestion";
-
+import { Feedback } from "./Pages/Feedback/feedback";
 
 const App = () => {
   return (
@@ -40,6 +40,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/admin" element={<Admin />} />
+        <Route exact path="/adminlogin" element={<AdminLogin />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route exact path="/home" element={<Home />} />
         <Route path="/buddy" element={<Buddy />} />
@@ -63,10 +64,10 @@ const App = () => {
         <Route path="/myfriends" element={<FriendRequests />} />
         <Route path="/suggestfriends" element={<FriendSuggestion />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
+        <Route path="/feedback" element={<Feedback />} />
 
       </Routes>
     </Router>
   );
 };
-
 export default App;

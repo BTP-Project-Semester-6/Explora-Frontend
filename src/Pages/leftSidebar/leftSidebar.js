@@ -69,7 +69,6 @@ function LeftSideBar() {
       navigate("/login");
     }
   }, []);
-
   return (
     <div>
       <div className="right-box">
@@ -124,19 +123,13 @@ function LeftSideBar() {
               <NoteAddIcon style={{ fontSize: "25px" }} /> PrePlanning
             </Button>
           </div>
-          {/* <div className="nav-buttons">
-            <Button color="success" variant="text">
-              Option 3
-            </Button>
-          </div> *
-          link toprofile  is still remians/
-          }
         </div>
-        {/* <hr style={{ margin: "10px" }}></hr> */}
+
         <div
           style={{
-            margin: "10px",
-            marginTop: "50px",
+            marginTop: "40px",
+            marginLeft: "10px",
+            marginRight: "10px",
             textAlign: "center",
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
             borderRadius: "20px",
@@ -155,7 +148,7 @@ function LeftSideBar() {
                 src={users[0] == null ? "#" : `${users[0].picUrl}`}
                 alt=""
               />
-              
+
               <div>{users[0] == null ? "#" : users[0].name}</div>
             </div>
             <div className="row">
