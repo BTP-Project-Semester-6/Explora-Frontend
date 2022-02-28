@@ -111,16 +111,14 @@ export const validateLocationTask =
                 dispatch({
                   type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
                   payload: { userId: hostID, taskId: task.data._id },
-                });
-                getTaskByID(task.data._id, hostID);
+                }).then(dispatch(getTaskByID(task.data._id, hostID)));
                 console.log(error);
               });
           } catch (e) {
             dispatch({
               type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
               payload: { userId: hostID, taskId: task.data._id },
-            });
-            getTaskByID(task.data._id, hostID);
+            }).then(dispatch(getTaskByID(task.data._id, hostID)));
             console.log(e);
           }
         } else {
