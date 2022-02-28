@@ -66,6 +66,7 @@ export const addTask = (userId, challengeId) => async (dispatch, getState) => {
 export const validateLocationTask =
   (hostID, task, loc) => async (dispatch, getState) => {
     console.log(task);
+    const taskId = task.data._id;
     dispatch({
       type: "ADD_SUB_LOCATION_TO_TASK_REQUEST",
       payload: loc,
@@ -97,8 +98,9 @@ export const validateLocationTask =
               .then((data) => {
                 dispatch({
                   type: "ADD_SUB_LOCATION_TO_TASK_SUCCESS",
-                  payload: data,
+                  payload: { userId: hostID, taskId: task.data._id },
                 });
+                getTaskByID(task.data._id, hostID);
                 console.log(data);
               })
               .catch((error) => {
@@ -108,20 +110,25 @@ export const validateLocationTask =
                     : error.message;
                 dispatch({
                   type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
-                  payload: message,
+                  payload: { userId: hostID, taskId: task.data._id },
                 });
+                getTaskByID(task.data._id, hostID);
                 console.log(error);
               });
           } catch (e) {
-            dispatch({ type: "ADD_SUB_LOCATION_TO_TASK_FAIL", payload: e });
+            dispatch({
+              type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
+              payload: { userId: hostID, taskId: task.data._id },
+            });
+            getTaskByID(task.data._id, hostID);
             console.log(e);
           }
         } else {
           console.log(dis);
           dispatch({
             type: "ADD_SUB_LOCATION_TO_TASK_NOT_IN_PLACE",
-            payload: { message: "Not in correct place" },
-          });
+            payload: { userId: hostID, taskId: task.data._id },
+          }).then(dispatch(getTaskByID(task.data._id, hostID)));
         }
     };
 
