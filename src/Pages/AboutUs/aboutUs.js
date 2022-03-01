@@ -144,7 +144,38 @@ export default function AboutUs() {
                   </div>
                   <div class="person-info">
                     <h3 class="full-name">Nalin Agrawal</h3>
-                    <span class="speciality">IIIT PUNE(CSE)</span>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span class="speciality">
+                        <a
+                          href="https://www.facebook.com/nalin.agrawal.12"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-facebook-square fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.instagram.com/nalinagrawal382/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-instagram fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-linkedin fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://twitter.com/NalinAgrawal12"
+                          style={{ color: "inherit" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-twitter fa-2xl"></i>
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -163,7 +194,38 @@ export default function AboutUs() {
                   </div>
                   <div class="person-info">
                     <h3 class="full-name">Prerit Kumar Jha</h3>
-                    <span class="speciality">IIIT PUNE(CSE)</span>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span class="speciality">
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-facebook-square fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-instagram fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-linkedin fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-twitter fa-2xl"></i>
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -182,7 +244,38 @@ export default function AboutUs() {
                   </div>
                   <div class="person-info">
                     <h3 class="full-name">Himanshu Rane</h3>
-                    <span class="speciality">IIIT PUNE(ECE)</span>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span class="speciality">
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-facebook-square fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-instagram fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-linkedin fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-twitter fa-2xl"></i>
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,7 +294,38 @@ export default function AboutUs() {
                   </div>
                   <div class="person-info">
                     <h3 class="full-name">Vijay S. C. Joshi</h3>
-                    <span class="speciality">IIIT PUNE(CSE)</span>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span class="speciality">
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-facebook-square fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-instagram fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit", paddingRight: "10px" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-linkedin fa-2xl"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          style={{ color: "inherit" }}
+                          target="_blank"
+                        >
+                          <i class="fa-brands fa-twitter fa-2xl"></i>
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
