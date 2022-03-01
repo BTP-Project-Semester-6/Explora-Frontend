@@ -197,7 +197,7 @@ export default function AboutUs() {
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
-                          href="https://www.facebook.com/profile.php?id=100004937565856"
+                          href="https://www.facebook.com/preritkrjha"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
@@ -218,7 +218,7 @@ export default function AboutUs() {
                           <i class="fa-brands fa-linkedin fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/preritkrjha/"
+                          href="https://twitter.com/preritkrjha"
                           style={{ color: "inherit" }}
                           target="_blank"
                         >
