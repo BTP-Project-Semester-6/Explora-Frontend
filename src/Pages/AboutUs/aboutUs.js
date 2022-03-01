@@ -197,28 +197,28 @@ export default function AboutUs() {
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.facebook.com/profile.php?id=100004937565856"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-facebook-square fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.instagram.com/preritkrjha/"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-instagram fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.linkedin.com/in/preritkrjha/"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-linkedin fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.linkedin.com/in/preritkrjha/"
                           style={{ color: "inherit" }}
                           target="_blank"
                         >
@@ -297,28 +297,28 @@ export default function AboutUs() {
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.facebook.com/vijayjoshi802"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-facebook-square fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.instagram.com/vijayjoshi802/"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-instagram fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://www.linkedin.com/in/vijay-joshi-80221a193/"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-linkedin fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://mobile.twitter.com/vijay_joshi16"
                           style={{ color: "inherit" }}
                           target="_blank"
                         >
