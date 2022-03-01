@@ -247,28 +247,28 @@ export default function AboutUs() {
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="www.linkedin.com/in/himanshurane-6501"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-facebook-square fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="www.linkedin.com/in/himanshurane-6501"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-instagram fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="www.linkedin.com/in/himanshurane-6501"
                           style={{ color: "inherit", paddingRight: "10px" }}
                           target="_blank"
                         >
                           <i class="fa-brands fa-linkedin fa-2xl"></i>
                         </a>
                         <a
-                          href="https://www.linkedin.com/in/nalin-agrawal/"
+                          href="https://twitter.com/himanshu_rane_"
                           style={{ color: "inherit" }}
                           target="_blank"
                         >
