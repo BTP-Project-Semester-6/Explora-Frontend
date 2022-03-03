@@ -56,7 +56,7 @@ export default function Buddy() {
       .then((result) => {
         console.log(result);
         if (result.message === "Success") {
-          Toast(result.message, "", "", "");
+          Toast("Successfully sent request!", "", "", "");
         } else {
           Toast("", result.error, "", "");
         }
