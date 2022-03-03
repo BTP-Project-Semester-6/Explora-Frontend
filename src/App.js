@@ -32,6 +32,7 @@ import { FriendRequests } from "./Pages/Friends/FriendsRequest";
 import LeaderBoard from "./Pages/LeaderBoard/leaderBoard";
 import FriendSuggestion from "./Pages/FriendSuggestion/FriendSuggestion";
 import { Feedback } from "./Pages/Feedback/feedback";
+import MyBuddies from "./Pages/MyBuddies/MyBuddies";
 
 const App = () => {
   return (
@@ -66,6 +67,7 @@ const App = () => {
         <Route path="/leaderboard" element={<LeaderBoard />} />
         <Route path="/feedback" element={<Feedback />} />
 
+        <Route path="/mybuddies" element={<MyBuddies />} />
       </Routes>
     </Router>
   );
