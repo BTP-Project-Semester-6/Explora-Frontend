@@ -28,7 +28,10 @@ export const VisitingPlaces = () => {
         let long = position.coords.longitude;
         fetch("http://localhost:3001/api/visit/places", {
           method: "post",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
           body: JSON.stringify({
             location: lat + "," + long,
             keywords: place,

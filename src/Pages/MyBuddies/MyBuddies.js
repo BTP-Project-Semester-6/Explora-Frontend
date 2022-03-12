@@ -17,6 +17,7 @@ const MyBuddies = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
         id: id,
@@ -55,6 +56,7 @@ const MyBuddies = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
           },
         })
           .then((res) => res.json())
