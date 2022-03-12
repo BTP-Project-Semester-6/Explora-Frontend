@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { getAllNotValidatedChallenges } from "../../actions/challengeAction";
 import Toast from "../../Components/Toast/toast";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 function ChallengeRequest({ data }) {
   const includeHandler = (id) => {
@@ -133,18 +136,38 @@ export default function Admin() {
   );
   // console.log(challenges);
 
+  const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:3001/api/user/feedbackall", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setfeedbackAll(data.message);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (localStorage.getItem("token") != "null") {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if (decoded.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      } else {
+        if (decoded) {
+          if (decoded.isAdmin === true) {
+            fetch("http://localhost:3001/api/user/feedbackall", {
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                setfeedbackAll(data.message);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else {
+            toast.error("Admin Privilage Needed");
+            navigate("/login");
+          }
+        }
+      }
+    } else {
+      navigate("/login");
+    }
   }, []);
   return (
     <div>
