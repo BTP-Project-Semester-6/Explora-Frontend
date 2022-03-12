@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
-
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
 import "./task.css";
 import { styled } from "@mui/material/styles";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
@@ -35,7 +32,6 @@ export default function Task() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // dispatch(getTaskByID(id));
 
   const [host, setHost] = React.useState("");
   const [hostID, setHostID] = React.useState("");
@@ -64,13 +60,10 @@ export default function Task() {
   }, []);
 
   const { task } = useSelector((state) => state.getTaskByUSerIDReducer);
-  // console.log(task.data);
-  // {task.data.challengeID.badge}
   const checkLocationHandler = (loc) => {
     dispatch(validateLocationTask(hostID, task, loc));
-    navigate("/home");
+    // navigate("/home");
   };
-  //below code is for frontend
   return (
     <div className="task-body">
       {task.data === undefined ? (

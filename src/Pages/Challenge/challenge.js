@@ -43,6 +43,7 @@ export default function Challenge() {
   }, []);
 
   const challenges = useSelector((state) => state.getChallengeByCityReducer);
+  const task = useSelector((state) => state.addTaskReducer);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -55,9 +56,12 @@ export default function Challenge() {
 
   const StartChallengeHandler = (challenge) => {
     dispatch(addTask(hostID, challenge._id));
-    navigate("/home");
+    console.log(task);
   };
-
+  if (task.data === true) {
+    console.log(task);
+    navigate("/task/" + task.task.id);
+  }
   return (
     <div
       style={{
