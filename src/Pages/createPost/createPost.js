@@ -93,7 +93,10 @@ export default function CreatePost() {
                   );
                   fetch("http://localhost:3001/api/posts/newpost", {
                     method: "post",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                      "Content-Type": "application/json",
+                      "x-auth-token": localStorage.getItem("token"),
+                    },
                     body: JSON.stringify({
                       location: location,
                       author: user._id,
