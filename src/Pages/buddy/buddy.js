@@ -45,6 +45,7 @@ export default function Buddy() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
         id: user._id,
