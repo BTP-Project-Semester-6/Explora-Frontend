@@ -62,7 +62,7 @@ export default function Task() {
   const { task } = useSelector((state) => state.getTaskByUSerIDReducer);
   const checkLocationHandler = (loc) => {
     dispatch(validateLocationTask(hostID, task, loc));
-    navigate("/home");
+    // navigate("/home");
   };
   return (
     <div className="task-body">
