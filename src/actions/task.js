@@ -8,7 +8,10 @@ export const getTaskByID = (id, userId) => async (dispatch, getState) => {
         userId: userId,
         taskId: id,
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -38,7 +41,10 @@ export const addTask = (userId, challengeId) => async (dispatch, getState) => {
 
     fetch("http://localhost:3001/api/task/addTask", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         userId: userId,
         challengeID: challengeId,
@@ -87,7 +93,10 @@ export const validateLocationTask =
           try {
             fetch("http://localhost:3001/api/task/completeSubLocationInTask", {
               method: "post",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                "x-auth-token": localStorage.getItem("token"),
+              },
               body: JSON.stringify({
                 userId: hostID,
                 taskId: task.data._id,

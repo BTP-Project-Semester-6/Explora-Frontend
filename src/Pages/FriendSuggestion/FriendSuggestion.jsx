@@ -33,6 +33,7 @@ const FriendSuggestion = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
           },
           body: JSON.stringify({
             id: decoded._id,

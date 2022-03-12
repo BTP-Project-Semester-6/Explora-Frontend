@@ -10,7 +10,10 @@ function ChallengeRequest({ data }) {
   const includeHandler = (id) => {
     fetch("http://localhost:3001/api/challenge/validateChallenge", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         id: id,
       }),
@@ -32,7 +35,10 @@ function ChallengeRequest({ data }) {
   const deleteHandler = (id) => {
     fetch("http://localhost:3001/api/challenge/removeChallenge", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         id: id,
       }),
@@ -150,7 +156,10 @@ export default function Admin() {
           if (decoded.isAdmin === true) {
             fetch("http://localhost:3001/api/user/feedbackall", {
               method: "post",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                "x-auth-token": localStorage.getItem("token"),
+              },
             })
               .then((res) => res.json())
               .then((data) => {

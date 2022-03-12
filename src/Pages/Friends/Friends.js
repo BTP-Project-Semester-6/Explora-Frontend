@@ -38,7 +38,10 @@ export const Friends = () => {
           setUser(decoded);
           fetch("http://localhost:3001/api/user/getMyFriends", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
             body: JSON.stringify({
               id: decoded._id,
             }),
@@ -60,7 +63,10 @@ export const Friends = () => {
             });
           fetch("http://localhost:3001/api/user/allUserExceptHost", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
             body: JSON.stringify({
               id: decoded._id,
             }),
@@ -83,7 +89,10 @@ export const Friends = () => {
     e.preventDefault();
     fetch("http://localhost:3001/api/user/searchFriends", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         name: searchName,
       }),
@@ -104,7 +113,10 @@ export const Friends = () => {
   const SentRequestHandler = (toId) => {
     fetch("http://localhost:3001/api/user/friendRequest", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         fromId: user._id,
         toId: toId,
@@ -125,7 +137,10 @@ export const Friends = () => {
   const AcceptRequestHandler = (fromId) => {
     fetch("http://localhost:3001/api/user/friendRequestAccept", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         fromId: user._id,
         toId: fromId,
