@@ -138,6 +138,8 @@ export default function ButtonAppBar() {
       navigate("/leaderboard");
     } else if (text == "Feedback") {
       navigate("/feedback");
+    } else if (text == "About Us") {
+      navigate("/aboutus");
     }
   }
 
@@ -262,7 +264,7 @@ export default function ButtonAppBar() {
               <Divider />
 
               <List>
-                {["Guide Section", "Why Explora ?", "About Us", "Feedback"].map(
+                {["Guide Section", "About Us", "Feedback"].map(
                   (text, index) => (
                     <ListItem
                       button
