@@ -39,7 +39,7 @@ export default function Buddy() {
     }
   };
 
-  const addRequestHandler = (groupId) => {
+  const addRequestHandler = (groupId, hostId) => {
     console.log(user);
     fetch("http://localhost:3001/api/buddy/addbuddyrequest", {
       method: "POST",
@@ -51,6 +51,7 @@ export default function Buddy() {
         id: user._id,
         groupId: groupId,
         username: user.username,
+        hostId: hostId,
       }),
     })
       .then((res) => res.json())
@@ -285,7 +286,7 @@ export default function Buddy() {
                     variant="contained"
                     href="#contained-buttons"
                     onClick={() => {
-                      addRequestHandler(eachBuddy._id);
+                      addRequestHandler(eachBuddy._id, eachBuddy.Host._id);
                     }}
                   >
                     Join Group
