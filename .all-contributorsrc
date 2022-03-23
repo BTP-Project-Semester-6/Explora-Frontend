@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "him-rane",
+      "name": "Himanshu Rane",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70720663?v=4",
+      "profile": "https://github.com/him-rane",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Explora-Frontend",
+  "projectOwner": "BTP-Sem-6",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
