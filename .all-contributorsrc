@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "vijayjoshi16",
+      "name": "Vijay Joshi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54314949?v=4",
+      "profile": "https://vijayjoshi.netlify.app/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Explora-Frontend",
+  "projectOwner": "BTP-Sem-6",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
