@@ -6,6 +6,16 @@
   "commit": false,
   "contributors": [
     {
+      "login": "prerit2001",
+      "name": "Prerit Kumar Jha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67575900?v=4",
+      "profile": "https://prerit2001.github.io/Portfolio/",
+      "contributions": [
+        "code"
+      ]
+      }
+,
+{
 
       "login": "him-rane",
       "name": "Himanshu Rane",
@@ -30,8 +40,6 @@
       "name": "Vijay Joshi",
       "avatar_url": "https://avatars.githubusercontent.com/u/54314949?v=4",
       "profile": "https://vijayjoshi.netlify.app/",
-
-
       "contributions": [
         "code"
       ]
