@@ -81,10 +81,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/him-rane"><img src="https://avatars.githubusercontent.com/u/70720663?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Himanshu Rane</b></sub></a><br /><a href="https://github.com/BTP-Sem-6/Explora-Frontend/commits?author=him-rane" title="Code">💻</a></td>
 
     <td align="center"><a href="https://nalin-programmer.github.io/Portfolio/"><img src="https://avatars.githubusercontent.com/u/54065357?v=4?s=100" width="100px;" alt=""/><br /><sub><b>NALIN AGRAWAL</b></sub></a><br /><a href="https://github.com/BTP-Sem-6/Explora-Frontend/commits?author=nalin-programmer" title="Code">💻</a></td>
 
     <td align="center"><a href="https://vijayjoshi.netlify.app/"><img src="https://avatars.githubusercontent.com/u/54314949?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vijay Joshi</b></sub></a><br /><a href="https://github.com/BTP-Sem-6/Explora-Frontend/commits?author=vijayjoshi16" title="Code">💻</a></td>
+
 
   </tr>
 </table>
