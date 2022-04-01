@@ -6,7 +6,10 @@ export const getCityChallenge = (city) => async (dispatch, getState) => {
     // console.log(city + " action");
     fetch("http://localhost:3001/api/challenge/getChallengeByCity", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         city: city,
       }),
@@ -40,7 +43,10 @@ export const createCityChallenge =
       // console.log(city + " action");
       fetch("http://localhost:3001/api/challenge/newChallenge", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           city: city,
           description: description,
@@ -79,7 +85,10 @@ export const getAllNotValidatedChallenges =
       // console.log(city + " action");
       fetch("http://localhost:3001/api/challenge/getAdminAllNotValidCity", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
       })
         .then((res) => res.json())
         .then((data) => {

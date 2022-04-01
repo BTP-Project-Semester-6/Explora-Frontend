@@ -25,7 +25,10 @@ export default function Home() {
           setUser(decoded);
           fetch("http://localhost:3001/api/posts/getallposts", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
             body: JSON.stringify({
               id: decoded._id,
             }),
