@@ -54,7 +54,10 @@ export default function PrePlanning() {
     if (!item.helpful.some((i) => i.userId === hostID)) {
       fetch("http://localhost:3001/api/prePlanning/helpfulPrePlanning", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           postId: item._id,
           userId: jwt_decode(localStorage.getItem("token"))._id,
@@ -70,7 +73,10 @@ export default function PrePlanning() {
     } else {
       fetch("http://localhost:3001/api/prePlanning/removeHelpfulPrePlanning", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           postId: item._id,
           userId: jwt_decode(localStorage.getItem("token"))._id,
@@ -90,7 +96,10 @@ export default function PrePlanning() {
     if (!item.notHelpful.some((i) => i.userId === hostID)) {
       fetch("http://localhost:3001/api/prePlanning/notHelpfulPrePlanning", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           postId: item._id,
           userId: jwt_decode(localStorage.getItem("token"))._id,
@@ -108,7 +117,10 @@ export default function PrePlanning() {
         "http://localhost:3001/api/prePlanning/removeNotHelpfulPrePlanning",
         {
           method: "post",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
           body: JSON.stringify({
             postId: item._id,
             userId: jwt_decode(localStorage.getItem("token"))._id,

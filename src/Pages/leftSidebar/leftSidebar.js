@@ -33,7 +33,10 @@ function LeftSideBar() {
           // setUser(decoded);
           fetch("http://localhost:3001/api/user/getAllUsers", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
             body: JSON.stringify({
               id: decoded._id,
             }),
