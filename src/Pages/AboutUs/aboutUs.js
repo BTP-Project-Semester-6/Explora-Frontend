@@ -135,15 +135,17 @@ export default function AboutUs() {
                 <div class="single-person">
                   <div class="person-image">
                     <img
-                      src="https://media-exp1.licdn.com/dms/image/C4D03AQH4cQ_Su_axrA/profile-displayphoto-shrink_400_400/0/1632837172163?e=1650499200&v=beta&t=GQFO6-QD8uYbWL6GmnyjIKQXKq2qu4NeWDanEDXN3Ac"
+                      src="https://media-exp1.licdn.com/dms/image/C4E03AQFVJrxtqTFaQA/profile-displayphoto-shrink_400_400/0/1648016840034?e=1654128000&v=beta&t=174hYsi5anyh4rybEdfUNQZf-yLl-9RWn-GVbiaBFVY"
                       alt=""
                     />
                     <span class="icon">
-                      <i class="fa-duotone fa-1"></i>
+                      <i class="fa-solid fa-code"></i>
                     </span>
                   </div>
                   <div class="person-info">
-                    <h3 class="full-name">Nalin Agrawal</h3>
+                    <center>
+                      <h3 class="full-name">Nalin Agrawal</h3>
+                    </center>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
@@ -189,11 +191,13 @@ export default function AboutUs() {
                       alt=""
                     />
                     <span class="icon">
-                      <i class="fa-solid fa-2"></i>
+                      <i class="fa-solid fa-code"></i>
                     </span>
                   </div>
                   <div class="person-info">
-                    <h3 class="full-name">Prerit Kumar Jha</h3>
+                    <center>
+                      <h3 class="full-name">Prerit Kumar Jha</h3>
+                    </center>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
@@ -239,11 +243,13 @@ export default function AboutUs() {
                       alt=""
                     />
                     <span class="icon">
-                      <i class="fa-solid fa-3"></i>
+                      <i class="fa-solid fa-code"></i>
                     </span>
                   </div>
                   <div class="person-info">
-                    <h3 class="full-name">Himanshu Rane</h3>
+                    <center>
+                      <h3 class="full-name">Himanshu Rane</h3>
+                    </center>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
@@ -289,11 +295,13 @@ export default function AboutUs() {
                       alt=""
                     />
                     <span class="icon">
-                      <i class="fa-solid fa-4"></i>
+                      <i class="fa-solid fa-code"></i>
                     </span>
                   </div>
                   <div class="person-info">
-                    <h3 class="full-name">Vijay S. C. Joshi</h3>
+                    <center>
+                      <h3 class="full-name">Vijay S. C. Joshi</h3>
+                    </center>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span class="speciality">
                         <a
