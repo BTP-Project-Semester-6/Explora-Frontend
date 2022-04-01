@@ -39,6 +39,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupIcon from "@mui/icons-material/Group";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 const drawerWidth = 240;
 
 const styles = (theme) => ({
@@ -113,31 +114,44 @@ export default function ButtonAppBar() {
   function handleNavigation(text) {
     if (text == "Profile") {
       navigate(`/profile/${user._id}`);
+      setOpen(false);
     } else if (text == "Home") {
       navigate("/home");
+      setOpen(false);
     } else if (text == "Challenges") {
       navigate("/challenge");
+      setOpen(false);
     } else if (text == "Buddies") {
       navigate("/buddy");
+      setOpen(false);
     } else if (text == "PrePlanning") {
       navigate("/preplanning");
+      setOpen(false);
     } else if (text == "Logout") {
       localStorage.removeItem("token");
       window.location.reload(false);
+      setOpen(false);
     } else if (text == "Explora") {
       navigate("/");
+      setOpen(false);
     } else if (text == "Login") {
       navigate("/login");
+      setOpen(false);
     } else if (text == "Register") {
       navigate("/register");
+      setOpen(false);
     } else if (text == "Visit Nearby") {
       navigate("/places");
+      setOpen(false);
     } else if (text == "Find Friends") {
       navigate("/friends");
+      setOpen(false);
     } else if (text == "Leaderboard") {
       navigate("/leaderboard");
+      setOpen(false);
     } else if (text == "Feedback") {
       navigate("/feedback");
+      setOpen(false);
     }
   }
 
@@ -217,7 +231,7 @@ export default function ButtonAppBar() {
                         <HomeIcon style={{ fontSize: "20px" }} />
                       )}
                       {text == "Leaderboard" && (
-                        <HomeIcon style={{ fontSize: "20px" }} />
+                        <LeaderboardIcon style={{ fontSize: "20px" }} />
                       )}
                       {text == "Logout" && (
                         <PowerSettingsNewIcon

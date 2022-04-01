@@ -30,6 +30,7 @@
   text-align: center;
   color: #fe7e6d;
 }
+
 .task-scroll {
   height: 38%;
   overflow: scroll;
@@ -39,7 +40,7 @@
 }
 
 .sug-scroll {
-  height: 45%;
+  height: 55%;
   overflow: scroll;
 }
 .task-scroll::-webkit-scrollbar {
