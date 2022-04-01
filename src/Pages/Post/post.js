@@ -106,7 +106,7 @@ export default function Post(props) {
   let date = JSON.stringify(str);
   date = date.slice(1, 4) + ", " + date.slice(4, 11);
 
-  console.log(date);
+  //console.log(date);
 
   return (
     <Card
@@ -126,6 +126,7 @@ export default function Post(props) {
         }
         action={<IconButton aria-label="settings"></IconButton>}
         //title={jwt_decode(localStorage.getItem("token")).name}
+
         title={props.author.name}
         subheader={props.location + " - " + date}
         titleTypographyProps={{
@@ -135,6 +136,7 @@ export default function Post(props) {
         }}
         subheaderTypographyProps={{ variant: "h6", fontWeight: 600 }}
       />
+
       <CardMedia
         component="img"
         style={{
@@ -145,6 +147,7 @@ export default function Post(props) {
         }}
         src={props.photoUrl}
       />
+
       <CardContent>
         <Typography
           style={{ margin: "0px", color: "black", fontWeight: "600" }}

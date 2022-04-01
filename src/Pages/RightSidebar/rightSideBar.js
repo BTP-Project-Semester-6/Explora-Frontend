@@ -93,10 +93,10 @@ function RightSideBar() {
             <div
               className="leftfriends"
               style={{
-                paddingTop: "20px",
+                paddingTop: "10px",
                 paddingBottom: "20px",
                 overflowY: "auto",
-                height: "250px",
+                height: "318px",
               }}
             >
               <Suggestion />

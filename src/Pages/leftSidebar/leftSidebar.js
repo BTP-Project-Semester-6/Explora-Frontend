@@ -1,25 +1,16 @@
-import Suggestion from "../showFriend/suggestion";
 import Button from "@mui/material/Button";
 import "./leftSideBar.css";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import "./leftsidebar2.scss";
 import { useNavigate } from "react-router-dom";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import crownimg from "../leftSidebar/Crowen.png";
 import React, { useState, useEffect } from "react";
-
 import jwt_decode from "jwt-decode";
 
 function LeftSideBar() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [me, setMe] = useState(0);
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       navigate("/login");
@@ -43,9 +34,12 @@ function LeftSideBar() {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data.users);
+              console.log(decoded._id);
               // setPosts(data.allPosts.reverse());
-              data.users.map((user) => {
+              data.users.map((user, index) => {
+                if (decoded._id === user._id) {
+                  setMe(index);
+                }
                 let like = 0;
                 let comment = 0;
                 user.posts.map((post) => {
@@ -59,7 +53,7 @@ function LeftSideBar() {
               data.users.sort((a, b) => {
                 return b.count - a.count;
               });
-              console.log(data.users);
+              //console.log(data.users);
 
               setUsers(data.users);
             })
@@ -72,6 +66,7 @@ function LeftSideBar() {
       navigate("/login");
     }
   }, []);
+  // console.log(id);
   return (
     <div>
       <div className="right-box">
@@ -129,18 +124,121 @@ function LeftSideBar() {
         </div>
 
         <div
-          style={{
-            marginTop: "40px",
-            marginLeft: "10px",
-            marginRight: "10px",
-            textAlign: "center",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            borderRadius: "20px",
-            padding: "20px",
-            background: "white",
-          }}
+          // style={{
+          //   marginTop: "40px",
+          //   marginLeft: "10px",
+          //   marginRight: "10px",
+          //   textAlign: "center",
+          //   boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+          //   borderRadius: "20px",
+          //   padding: "20px",
+          //   background: "white",
+          // }}
+          className="leaderOnHomePage"
         >
-          <div className="LeaderboardTx">Explora Rank</div>
+          <div className="card one">
+            <div className="header">
+              <h3 className="title">Leaderboard</h3>
+              <div></div>
+            </div>
+
+            <div className="profile">
+              <a
+                href={
+                  users[1] == null
+                    ? "#"
+                    : `http://localhost:3000/profile/${users[1]._id}`
+                }
+              >
+                <div className="person second">
+                  <div className="num">2</div>
+                  <i className="fas fa-caret-up"></i>
+                  <img
+                    src={users[1] == null ? "#" : `${users[1].picUrl}`}
+                    alt=""
+                    className="photo"
+                  />
+                  <p className="link">
+                    {users[1] == null ? "#" : users[1].username}
+                  </p>
+                  <p className="points">
+                    {users[1] == null ? "#" : users[1].count}
+                  </p>
+                </div>
+              </a>
+              <a
+                href={
+                  users[0] == null
+                    ? "#"
+                    : `http://localhost:3000/profile/${users[0]._id}`
+                }
+              >
+                <div className="person first">
+                  <div className="num">1</div>
+                  <i className="fas fa-crown"></i>
+                  <img
+                    src={users[0] == null ? "#" : `${users[0].picUrl}`}
+                    alt=""
+                    className="photo main"
+                  />
+                  <p className="link">
+                    {users[0] == null ? "#" : users[0].username}
+                  </p>
+                  <p className="points">
+                    {users[0] == null ? "#" : users[0].count}
+                  </p>
+                </div>
+              </a>
+
+              <a
+                href={
+                  users[2] == null
+                    ? "#"
+                    : `http://localhost:3000/profile/${users[2]._id}`
+                }
+              >
+                <div className="person third">
+                  <div className="num">3</div>
+                  <i className="fas fa-caret-up"></i>
+                  <img
+                    src={users[2] == null ? "#" : `${users[2].picUrl}`}
+                    alt=""
+                    className="photo"
+                  />
+                  <p className="link">
+                    {users[2] == null ? "#" : users[2].username}
+                  </p>
+                  <p className="points">
+                    {users[2] == null ? "#" : users[2].count}
+                  </p>
+                </div>
+              </a>
+            </div>
+
+            <div className="rest">
+              <div className="others flex">
+                <div className="rank">
+                  <i className="fas fa-caret-up"></i>
+                  <p className="num">{me + 1}</p>
+                </div>
+                <div className="info flex">
+                  <img
+                    src={users[me] == null ? "#" : `${users[me].picUrl}`}
+                    alt=""
+                    className="p_img"
+                  />
+                  <p className="link">
+                    {" "}
+                    {users[me] == null ? "#" : users[me].username}
+                  </p>
+                  <p className="points">
+                    {users[me] == null ? "#" : users[me].count}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="LeaderboardTx">Explora Rank</div>
           <div>
             <div className="Crowen col">
               <img className="CrowenImg row" src={`${crownimg}`} alt="" />
@@ -176,7 +274,7 @@ function LeftSideBar() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
