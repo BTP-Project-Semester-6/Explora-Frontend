@@ -5,7 +5,10 @@ export const createPrePlanning =
       dispatch({ type: "CREATE_PRE_PLANNING_REQUEST", payload: subLocation });
       fetch("http://localhost:3001/api/prePlanning/newPrePlanning", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           location: location,
           subLocation: subLocation,
@@ -41,7 +44,10 @@ export const getPrePlanningSubLocation =
         `http://localhost:3001/api/prePlanning/getPrePlanningBySubLocation/${subLoation}`,
         {
           method: "get",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
         }
       )
         .then((res) => res.json())

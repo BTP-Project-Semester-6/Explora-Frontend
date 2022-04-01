@@ -22,7 +22,10 @@ function RightSideBar() {
           // setUser(decoded);
           fetch(`http://localhost:3001/api/task/getStatusTask/${decoded._id}`, {
             method: "get",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
           })
             .then((res) => res.json())
             .then((data) => {

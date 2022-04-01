@@ -37,7 +37,10 @@ export const Feedback = () => {
     console.log(value, subject, description);
     fetch("http://localhost:3001/api/user/feedback", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         subject,
         description,

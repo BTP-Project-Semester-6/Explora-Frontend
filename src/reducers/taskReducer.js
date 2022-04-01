@@ -53,6 +53,7 @@ export const verifySubLocationReducer = (state = {}, action) => {
       return { loading: true, task: [] };
     case "ADD_SUB_LOCATION_TO_TASK_SUCCESS":
       Toast("Congratulations you completed another step!", "", "", "");
+
       return { loading: false, success: true, task: action.payload };
     case "ADD_SUB_LOCATION_TO_TASK_NOT_IN_PLACE":
       Toast("", "", "", "You are not in correct place!");

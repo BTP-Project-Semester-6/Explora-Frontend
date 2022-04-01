@@ -4,7 +4,10 @@ export const getGuideByCity = (city) => async (dispatch, getState) => {
     // console.log(city + " action");
     fetch(`http://localhost:3001/api/guide/location/${city}`, {
       method: "get",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -31,7 +34,10 @@ export const getGuideAndBuddyByCity = (city) => async (dispatch, getState) => {
     // console.log(city + " action");
     fetch(`http://localhost:3001/api/guide/location/${city}`, {
       method: "get",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
     })
       .then((res) => res.json())
       .then((data1) => {
@@ -43,7 +49,10 @@ export const getGuideAndBuddyByCity = (city) => async (dispatch, getState) => {
           console.log(data1);
           fetch("http://localhost:3001/api/buddy/getBuddyByCity", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
             body: JSON.stringify({
               city: city,
             }),
