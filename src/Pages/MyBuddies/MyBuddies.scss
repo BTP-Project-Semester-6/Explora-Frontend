@@ -1,0 +1,57 @@
+.my_buddies {
+  text-align: center;
+  background-color: #8bc6ec;
+  padding: 20px 10px;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  min-height: 100vh;
+}
+
+.buddy_card {
+  margin: 10px auto;
+  max-width: 960px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1.4px solid grey;
+  background-color: rgba(255, 255, 255, 0.836);
+  transition: transform 0.2s;
+  text-align: left;
+  padding: 10px 20px;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.buddy_card:hover {
+  transform: scale(1.025);
+}
+
+.buddy_intro {
+  color: #3f51b5;
+}
+
+.buddy_location {
+  color: gray;
+  text-align: right;
+}
+
+.buddy_description {
+  color: gray;
+  margin-top: 20px;
+}
+
+.buddy_member {
+  margin: 10px;
+  // display: block;
+}
+
+.request_grid {
+  text-align: right;
+}
+
+.add_member_button {
+  background-color: rgb(1, 209, 1);
+  border: none;
+  color: white;
+  height: 40px;
+  border-radius: 10px;
+  margin: 0;
+}

@@ -8,7 +8,10 @@ export const getTaskByID = (id, userId) => async (dispatch, getState) => {
         userId: userId,
         taskId: id,
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -38,7 +41,10 @@ export const addTask = (userId, challengeId) => async (dispatch, getState) => {
 
     fetch("http://localhost:3001/api/task/addTask", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         userId: userId,
         challengeID: challengeId,
@@ -66,6 +72,7 @@ export const addTask = (userId, challengeId) => async (dispatch, getState) => {
 export const validateLocationTask =
   (hostID, task, loc) => async (dispatch, getState) => {
     console.log(task);
+    const taskId = task.data._id;
     dispatch({
       type: "ADD_SUB_LOCATION_TO_TASK_REQUEST",
       payload: loc,
@@ -86,7 +93,10 @@ export const validateLocationTask =
           try {
             fetch("http://localhost:3001/api/task/completeSubLocationInTask", {
               method: "post",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                "x-auth-token": localStorage.getItem("token"),
+              },
               body: JSON.stringify({
                 userId: hostID,
                 taskId: task.data._id,
@@ -97,8 +107,9 @@ export const validateLocationTask =
               .then((data) => {
                 dispatch({
                   type: "ADD_SUB_LOCATION_TO_TASK_SUCCESS",
-                  payload: data,
+                  payload: { userId: hostID, taskId: task.data._id },
                 });
+                getTaskByID(task.data._id, hostID);
                 console.log(data);
               })
               .catch((error) => {
@@ -108,20 +119,23 @@ export const validateLocationTask =
                     : error.message;
                 dispatch({
                   type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
-                  payload: message,
-                });
+                  payload: { userId: hostID, taskId: task.data._id },
+                }).then(dispatch(getTaskByID(task.data._id, hostID)));
                 console.log(error);
               });
           } catch (e) {
-            dispatch({ type: "ADD_SUB_LOCATION_TO_TASK_FAIL", payload: e });
+            dispatch({
+              type: "ADD_SUB_LOCATION_TO_TASK_FAIL",
+              payload: { userId: hostID, taskId: task.data._id },
+            }).then(dispatch(getTaskByID(task.data._id, hostID)));
             console.log(e);
           }
         } else {
           console.log(dis);
           dispatch({
             type: "ADD_SUB_LOCATION_TO_TASK_NOT_IN_PLACE",
-            payload: { message: "Not in correct place" },
-          });
+            payload: { userId: hostID, taskId: task.data._id },
+          }).then(dispatch(getTaskByID(task.data._id, hostID)));
         }
     };
 

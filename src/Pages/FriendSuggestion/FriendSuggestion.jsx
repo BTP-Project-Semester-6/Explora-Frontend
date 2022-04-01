@@ -33,6 +33,7 @@ const FriendSuggestion = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
           },
           body: JSON.stringify({
             id: decoded._id,
@@ -63,6 +64,7 @@ const FriendSuggestion = () => {
         </p>
         <h3>RANKLIST</h3>
         <Grid container>
+          {rankList.length == 0 && <h3>Loading...</h3>}
           {rankList.map((user) => {
             return (
               <Grid item xs={12} sm={6} md={4} lg={4}>

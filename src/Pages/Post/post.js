@@ -44,7 +44,10 @@ export default function Post(props) {
   const handleSubmit = () => {
     fetch("http://localhost:3001/api/posts/newcomment", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         message: inp,
         postId: props._id,
@@ -67,7 +70,10 @@ export default function Post(props) {
     if (!liked) {
       fetch("http://localhost:3001/api/posts/likepost", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           postId: props._id,
           userId: jwt_decode(localStorage.getItem("token"))._id,

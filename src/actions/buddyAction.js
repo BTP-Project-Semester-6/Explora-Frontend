@@ -4,7 +4,10 @@ export const getBuddyByCity = (city) => async (dispatch, getState) => {
     // console.log(city + " action");
     fetch("http://localhost:3001/api/buddy/getBuddyByCity", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify({
         city: city,
       }),
@@ -40,7 +43,10 @@ export const createGroup =
       dispatch({ type: "CREATE_GROUP_REQUEST", payload: city });
       fetch("http://localhost:3001/api/buddy/createGroup", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
         body: JSON.stringify({
           groupMaxSize: groupMaxSize,
           city: city,

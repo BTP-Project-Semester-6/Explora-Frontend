@@ -5,7 +5,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Navbar from "../../Components/Navbar/navbar";
 import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -29,7 +28,10 @@ export const VisitingPlaces = () => {
         let long = position.coords.longitude;
         fetch("http://localhost:3001/api/visit/places", {
           method: "post",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
           body: JSON.stringify({
             location: lat + "," + long,
             keywords: place,

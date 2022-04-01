@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+import RightSideBar from "../RightSidebar/rightSideBar";
 
 const Profile = (props) => {
   const { id } = useParams();
@@ -33,7 +34,10 @@ const Profile = (props) => {
           setUser(decoded);
           fetch("http://localhost:3001/api/posts/getpostbyid", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
             body: JSON.stringify({
               id: id,
             }),
@@ -48,7 +52,10 @@ const Profile = (props) => {
             });
           fetch(`http://localhost:3001/api/user/id/${id}`, {
             method: "get",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
           })
             .then((res) => res.json())
             .then((data) => {
@@ -126,6 +133,9 @@ const Profile = (props) => {
                   <h6>{profile.badges.length} Challenges Completed</h6>
                   <h6>{profile.travelHistory.length} Places Travelled</h6>
                 </div> */}
+                <div className="right-sidebar" style={{ width: "100%" }}>
+                  <RightSideBar></RightSideBar>
+                </div>
               </div>
             </div>
           </div>
@@ -171,40 +181,16 @@ const Profile = (props) => {
             <div className="BadgesBox">
               <div className="row badgescountshow">
                 <div className="badgesCountText col-6">Total Badges -</div>
-                <div className="badgesCount col-1"> 7</div>
+                <div className="badgesCount col-1">
+                  {" "}
+                  {profile.badges.length}
+                </div>
               </div>
 
               <div className="badgesArray">
-                <img
-                  className="badgesImges"
-                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
-                  alt=""
-                />
-                <img
-                  className="badgesImges"
-                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
-                  alt=""
-                />
-                <img
-                  className="badgesImges"
-                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
-                  alt=""
-                />
-                <img
-                  className="badgesImges"
-                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
-                  alt=""
-                />
-                <img
-                  className="badgesImges"
-                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
-                  alt=""
-                />
-                <img
-                  className="badgesImges"
-                  src="https://img.freepik.com/free-vector/award-ribbon_24908-54753.jpg?w=740"
-                  alt=""
-                />
+                {profile.badges.map((mp) => (
+                  <img className="badgesImges" src={mp} alt="" />
+                ))}
               </div>
             </div>
           </div>
