@@ -37,9 +37,6 @@ function LeftSideBar() {
               console.log(decoded._id);
               // setPosts(data.allPosts.reverse());
               data.users.map((user, index) => {
-                if (decoded._id === user._id) {
-                  setMe(index);
-                }
                 let like = 0;
                 let comment = 0;
                 user.posts.map((post) => {
@@ -47,14 +44,18 @@ function LeftSideBar() {
                   comment += post.postId.comments.length;
                 });
 
-                let count = like + comment + user.badges;
+                let count = like + comment + user.badges.length;
                 user.count = count;
               });
               data.users.sort((a, b) => {
                 return b.count - a.count;
               });
               //console.log(data.users);
-
+              data.users.map((user, index) => {
+                if (decoded._id === user._id) {
+                  setMe(index);
+                }
+              });
               setUsers(data.users);
             })
             .catch((error) => {
