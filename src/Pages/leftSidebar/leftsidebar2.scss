@@ -1,0 +1,197 @@
+.leaderOnHomePage {
+  @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    line-height: 1.5;
+    transition: all 0.3s ease-in-out;
+    font-family: "Josefin Sans", Arial;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    background: linear-gradient(to bottom right, #38a3a5, #57cc99, #80ed99);
+  }
+
+  .card {
+    min-height: 475px;
+    width: 95%;
+    margin: 10px;
+
+    border-radius: 15px;
+    background: #072227;
+  }
+
+  .card .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    color: #ddd;
+  }
+
+  .card .header .title {
+    text-decoration: none;
+    color: #fe7e6d;
+    font-size: 25px;
+    font-weight: bolder;
+  }
+
+  .one .sort {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 14.1px;
+  }
+
+  .one .sort .day {
+    padding: 0.4rem 1.2rem;
+    margin: 0 0.1rem;
+    cursor: pointer;
+  }
+
+  .one .sort .day.active,
+  .one .sort .day:active {
+    background: rgba(210, 255, 213, 0.3);
+    border-radius: 25px;
+  }
+
+  ::selection {
+    background: rgba(210, 255, 213, 0.3);
+  }
+
+  .photo {
+    width: 90px;
+    height: 90px;
+    background: #fff;
+    border-radius: 50%;
+    border: 5px solid cyan;
+    box-shadow: 0 0 20px cyan;
+    margin: 1rem 0;
+  }
+
+  .main {
+    width: 110px;
+    height: 110px;
+  }
+
+  .profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .profile .person {
+    display: flex;
+    margin: 1rem 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .profile .person.first {
+    z-index: 10;
+    transform: translateY(-10%);
+  }
+
+  .first .fa-crown {
+    color: gold;
+    filter: drop-shadow(0px 0px 5px gold);
+  }
+
+  .num {
+    color: white;
+  }
+
+  .fa-caret-up {
+    color: cyan;
+    font-size: 21px;
+  }
+
+  .link {
+    margin: 0.2rem 0;
+    color: #fff;
+    margin-top: -0.3rem;
+    font-size: 13px;
+  }
+
+  .points {
+    color: cyan;
+    font-size: 17px;
+  }
+
+  .second {
+    margin-right: -0.7rem !important;
+  }
+
+  .third {
+    margin-left: -0.7rem !important;
+  }
+
+  .p_img {
+    width: 50px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+
+  .others {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info {
+    width: 75%;
+    margin-right: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    background: white;
+    color: #072227;
+  }
+
+  .info .points {
+    font-size: large;
+    margin-left: 0.2rem;
+    margin-right: 2rem;
+    color: #072227;
+  }
+
+  .info .link {
+    font-size: large;
+    margin: 0 2rem;
+    color: #072227;
+  }
+
+  .rank {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+    flex-direction: column-reverse;
+  }
+
+  .rank i {
+    margin-top: -5px !important;
+  }
+
+  .rank .num {
+    margin: 0 !important;
+  }
+}
