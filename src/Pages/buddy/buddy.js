@@ -171,7 +171,7 @@ export default function Buddy() {
                 <CardMedia
                   component="img"
                   alt="green iguana"
-                  height="140"
+                  height="inherit"
                   image={eachGuide.userId.picUrl}
                 />
                 <CardContent>

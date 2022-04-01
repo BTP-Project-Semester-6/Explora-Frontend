@@ -153,7 +153,6 @@ export default function ButtonAppBar() {
       navigate("/feedback");
 
       setOpen(false);
-
     } else if (text == "About Us") {
       navigate("/aboutus");
     }
@@ -183,17 +182,9 @@ export default function ButtonAppBar() {
         >
           <DrawerHeader>
             <div style={{ width: "100%" }}>
-              <img
-                style={{
-                  float: "left",
-                  width: "80px",
-                  height: "50px",
-                  cursor: "pointer",
-                }}
-                src="btplogo2.svg"
-                alt="logo"
-                onClick={(e) => navigate("/")}
-              />
+              <div alt="EXPLORA" onClick={(e) => navigate("/")}>
+                🅴🆇🅿🅻🅾🆁🅰
+              </div>
             </div>
 
             <IconButton

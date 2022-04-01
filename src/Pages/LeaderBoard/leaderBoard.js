@@ -41,7 +41,7 @@ const LeaderBoard = () => {
                   comment += post.postId.comments.length;
                 });
 
-                let count = like + comment + user.badges;
+                let count = like + comment + user.badges.length;
                 user.count = count;
               });
               data.users.sort((a, b) => {
