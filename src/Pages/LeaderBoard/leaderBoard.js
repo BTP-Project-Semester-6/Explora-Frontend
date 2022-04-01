@@ -99,17 +99,22 @@ const LeaderBoard = () => {
             </div>
             <div className="col-8">
               {users.map((user, index) => (
-                <div className="lbusers row ">
-                  <div className="lbuserrank col-1">{index + 1}</div>
-                  <div className="lbuserimgbox col-2">
-                    <img className="lbuserimg" src={`${user.picUrl}`}></img>
+                <a
+                  className="rane"
+                  href={`http://localhost:3000/profile/${user._id}`}
+                >
+                  <div className="lbusers row ">
+                    <div className="lbuserrank col-1">{index + 1}</div>
+                    <div className="lbuserimgbox col-2">
+                      <img className="lbuserimg" src={`${user.picUrl}`}></img>
+                    </div>
+                    <div className="lbnamebox col-6">
+                      <div className="lbusername">{user.username}</div>
+                      <div className="lbname">{user.name}</div>
+                    </div>
+                    <div className="lbuserpoints col-3">{user.count}</div>
                   </div>
-                  <div className="lbnamebox col-6">
-                    <div className="lbusername">{user.username}</div>
-                    <div className="lbname">{user.name}</div>
-                  </div>
-                  <div className="lbuserpoints col-3">{user.count}</div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
