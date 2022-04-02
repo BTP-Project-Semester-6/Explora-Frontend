@@ -1,7 +1,7 @@
 .img-sugg {
   border-radius: 30%;
-  height: 45px;
-  width: 45px;
+  height: 60px;
+  width: 60px;
   float: right;
   margin-bottom: 5px;
 }
@@ -16,4 +16,9 @@
 }
 .sug-username {
   font-size: 0.6em;
+}
+
+.sug-similarity{
+  font-size: 0.8em;
+  color: #1976d2;
 }
