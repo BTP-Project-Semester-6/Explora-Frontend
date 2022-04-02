@@ -1,16 +1,17 @@
 import "./suggestion.css";
-function Suggestion() {
-  const url =
-    "https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg";
+function Suggestion(props) {
   return (
     <div>
       <div style={{ margin: "auto" }} className="row">
         <div className="col-4">
-          <img className="img-sugg" src={url} alt="#" />
+          <img className="img-sugg" src={props.pic} alt="#" />
         </div>
         <div style={{ margin: "auto" }} className="col-8">
-          <div className="sug-name">Himanshu Rane</div>
-          <div className="sug-username">himanshu_rane_</div>
+          <div className="sug-name">{props.name}</div>
+          <div className="sug-username">{props.username}</div>
+          <div className="sug-similarity">
+            Similarity: {props.similarity.toFixed(2)}%
+          </div>
         </div>
       </div>
       {/* <div className="container">

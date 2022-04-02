@@ -9,6 +9,11 @@ import jwt_decode from "jwt-decode";
 function RightSideBar() {
   const navigate = useNavigate();
   const [task, setTask] = useState([]);
+
+  //HOOKS FOR FRIEND SUGGESTION
+  const [suggestState, setSuggestState] = useState("Loading...");
+  const [rankList, setRankList] = useState([]);
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       navigate("/login");
@@ -34,6 +39,29 @@ function RightSideBar() {
             })
             .catch((error) => {
               console.log(error);
+            });
+
+          fetch("http://localhost:3001/api/user/suggestfriends", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+              id: decoded._id,
+            }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result.rankedParticipants);
+              if (result.errors) {
+                setSuggestState(
+                  "Seems to be like you haven't given the personality quiz...Complete the personality quiz in order to explore friends similar to you!"
+                );
+              } else {
+                setSuggestState("");
+                setRankList(result.rankedParticipants);
+              }
             });
         }
       }
@@ -99,23 +127,17 @@ function RightSideBar() {
                 height: "318px",
               }}
             >
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
-              <Suggestion />
+              <h4>{suggestState}</h4>
+              {rankList.map((user) => {
+                return (
+                  <Suggestion
+                    similarity={user.similarity}
+                    name={user.userData.name}
+                    username={user.userData.username}
+                    pic={user.userData.picUrl}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
