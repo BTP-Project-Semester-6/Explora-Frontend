@@ -36,7 +36,7 @@ import { Feedback } from "./Pages/Feedback/feedback";
 import MyBuddies from "./Pages/MyBuddies/MyBuddies";
 
 import AboutUs from "./Pages/AboutUs/aboutUs";
-
+import PlaceSuggestion from "./Pages/PlaceSuggestion/PlaceSuggestion";
 
 const App = () => {
   return (
@@ -75,6 +75,7 @@ const App = () => {
 
         <Route path="/aboutus" element={<AboutUs />} />
 
+        <Route path="/suggestplaces" element={<PlaceSuggestion />} />
       </Routes>
     </Router>
   );
