@@ -187,7 +187,7 @@ export default function AboutUs() {
                 <div class="single-person">
                   <div class="person-image">
                     <img
-                      src="https://media-exp1.licdn.com/dms/image/C4E03AQHLCTgS2vliWQ/profile-displayphoto-shrink_400_400/0/1640690637725?e=1649894400&v=beta&t=3XsLS_5rNRgYEnV-Ek7oUmZNY1Vz9uRGtmDQTi63tKU"
+                      src="https://media-exp1.licdn.com/dms/image/C4E03AQHLCTgS2vliWQ/profile-displayphoto-shrink_800_800/0/1640690637725?e=1655337600&v=beta&t=6ya8xOZf0JTtnRQi0W1e1fA2BPLQtX265uCWb-I9mAY"
                       alt=""
                     />
                     <span class="icon">
