@@ -10,6 +10,7 @@ import MmsIcon from "@mui/icons-material/Mms";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import HomeIcon from "@mui/icons-material/Home";
 import NearMeIcon from "@mui/icons-material/NearMe";
+import PsychologyIcon from "@mui/icons-material/Psychology";
 
 import { styled, useTheme } from "@mui/material/styles";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -39,7 +40,9 @@ import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupIcon from "@mui/icons-material/Group";
+import GroupsIcon from "@mui/icons-material/Groups";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 const drawerWidth = 240;
 
 const styles = (theme) => ({
@@ -155,6 +158,12 @@ export default function ButtonAppBar() {
       setOpen(false);
     } else if (text == "About Us") {
       navigate("/aboutus");
+    } else if (text == "Suggest Friends") {
+      navigate("/suggestfriends");
+    } else if (text == "My Buddies") {
+      navigate("/mybuddies");
+    } else if (text == "Personality Quiz") {
+      navigate("/personalityquiz");
     }
   }
 
@@ -208,9 +217,12 @@ export default function ButtonAppBar() {
                   "Leaderboard",
                   "Challenges",
                   "Buddies",
+                  "My Buddies",
                   "PrePlanning",
                   "Visit Nearby",
                   "Find Friends",
+                  "Suggest Friends",
+                  "Personality Quiz",
                   "Logout",
                 ].map((text, index) => (
                   <ListItem
@@ -247,6 +259,15 @@ export default function ButtonAppBar() {
                       )}
                       {text == "Find Friends" && (
                         <PersonAddIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Suggest Friends" && (
+                        <PsychologyIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "My Buddies" && (
+                        <GroupsIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Personality Quiz" && (
+                        <AssignmentIcon style={{ fontSize: "20px" }} />
                       )}
                     </ListItemIcon>
                     {text == "Logout" && (
