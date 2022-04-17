@@ -42,6 +42,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupIcon from "@mui/icons-material/Group";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 const drawerWidth = 240;
 
 const styles = (theme) => ({
@@ -161,6 +162,8 @@ export default function ButtonAppBar() {
       navigate("/suggestfriends");
     } else if (text == "My Buddies") {
       navigate("/mybuddies");
+    } else if (text == "Personality Quiz") {
+      navigate("/personalityquiz");
     }
   }
 
@@ -219,6 +222,7 @@ export default function ButtonAppBar() {
                   "Visit Nearby",
                   "Find Friends",
                   "Suggest Friends",
+                  "Personality Quiz",
                   "Logout",
                 ].map((text, index) => (
                   <ListItem
@@ -261,6 +265,9 @@ export default function ButtonAppBar() {
                       )}
                       {text == "My Buddies" && (
                         <GroupsIcon style={{ fontSize: "20px" }} />
+                      )}
+                      {text == "Personality Quiz" && (
+                        <AssignmentIcon style={{ fontSize: "20px" }} />
                       )}
                     </ListItemIcon>
                     {text == "Logout" && (
