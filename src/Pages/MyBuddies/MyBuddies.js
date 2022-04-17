@@ -129,7 +129,7 @@ const MyBuddies = () => {
                           <a href={"/profile/" + request.id}>
                             {request.username}
                           </a>
-                          <br>node</br>
+                          <br></br>
                           <a>Similarity: {request.similarity}</a>
                         </Grid>
                         <Grid
