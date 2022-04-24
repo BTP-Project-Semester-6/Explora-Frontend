@@ -2,7 +2,7 @@
 
 [![made with hearth by the Explora team](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-the%20Explora%20team-ff1414.svg?style=flat-square)](https://github.com/BTP-SEM-6)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/BTP-Sem-6/Explora-Frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-<img alt="GitHub Org's stars" src="https://img.shields.io/github/stars/BTP-Sem-6?style=social">
+<img alt="GitHub Org's stars" src="https://img.shields.io/github/stars/BTP-Sem-6/Explora-Frontend?style=social">
 
 <p align="center">
 <img src="https://avatars.githubusercontent.com/u/96934015?s=200&v=4" alt="Explora logo" height="200" width="200">
