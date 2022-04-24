@@ -28,7 +28,7 @@
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-
+<h2 align="center">INTRODUCTION</h2>
 <h4>Imagine a place where you could see and select the best places to travel and also post your experiences to the world and connect with fellow travellers with interests similar to you, compete in the leaderboard among all the travel enthusiasts ,find guides to make your trips easier and many more features.
   <br/>
 We also intend to power the web app using Machine Learning which would help people find similar travel buddies based on their personal and social preferences which is taken through a detailed personality quiz.
