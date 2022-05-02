@@ -12,7 +12,10 @@ import Typography from "@mui/material/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import SPINNER from "../../img/Spinner.gif";
 import "./buddy.scss";
-import { getGuideAndBuddyByCity } from "../../actions/guideAction";
+import {
+  getAllGuideAndBuddy,
+  getGuideAndBuddyByCity,
+} from "../../actions/guideAction";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "../../Components/Toast/toast";
 import { useNavigate } from "react-router-dom";
@@ -76,6 +79,7 @@ export default function Buddy() {
       } else {
         console.log(decoded);
         setUser(decoded);
+        dispatch(getAllGuideAndBuddy());
       }
     } else {
       navigate("/login");
@@ -160,6 +164,24 @@ export default function Buddy() {
           <div className="twelve">
             <h1>GUIDES</h1>
           </div>
+          {guide.length ? (
+            <div></div>
+          ) : (
+            <div
+              style={{
+                margin: "auto",
+                marginTop: "20%",
+              }}
+            >
+              <p style={{ textAlign: "center" }}>
+                {result.loading === true ? (
+                  <img src={SPINNER} width="80px" height="80px" />
+                ) : (
+                  "Sorry, we do not have any guide for this location.😔"
+                )}
+              </p>
+            </div>
+          )}
           {guide.map((eachGuide) => (
             <div
               style={{
@@ -228,7 +250,7 @@ export default function Buddy() {
                 {result.loading === true ? (
                   <img src={SPINNER} width="80px" height="80px" />
                 ) : (
-                  "Please enter city you want to seach🔍."
+                  "Sorry, we do not have any buddy group for this location.😔"
                 )}
               </p>
             </div>
