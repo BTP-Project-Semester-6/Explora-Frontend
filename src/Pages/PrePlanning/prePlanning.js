@@ -6,7 +6,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import "./prePlanning.scss";
 import Toast from "../../Components/Toast/toast";
-import { getPrePlanningSubLocation } from "../../actions/prePlanningPostAction";
+import {
+  getPrePlanningSubLocation,
+  getAllPrePlanning,
+} from "../../actions/prePlanningPostAction";
 import AddIcon from "@material-ui/icons/Add";
 import SPINNER from "../../img/Spinner.gif";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -38,6 +41,7 @@ export default function PrePlanning() {
           console.log(decoded);
           setHostID(decoded._id);
           setHost(decoded.username);
+          dispatch(getAllPrePlanning());
         }
       }
     } else {
@@ -136,6 +140,7 @@ export default function PrePlanning() {
         });
     }
   };
+
   const SubmitHandler = (e) => {
     e.preventDefault();
     if (subLocation === "") {
@@ -224,7 +229,7 @@ export default function PrePlanning() {
               {prePlannings.loading === true ? (
                 <img src={SPINNER} width="80px" height="80px" />
               ) : (
-                "Please enter location inside city you want to seach🔍."
+                "Sorry, no pre-planning available for this place.😔"
               )}
             </p>
           </div>
@@ -253,7 +258,16 @@ export default function PrePlanning() {
                 </div>
               </div>
               <div>
-                <p className="order">{prePlanningItem.description}</p>
+                <p className="order">
+                  <i style={{ color: "grey" }}>
+                    Location:{" "}
+                    {prePlanningItem.subLocation +
+                      "," +
+                      prePlanningItem.location}
+                  </i>
+                  <br />
+                  {prePlanningItem.description}
+                </p>
                 <IconButton>
                   {prePlanningItem.helpful.some(
                     (item) => item.userId === hostID

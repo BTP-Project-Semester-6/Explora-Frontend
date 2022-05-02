@@ -141,9 +141,9 @@ export default function Challenge() {
               marginTop: "20%",
             }}
           >
-            {/* <p style={{ textAlign: "center" }}>
-               {"Please enter location you want to seach🔍."}
-             </p> */}
+            <p style={{ textAlign: "center" }}>
+              {"Sorry, no challenge available for this place.😔"}
+            </p>
           </div>
         )}
         {challenges.map((challengeItem) =>
