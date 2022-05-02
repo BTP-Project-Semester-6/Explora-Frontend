@@ -5,7 +5,10 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
-import { getCityChallenge } from "../../actions/challengeAction";
+import {
+  getCityChallenge,
+  getAllChallenge,
+} from "../../actions/challengeAction";
 import AddIcon from "@material-ui/icons/Add";
 import "./challenge.scss";
 import { addTask } from "../../actions/task";
@@ -35,6 +38,7 @@ export default function Challenge() {
           console.log(decoded);
           setHostID(decoded._id);
           setHost(decoded.username);
+          dispatch(getAllChallenge());
         }
       }
     } else {
@@ -138,7 +142,7 @@ export default function Challenge() {
             }}
           >
             <p style={{ textAlign: "center" }}>
-              {"Please enter location you want to seach🔍."}
+              {"Sorry, no challenge available for this place.😔"}
             </p>
           </div>
         )}
